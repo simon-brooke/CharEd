@@ -1,4 +1,4 @@
-// Gradle script to build the Maud project
+// Gradle script to build the CharEd project
 
 plugins {
     id 'application' // to build a Java application
@@ -17,12 +17,12 @@ java {
 
 tasks.register('runForceDialog', JavaExec) {
     args '--forceDialog'
-    mainClass = 'maud.Maud'
+    mainClass = 'maud.CharEd'
     description 'Runs the editor after displaying the Settings dialog.'
 }
 
 application {
-    mainClass = 'maud.Maud'
+    mainClass = 'maud.CharEd'
 }
 
 checkstyle {
