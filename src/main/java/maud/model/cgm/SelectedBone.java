@@ -49,7 +49,7 @@ import jme3utilities.MyString;
 import jme3utilities.Validate;
 import jme3utilities.math.MyQuaternion;
 import jme3utilities.wes.Pose;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.tool.EditorTools;
 
@@ -644,13 +644,13 @@ public class SelectedBone implements Cloneable {
      */
     public void setRotationToMirror() {
         if (shouldEnableControls()) {
-            Cgm source = Maud.getModel().getSource();
+            Cgm source = CharEd.getModel().getSource();
             int sbIndex = source.getBone().index();
             Pose sourcePose = source.getPose().get();
             Quaternion sourceRotation
                     = sourcePose.modelOrientation(sbIndex, null);
 
-            int axisIndex = Maud.getModel().getMisc().linkToolAxis();
+            int axisIndex = CharEd.getModel().getMisc().linkToolAxis();
             Transform model = new Transform();
             MyQuaternion.mirrorAxis(sourceRotation, axisIndex,
                     model.getRotation());

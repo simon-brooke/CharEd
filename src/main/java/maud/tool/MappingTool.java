@@ -32,7 +32,7 @@ import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditableMap;
 import maud.model.EditorModel;
 import maud.model.LoadedMap;
@@ -91,7 +91,7 @@ class MappingTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        LoadedMap map = Maud.getModel().getMap();
+        LoadedMap map = CharEd.getModel().getMap();
         switch (name) {
             case "invertRma2":
                 map.setInvertMap(isChecked);
@@ -117,7 +117,7 @@ class MappingTool extends Tool {
         /*
          * the "use inverse" checkbox
          */
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         boolean invertFlag = model.getMap().isInvertingMap();
         setChecked("invertRma2", invertFlag);
         /*
@@ -143,7 +143,7 @@ class MappingTool extends Tool {
         /*
          * asset-path status
          */
-        EditableMap map = Maud.getModel().getMap();
+        EditableMap map = CharEd.getModel().getMap();
         String assetPath = map.getAssetPath();
         String assetDesc;
         if (assetPath.isEmpty()) {
@@ -173,9 +173,9 @@ class MappingTool extends Tool {
     private void updateFeedback() {
         String feedback;
 
-        LoadedMap map = Maud.getModel().getMap();
-        Cgm source = Maud.getModel().getSource();
-        Cgm target = Maud.getModel().getTarget();
+        LoadedMap map = CharEd.getModel().getMap();
+        Cgm source = CharEd.getModel().getSource();
+        Cgm target = CharEd.getModel().getTarget();
         if (!target.getSkeleton().isSelected()) {
             feedback = "select the target skeleton";
         } else if (!source.isLoaded()) {
@@ -222,7 +222,7 @@ class MappingTool extends Tool {
         String nextButton;
         String previousButton;
 
-        LoadedMap map = Maud.getModel().getMap();
+        LoadedMap map = CharEd.getModel().getMap();
         int numBoneMappings = map.countMappings();
         if (map.isBoneMappingSelected()) {
             int index = map.findIndex();
@@ -254,10 +254,10 @@ class MappingTool extends Tool {
         String mButton = "";
         String uButton = "";
 
-        if (Maud.getModel().getMap().isBoneMappingSelected()) {
+        if (CharEd.getModel().getMap().isBoneMappingSelected()) {
             uButton = "Unmap";
-        } else if (Maud.getModel().getSource().getBone().isSelected()
-                && Maud.getModel().getTarget().getBone().isSelected()) {
+        } else if (CharEd.getModel().getSource().getBone().isSelected()
+                && CharEd.getModel().getTarget().getBone().isSelected()) {
             mButton = "Map";
         }
 
@@ -272,12 +272,12 @@ class MappingTool extends Tool {
         /*
          * description
          */
-        Cgm source = Maud.getModel().getSource();
+        Cgm source = CharEd.getModel().getSource();
         String sourceBoneDesc;
         if (source.getBone().isSelected()) {
             String sourceName = source.getBone().name();
             sourceBoneDesc = MyString.quote(sourceName);
-            String target = Maud.getModel().getMap().targetBoneName(sourceName);
+            String target = CharEd.getModel().getMap().targetBoneName(sourceName);
             if (target != null) {
                 sourceBoneDesc += String.format("  -> %s", target);
             }
@@ -305,11 +305,11 @@ class MappingTool extends Tool {
     private void updateTarget() {
         String targetBoneDesc;
 
-        SelectedBone bone = Maud.getModel().getTarget().getBone();
+        SelectedBone bone = CharEd.getModel().getTarget().getBone();
         if (bone.isSelected()) {
             String targetName = bone.name();
             targetBoneDesc = MyString.quote(targetName);
-            String source = Maud.getModel().getMap().sourceBoneName(targetName);
+            String source = CharEd.getModel().getMap().sourceBoneName(targetName);
             if (source != null) {
                 targetBoneDesc += String.format("  <- %s", source);
             }

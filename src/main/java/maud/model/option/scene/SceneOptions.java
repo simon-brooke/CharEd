@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.action.ActionPrefix;
 import maud.model.EditState;
@@ -240,7 +240,7 @@ public class SceneOptions implements Cloneable {
         if (numPhysicsIterations != newNumber) {
             numPhysicsIterations = newNumber;
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedPhysicsIterations();
         }
     }
@@ -254,7 +254,7 @@ public class SceneOptions implements Cloneable {
     public void setPlatformDiameter(WhichCgm whichCgm, float newDiameter) {
         Validate.positive(newDiameter, "new diameter");
 
-        EditState editState = Maud.getModel().getOptionsEditState();
+        EditState editState = CharEd.getModel().getOptionsEditState();
         switch (whichCgm) {
             case Source:
                 if (sourcePlatformDiameter != newDiameter) {

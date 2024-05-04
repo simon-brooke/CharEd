@@ -34,7 +34,7 @@ import jme3utilities.math.MyVector3f;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.option.scene.LightsOptions;
 import maud.model.option.scene.RenderOptions;
@@ -126,7 +126,7 @@ public class SceneLightingTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        RenderOptions options = Maud.getModel().getScene().getRender();
+        RenderOptions options = CharEd.getModel().getScene().getRender();
         switch (name) {
             case "sky2":
                 options.setSkySimulated(isChecked);
@@ -144,7 +144,7 @@ public class SceneLightingTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        LightsOptions options = Maud.getModel().getScene().getLights();
+        LightsOptions options = CharEd.getModel().getScene().getLights();
 
         Vector3f direction = readVectorBank("Dir", directionSt, null);
         if (MyVector3f.isZero(direction)) {
@@ -165,7 +165,7 @@ public class SceneLightingTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         SceneOptions sceneOptions = model.getScene();
         boolean isSkySimulated = sceneOptions.getRender().isSkySimulated();
         setChecked("sky2", isSkySimulated);
@@ -173,7 +173,7 @@ public class SceneLightingTool extends Tool {
         SceneView sceneView = model.getTarget().getSceneView();
         int count = sceneView.countAddedLightProbes();
         String countText;
-        if (Maud.envCamIsBusy && count > 0) {
+        if (CharEd.envCamIsBusy && count > 0) {
             countText = Integer.toString(count - 1) + "+";
         } else {
             countText = Integer.toString(count);
@@ -181,7 +181,7 @@ public class SceneLightingTool extends Tool {
         setStatusText("probeCount", countText);
 
         String addText;
-        if (Maud.envCamIsBusy) {
+        if (CharEd.envCamIsBusy) {
             addText = "";
         } else {
             addText = "Add";

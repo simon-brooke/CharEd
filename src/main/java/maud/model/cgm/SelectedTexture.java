@@ -55,7 +55,7 @@ import jme3utilities.Validate;
 import jme3utilities.nifty.WindowController;
 import jme3utilities.ui.Locators;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.model.History;
 
@@ -682,13 +682,13 @@ public class SelectedTexture implements JmeCloneable {
             Spatial spatial = firstRef.getOverrideSpatial();
             cgm.getSpatial().select(spatial);
             cgm.getOverride().select(parameterName);
-            tool = Maud.gui.findTool("overrides");
+            tool = CharEd.gui.findTool("overrides");
         } else {
             assert firstRef.isInMaterial();
             Material material = firstRef.getMaterial();
             cgm.getSpatial().selectMaterial(material);
             cgm.getMatParam().select(parameterName);
-            tool = Maud.gui.findTool("material");
+            tool = CharEd.gui.findTool("material");
         }
         tool.select();
     }
@@ -968,7 +968,7 @@ public class SelectedTexture implements JmeCloneable {
         Image image = selectedTexture.getImage();
         RenderedImage renderedImage = MaudUtil.render(image, flipY, awtType);
 
-        String filePath = Maud.filePath(assetPath);
+        String filePath = CharEd.filePath(assetPath);
         try {
             Heart.writeImage(filePath, renderedImage);
         } catch (IOException exception) {
@@ -1101,7 +1101,7 @@ public class SelectedTexture implements JmeCloneable {
 
         Locators.save();
         Locators.registerDefault();
-        List<String> specList = Maud.getModel().getLocations().listAll();
+        List<String> specList = CharEd.getModel().getLocations().listAll();
         Locators.register(specList);
         AssetManager assetManager = Locators.getAssetManager();
         Texture result = null;

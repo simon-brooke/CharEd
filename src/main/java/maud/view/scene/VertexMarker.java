@@ -42,7 +42,7 @@ import jme3utilities.MyAsset;
 import jme3utilities.math.MyColor;
 import jme3utilities.mesh.PointMesh;
 import jme3utilities.ui.Locators;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.SelectedVertex;
 import maud.model.option.scene.DddCursorOptions;
@@ -123,7 +123,7 @@ public class VertexMarker {
             this.geometry = createGeometry();
         }
 
-        DddCursorOptions cursorOptions = Maud.getModel().getScene().getCursor();
+        DddCursorOptions cursorOptions = CharEd.getModel().getScene().getCursor();
         float cycleTime = cursorOptions.getCycleTime();
         this.colorTime = (colorTime + tpf) % cycleTime;
 
@@ -142,9 +142,9 @@ public class VertexMarker {
             Material material = geometry.getMaterial();
             material.setColor("Color", newColor); // note: creates alias
 
-            VertexOptions options = Maud.getModel().getScene().getVertex();
+            VertexOptions options = CharEd.getModel().getScene().getVertex();
             float pointSize = options.getPointSize();
-            AppSettings current = Maud.getApplication().getSettings();
+            AppSettings current = CharEd.getApplication().getSettings();
             int msaaSamples = current.getSamples();
             if (msaaSamples == 16) { // work around JME issue #878
                 pointSize *= 2f;

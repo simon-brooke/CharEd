@@ -32,7 +32,7 @@ import jme3utilities.nifty.Tool;
 import jme3utilities.wes.TweenRotations;
 import jme3utilities.wes.TweenTransforms;
 import jme3utilities.wes.TweenVectors;
-import maud.Maud;
+import maud.CharEd;
 
 /**
  * The controller for the "Tweening" tool in Maud's editor screen.
@@ -69,7 +69,7 @@ public class TweeningTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        TweenTransforms techniques = Maud.getModel().getTweenTransforms();
+        TweenTransforms techniques = CharEd.getModel().getTweenTransforms();
         TweenVectors tweenTranslations = techniques.getTweenTranslations();
         String desc = tweenTranslations.toString();
         setButtonText("tweenTranslations", desc);

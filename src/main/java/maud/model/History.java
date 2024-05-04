@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.tool.HistoryTool;
 
 /**
@@ -157,7 +157,7 @@ final public class History {
      * invoked each time a checkpoint is added or the limit is reconfigured.
      */
     public static void enforceLimit() {
-        int maxCheckpoints = Maud.getModel().getMisc().maxCheckpoints();
+        int maxCheckpoints = CharEd.getModel().getMisc().maxCheckpoints();
         while (countCheckpoints() > maxCheckpoints) {
             checkpoints.remove(0);
 
@@ -282,7 +282,7 @@ final public class History {
      * update.
      */
     public static void setAutoScroll() {
-        HistoryTool tool = (HistoryTool) Maud.gui.findTool("history");
+        HistoryTool tool = (HistoryTool) CharEd.gui.findTool("history");
         tool.setAutoScroll();
     }
 
@@ -335,6 +335,6 @@ final public class History {
         assert !message.isEmpty();
 
         logger.warning(message);
-        Maud.getModel().getMisc().setStatusMessage(message);
+        CharEd.getModel().getMisc().setStatusMessage(message);
     }
 }

@@ -47,7 +47,7 @@ import java.util.logging.Logger;
 import jme3utilities.MyAsset;
 import jme3utilities.MyCamera;
 import jme3utilities.ui.Locators;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.ScenePov;
 
 /**
@@ -148,7 +148,7 @@ public class Projectile {
         }
 
         Camera camera = view.getCamera();
-        InputManager inputManager = Maud.getApplication().getInputManager();
+        InputManager inputManager = CharEd.getApplication().getInputManager();
         Ray ray = MyCamera.mouseRay(camera, inputManager);
         spatial.setLocalTranslation(ray.origin);
 

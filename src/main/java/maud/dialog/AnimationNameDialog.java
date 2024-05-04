@@ -29,7 +29,7 @@ package maud.dialog;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.dialog.TextEntryDialog;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.model.cgm.SelectedAnimControl;
 
@@ -92,7 +92,7 @@ class AnimationNameDialog extends TextEntryDialog {
     private static boolean isUsed(String name) {
         assert name != null;
 
-        SelectedAnimControl sac = Maud.getModel().getTarget().getAnimControl();
+        SelectedAnimControl sac = CharEd.getModel().getTarget().getAnimControl();
         if (sac.hasRealAnimation(name)) {
             return true;
         } else {

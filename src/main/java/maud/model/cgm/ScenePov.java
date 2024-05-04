@@ -36,7 +36,7 @@ import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
 import jme3utilities.math.MyQuaternion;
 import jme3utilities.math.MyVector3f;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.scene.CameraOptions;
 import maud.model.option.scene.OrbitCenter;
 import maud.view.scene.SceneView;
@@ -124,7 +124,7 @@ public class ScenePov implements Cloneable, Pov {
      * Move (or turn) the POV to a horizontal orientation.
      */
     public void goHorizontal() {
-        if (Maud.getModel().getScene().getCamera().isOrbitMode()) {
+        if (CharEd.getModel().getScene().getCamera().isOrbitMode()) {
             float azimuth = azimuth();
             setOrbitGoal(0f, azimuth);
         } else {
@@ -171,7 +171,7 @@ public class ScenePov implements Cloneable, Pov {
         Validate.nonNull(newLocation, "new location");
 
         povLocation.set(newLocation);
-        if (Maud.getModel().getScene().getCamera().isOrbitMode()) {
+        if (CharEd.getModel().getScene().getCamera().isOrbitMode()) {
             setOrbitGoal();
         }
     }
@@ -182,7 +182,7 @@ public class ScenePov implements Cloneable, Pov {
      * the POV start pivoting.
      */
     public void setOrbitGoal() {
-        assert Maud.getModel().getScene().getCamera().isOrbitMode();
+        assert CharEd.getModel().getScene().getCamera().isOrbitMode();
 
         Vector3f centerLocation = centerLocation(null);
         Vector3f offset = centerLocation.subtract(povLocation);
@@ -224,7 +224,7 @@ public class ScenePov implements Cloneable, Pov {
     public void moveBackward(float amount) {
         Validate.nonZero(amount, "amount");
 
-        CameraOptions options = Maud.getModel().getScene().getCamera();
+        CameraOptions options = CharEd.getModel().getScene().getCamera();
         if (options.isOrbitMode()) {
             if (!isPivoting) {
                 float rate = 1f - dollyInOutRate / 100f;
@@ -249,7 +249,7 @@ public class ScenePov implements Cloneable, Pov {
     public void moveLeft(float amount) {
         Validate.nonZero(amount, "amount");
 
-        if (Maud.getModel().getScene().getCamera().isOrbitMode()) {
+        if (CharEd.getModel().getScene().getCamera().isOrbitMode()) {
             float azimuthAngle = azimuth() + 2f * amount;
             float elevationAngle = elevationAngle();
             setOrbitGoal(elevationAngle, azimuthAngle);
@@ -270,7 +270,7 @@ public class ScenePov implements Cloneable, Pov {
     public void moveUp(float amount) {
         Validate.nonZero(amount, "amount");
 
-        CameraOptions options = Maud.getModel().getScene().getCamera();
+        CameraOptions options = CharEd.getModel().getScene().getCamera();
         if (options.isOrbitMode()) {
             float azimuthAngle = azimuth();
             float elevationAngle = elevationAngle() - amount;
@@ -316,7 +316,7 @@ public class ScenePov implements Cloneable, Pov {
      */
     @Override
     public void update(float tpf) {
-        CameraOptions options = Maud.getModel().getScene().getCamera();
+        CameraOptions options = CharEd.getModel().getScene().getCamera();
 
         if (options.isOrbitMode()) {
             Vector3f centerLocation = centerLocation(null);
@@ -366,7 +366,7 @@ public class ScenePov implements Cloneable, Pov {
     private Vector3f centerLocation(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
-        CameraOptions options = Maud.getModel().getScene().getCamera();
+        CameraOptions options = CharEd.getModel().getScene().getCamera();
         OrbitCenter orbitCenter = options.getOrbitCenter();
         switch (orbitCenter) {
             case DddCursor:
@@ -448,7 +448,7 @@ public class ScenePov implements Cloneable, Pov {
      * axis (in radians)
      */
     private void setOrbitGoal(float elevationAngle, float azimuth) {
-        CameraOptions options = Maud.getModel().getScene().getCamera();
+        CameraOptions options = CharEd.getModel().getScene().getCamera();
         assert options.isOrbitMode();
 
         if (!isPivoting) {
@@ -473,7 +473,7 @@ public class ScenePov implements Cloneable, Pov {
     private void setOrbitLocation(float elevationAngle, float azimuth,
             float range) {
         assert range >= 0f : range;
-        CameraOptions options = Maud.getModel().getScene().getCamera();
+        CameraOptions options = CharEd.getModel().getScene().getCamera();
         assert options.isOrbitMode();
         assert !isPivoting;
 
@@ -496,7 +496,7 @@ public class ScenePov implements Cloneable, Pov {
         float aspectRatio = MyCamera.viewAspectRatio(camera);
 
         float range;
-        CameraOptions options = Maud.getModel().getScene().getCamera();
+        CameraOptions options = CharEd.getModel().getScene().getCamera();
         if (options.isOrbitMode()) {
             range = range();
         } else {

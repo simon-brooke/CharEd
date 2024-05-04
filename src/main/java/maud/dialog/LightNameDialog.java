@@ -29,7 +29,7 @@ package maud.dialog;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.dialog.TextEntryDialog;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.SelectedLight;
 
 /**
@@ -101,7 +101,7 @@ class LightNameDialog extends TextEntryDialog {
      */
     private static boolean isUsed(String name) {
         assert name != null;
-        boolean result = Maud.getModel().getTarget().hasLight(name);
+        boolean result = CharEd.getModel().getTarget().hasLight(name);
         return result;
     }
 }

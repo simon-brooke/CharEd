@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.model.EditorModel;
 import maud.model.cgm.SelectedSpatial;
@@ -111,13 +111,13 @@ class SpatialRotationTool extends Tool {
 
         Quaternion rotation = new Quaternion();
         RotationDisplayMode mode
-                = Maud.getModel().getMisc().rotationDisplayMode();
+                = CharEd.getModel().getMisc().rotationDisplayMode();
         if (mode == RotationDisplayMode.QuatCoeff) {
             MaudUtil.setFromSliders(sliderPositions, rotation);
         } else {
             rotation.fromAngles(sliderPositions);
         }
-        Maud.getModel().getTarget().setSpatialRotation(rotation);
+        CharEd.getModel().getTarget().setSpatialRotation(rotation);
     }
 
     /**
@@ -130,7 +130,7 @@ class SpatialRotationTool extends Tool {
         updateSnapButtons();
 
         RotationDisplayMode mode
-                = Maud.getModel().getMisc().rotationDisplayMode();
+                = CharEd.getModel().getMisc().rotationDisplayMode();
         String dButton = mode.toString();
         setButtonText("rotationMode2", dButton);
     }
@@ -142,12 +142,12 @@ class SpatialRotationTool extends Tool {
      * of the selected spatial.
      */
     private void setSlidersToTransform() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         SelectedSpatial spatial = model.getTarget().getSpatial();
         Quaternion rotation = spatial.localRotation(null);
 
         RotationDisplayMode mode
-                = Maud.getModel().getMisc().rotationDisplayMode();
+                = CharEd.getModel().getMisc().rotationDisplayMode();
         float[] statusValues = new float[numAxes];
         float[] sliderPositions = new float[numAxes];
         String unitSuffix = MaudUtil.displayRotation(rotation, mode,
@@ -167,7 +167,7 @@ class SpatialRotationTool extends Tool {
     private void updateSnapButtons() {
         String xyzButton = "";
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         RotationDisplayMode mode = model.getMisc().rotationDisplayMode();
         if (mode != RotationDisplayMode.QuatCoeff) {
             xyzButton = "snap";

@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.action.ActionPrefix;
 import maud.model.EditState;
@@ -188,7 +188,7 @@ public class RenderOptions implements Cloneable {
         if (cloudiness != newOpacity) {
             cloudiness = newOpacity;
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedSkyCloudiness();
         }
     }
@@ -218,7 +218,7 @@ public class RenderOptions implements Cloneable {
         if (hour != newHour) {
             hour = newHour;
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedSkyHour();
         }
     }
@@ -298,7 +298,7 @@ public class RenderOptions implements Cloneable {
         if (!sourceBackground.equals(newColor)) {
             sourceBackground.set(newColor);
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             Background background = Background.SourceScenesWithNoSky;
             editState.setEditedBackgroundColor(background);
         }
@@ -315,7 +315,7 @@ public class RenderOptions implements Cloneable {
         if (!targetBackground.equals(newColor)) {
             targetBackground.set(newColor);
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             Background background = Background.TargetScenesWithNoSky;
             editState.setEditedBackgroundColor(background);
         }
@@ -332,10 +332,10 @@ public class RenderOptions implements Cloneable {
         if (triangleMode != newSetting) {
             triangleMode = newSetting;
 
-            Cgm target = Maud.getModel().getTarget();
+            Cgm target = CharEd.getModel().getTarget();
             target.updateSceneWireframe();
 
-            Cgm source = Maud.getModel().getSource();
+            Cgm source = CharEd.getModel().getSource();
             if (source.isLoaded()) {
                 source.updateSceneWireframe();
             }

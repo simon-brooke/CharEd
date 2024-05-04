@@ -32,7 +32,7 @@ import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.EditableCgm;
 import maud.model.cgm.SelectedUserData;
@@ -89,7 +89,7 @@ class UserDataTool extends Tool {
         String previousButton = "";
         String selectButton = "";
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         int numKeys = target.getSpatial().countUserData();
         int selectedIndex = target.getUserData().findKeyIndex();
         if (selectedIndex >= 0) {
@@ -125,7 +125,7 @@ class UserDataTool extends Tool {
         String keyText;
         String rButton;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         String key = target.getUserData().key();
         if (key == null) {
             dButton = "";
@@ -146,7 +146,7 @@ class UserDataTool extends Tool {
      * Update the type status.
      */
     private void updateType() {
-        SelectedUserData data = Maud.getModel().getTarget().getUserData();
+        SelectedUserData data = CharEd.getModel().getTarget().getUserData();
 
         String typeText = "";
         if (data.isSelected()) {
@@ -162,7 +162,7 @@ class UserDataTool extends Tool {
     private void updateValue() {
         String valueButton = "";
 
-        SelectedUserData datum = Maud.getModel().getTarget().getUserData();
+        SelectedUserData datum = CharEd.getModel().getTarget().getUserData();
         String key = datum.key();
         if (key != null) {
             Object value = datum.getValue();

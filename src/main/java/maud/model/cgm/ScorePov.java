@@ -33,7 +33,7 @@ import com.jme3.renderer.Camera;
 import java.util.logging.Logger;
 import jme3utilities.MyCamera;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.view.ScoreView;
 
 /**
@@ -246,7 +246,7 @@ public class ScorePov implements Cloneable, Pov {
     public void moveUp(float amount) {
         Validate.nonZero(amount, "amount");
 
-        Maud app = Maud.getApplication();
+        CharEd app = CharEd.getApplication();
         Camera camera = app.getCamera();
         float displayHeight = camera.getHeight();
 

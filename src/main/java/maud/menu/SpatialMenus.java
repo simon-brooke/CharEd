@@ -30,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.action.ActionPrefix;
 import maud.dialog.EditorDialogs;
 import maud.model.cgm.Cgm;
@@ -84,7 +84,7 @@ final public class SpatialMenus {
         builder.addTool("Translate tool");
         builder.addTool("User-Data tool");
 
-        SelectedSpatial ss = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial ss = CharEd.getModel().getTarget().getSpatial();
         int treeLevel = ss.treeLevel();
         boolean isCgmRoot = (treeLevel == 0);
         int numChildren = ss.countChildren();
@@ -126,7 +126,7 @@ final public class SpatialMenus {
     public static void editMaterial() {
         MenuBuilder builder = new MenuBuilder();
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int uses = target.getSpatial().countMaterialUses();
         if (uses > 1) {
             builder.addEdit("Clone");
@@ -163,7 +163,7 @@ final public class SpatialMenus {
             handled = menuSpatialSelect(arg);
 
         } else {
-            EditableCgm target = Maud.getModel().getTarget();
+            EditableCgm target = CharEd.getModel().getTarget();
             SelectedSpatial ss = target.getSpatial();
             switch (remainder) {
                 case "Add new":
@@ -269,7 +269,7 @@ final public class SpatialMenus {
      * @param subset which kinds of spatials to include (not null)
      */
     public static void selectSpatial(String argument, WhichSpatials subset) {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         if (target.hasSpatial(argument)) {
             target.getSpatial().select(argument);
         } else {
@@ -285,7 +285,7 @@ final public class SpatialMenus {
      * @param itemPrefix prefix for filtering menu items (not null)
      */
     public static void selectSpatialChild(String itemPrefix) {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         int numChildren = spatial.countChildren();
         if (numChildren == 1) {
             spatial.selectChild(0);
@@ -321,7 +321,7 @@ final public class SpatialMenus {
      * @param itemPrefix prefix for filtering menu items (not null)
      */
     public static void selectSpatialSibling(String itemPrefix) {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         int numSiblings = spatial.countSiblings(); // count includes self
         assert numSiblings > 1 : numSiblings;
 
@@ -356,7 +356,7 @@ final public class SpatialMenus {
     private static void addNew() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.isNode()) {
             builder.addDialog("Leaf node");
         }
@@ -376,7 +376,7 @@ final public class SpatialMenus {
      * @return true if the action is handled, otherwise false
      */
     private static boolean menuEditMaterial(String remainder) {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         boolean handled = true;
         switch (remainder) {
             case "Clone":
@@ -438,7 +438,7 @@ final public class SpatialMenus {
      * @return true if the action is handled, otherwise false
      */
     private static boolean menuSpatialSelect(String remainder) {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         boolean handled = true;
         switch (remainder) {
             case "Attachments node":
@@ -478,7 +478,7 @@ final public class SpatialMenus {
     private static void select() {
         MenuBuilder builder = new MenuBuilder();
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<String> names = target.listSpatialNames("", WhichSpatials.All);
         if (!names.isEmpty()) {
             builder.addSubmenu("By name");
@@ -524,7 +524,7 @@ final public class SpatialMenus {
      * Handle the "Spatial -> Select -> Attachments node" menu item.
      */
     private static void selectAttachmentsNode() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedBone bone = target.getBone();
         if (bone.hasAttachmentsNode()) {
             SelectedSpatial spatial = target.getSpatial();
@@ -550,7 +550,7 @@ final public class SpatialMenus {
         Collections.sort(nameList);
 
         MenuBuilder builder = new MenuBuilder();
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         for (String name : nameList) {
             switch (subset) {
                 case All:

@@ -61,7 +61,7 @@ import jme3utilities.sky.Constants;
 import jme3utilities.ui.Locators;
 import jme3utilities.ui.UiVersion;
 import jme3utilities.wes.WesVersion;
-import maud.Maud;
+import maud.CharEd;
 import maud.action.Action;
 import maud.action.ActionPrefix;
 import maud.model.EditorModel;
@@ -124,7 +124,7 @@ final public class EditorDialogs {
      * Display an "About Maud" dialog.
      */
     public static void aboutMaud() {
-        Nifty nifty = Maud.gui.getNifty();
+        Nifty nifty = CharEd.gui.getNifty();
         String niftyVersion = nifty.getVersion();
         String text = "Maud, by Stephen Gold\n\nYou are c"
                 + "urrently using Maud, a jMonkeyEngine application for edit"
@@ -175,8 +175,8 @@ final public class EditorDialogs {
 
         text += String.format("%n%n");
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showInfoDialog("About Maud", text);
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showInfoDialog("About Maud", text);
     }
 
     /**
@@ -208,9 +208,9 @@ final public class EditorDialogs {
             String message
                     = String.format("Overwrite %s?", MyString.quote(filePath));
             OverwriteDialog controller = new OverwriteDialog();
-            Maud.gui.showConfirmDialog(message, "", action, controller);
+            CharEd.gui.showConfirmDialog(message, "", action, controller);
         } else {
-            Maud.perform(action);
+            CharEd.perform(action);
         }
     }
 
@@ -218,12 +218,12 @@ final public class EditorDialogs {
      * Display a "delete animation" dialog.
      */
     public static void deleteAnimation() {
-        String name = Maud.getModel().getTarget().getAnimation().name();
+        String name = CharEd.getModel().getTarget().getAnimation().name();
         String message = String.format("Delete the %s animation?",
                 MyString.quote(name));
         DialogController controller = new MinimalDialog();
-        Maud.gui.closeAllPopups();
-        Maud.gui.showConfirmDialog(message, "Delete", Action.deleteAnimation,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showConfirmDialog(message, "Delete", Action.deleteAnimation,
                 controller);
     }
 
@@ -231,14 +231,14 @@ final public class EditorDialogs {
      * Display a "delete nextKeyframes" dialog.
      */
     public static void deleteNextKeyframes() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numFrames = target.getTrack().countKeyframes();
         int frameIndex = target.getFrame().findIndex();
         int max = numFrames - frameIndex - 2;
         IntegerDialog controller
                 = new IntegerDialog("Delete", 1, max, AllowNull.No);
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter the number of frames to delete:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter the number of frames to delete:",
                 "1", ActionPrefix.deleteNextKeyframes, controller);
     }
 
@@ -246,13 +246,13 @@ final public class EditorDialogs {
      * Display a "delete previousKeyframes" dialog.
      */
     public static void deletePreviousKeyframes() {
-        SelectedFrame frame = Maud.getModel().getTarget().getFrame();
+        SelectedFrame frame = CharEd.getModel().getTarget().getFrame();
         int frameIndex = frame.findIndex();
         int max = frameIndex - 1;
         IntegerDialog controller
                 = new IntegerDialog("Delete", 1, max, AllowNull.No);
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter the number of frames to delete:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter the number of frames to delete:",
                 "1", ActionPrefix.deletePreviousKeyframes, controller);
     }
 
@@ -260,12 +260,12 @@ final public class EditorDialogs {
      * Display a "delete sgc" dialog.
      */
     public static void deleteSgc() {
-        String name = Maud.getModel().getTarget().getSgc().name();
+        String name = CharEd.getModel().getTarget().getSgc().name();
         String message
                 = String.format("Delete the %s control?", MyString.quote(name));
         DialogController controller = new MinimalDialog();
-        Maud.gui.closeAllPopups();
-        Maud.gui.showConfirmDialog(message, "Delete", Action.deleteSgc,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showConfirmDialog(message, "Delete", Action.deleteSgc,
                 controller);
     }
 
@@ -297,8 +297,8 @@ final public class EditorDialogs {
                     licenseName, licenseText);
         }
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showInfoDialog("License information", bodyText);
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showInfoDialog("License information", bodyText);
     }
 
     /**
@@ -308,7 +308,7 @@ final public class EditorDialogs {
      * @param slot load slot (not null)
      */
     public static void loadCgmAsset(String spec, LoadedCgm slot) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         String actionPrefix;
         if (slot == model.getTarget()) {
             actionPrefix = ActionPrefix.loadCgmAsset;
@@ -330,8 +330,8 @@ final public class EditorDialogs {
         extList.add(".xbuf");
         AssetDialog controller = new AssetDialog("Select", spec, extList);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter model asset path:", "Models/",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter model asset path:", "Models/",
                 "Load", dialogPrefix, controller);
     }
 
@@ -341,7 +341,7 @@ final public class EditorDialogs {
      * @param spec URL specification, or null for the default location
      */
     public static void loadMapAsset(String spec) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         String indexString = model.getLocations().indexForSpec(spec);
         String dialogPrefix = ActionPrefix.loadMapAsset + indexString + " /";
 
@@ -349,8 +349,8 @@ final public class EditorDialogs {
         extList.add(".j3o");
         AssetDialog controller = new AssetDialog("Select", spec, extList);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter map asset path:", "SkeletonMaps/",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter map asset path:", "SkeletonMaps/",
                 "Load", dialogPrefix, controller);
     }
 
@@ -362,13 +362,13 @@ final public class EditorDialogs {
     public static void mergeGeometries(String actionPrefix) {
         Validate.nonEmpty(actionPrefix, "action prefix");
 
-        SelectedSpatial ss = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial ss = CharEd.getModel().getTarget().getSpatial();
         List<GeometryItem> items = ss.listGeometryItems();
         MergeDialog controller = new MergeDialog(items);
 
         String prompt = "Select 2 or more geometries to include in the merge:";
-        Maud.gui.closeAllPopups();
-        Maud.gui.showMultiSelectDialog(prompt, actionPrefix, controller);
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showMultiSelectDialog(prompt, actionPrefix, controller);
     }
 
     /**
@@ -386,8 +386,8 @@ final public class EditorDialogs {
 
         DialogController controller
                 = new AnimationNameDialog(commitDescription);
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter a name for the new animation:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter a name for the new animation:",
                 defaultName, actionPrefix, controller);
     }
 
@@ -402,7 +402,7 @@ final public class EditorDialogs {
         Validate.nonNull(which1, "first animation's model");
         Validate.nonNull(which2, "2nd animation's model");
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         String animationName1 = model.getCgm(which1).getAnimation().name();
         String animationName2 = model.getCgm(which2).getAnimation().name();
         String defaultName = animationName1 + "," + animationName2;
@@ -416,14 +416,14 @@ final public class EditorDialogs {
      * Display a "new animation fromMix" dialog to select the tracks.
      */
     public static void newAnimationFromMix() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<TrackItem> items = target.listTrackItems();
         MixDialog controller = new MixDialog(items);
 
         String prompt = "Select tracks to include in the mix:";
         String prefix = ActionPrefix.newAnimationFromMix;
-        Maud.gui.closeAllPopups();
-        Maud.gui.showMultiSelectDialog(prompt, prefix, controller);
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showMultiSelectDialog(prompt, prefix, controller);
     }
 
     /**
@@ -447,8 +447,8 @@ final public class EditorDialogs {
         DialogController controller = new SpatialNameDialog("Add geometry");
         String defaultName = "new geometry";
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter a name for the new geometry:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter a name for the new geometry:",
                 defaultName, actionPrefix, controller);
     }
 
@@ -463,8 +463,8 @@ final public class EditorDialogs {
         DialogController controller = new LightNameDialog("Add light");
         String defaultName = "new light";
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter a name for the new light:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter a name for the new light:",
                 defaultName, actionPrefix, controller);
     }
 
@@ -479,8 +479,8 @@ final public class EditorDialogs {
         DialogController controller = new SpatialNameDialog("Add node");
         String defaultName = "new node";
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter a name for the new node:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter a name for the new node:",
                 defaultName, actionPrefix, controller);
     }
 
@@ -496,8 +496,8 @@ final public class EditorDialogs {
         DialogController controller = new OverrideNameDialog("Add");
         String defaultName = "ParameterName";
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog(
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog(
                 "Enter a parameter name for the new override:", defaultName,
                 actionPrefix, controller);
     }
@@ -513,8 +513,8 @@ final public class EditorDialogs {
         DialogController controller = new UserKeyDialog("Add");
         String defaultKey = "key";
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter a key for the new user data:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter a key for the new user data:",
                 defaultKey, actionPrefix, controller);
     }
 
@@ -522,12 +522,12 @@ final public class EditorDialogs {
      * Display a "reduce animation" dialog to enter the reduction factor.
      */
     public static void reduceAnimation() {
-        if (Maud.getModel().getTarget().getAnimation().isReal()) {
+        if (CharEd.getModel().getTarget().getAnimation().isReal()) {
             IntegerDialog controller = new IntegerDialog("Reduce", 2,
                     Integer.MAX_VALUE, AllowNull.No);
 
-            Maud.gui.closeAllPopups();
-            Maud.gui.showTextEntryDialog("Enter reduction factor:", "2",
+            CharEd.gui.closeAllPopups();
+            CharEd.gui.showTextEntryDialog("Enter reduction factor:", "2",
                     ActionPrefix.reduceAnimation, controller);
         }
     }
@@ -536,13 +536,13 @@ final public class EditorDialogs {
      * Display a "reduce track" dialog to enter the reduction factor.
      */
     public static void reduceTrack() {
-        SelectedTrack track = Maud.getModel().getTarget().getTrack();
+        SelectedTrack track = CharEd.getModel().getTarget().getTrack();
         if (track.isSelected()) {
             IntegerDialog controller = new IntegerDialog("Reduce", 2,
                     Integer.MAX_VALUE, AllowNull.No);
 
-            Maud.gui.closeAllPopups();
-            Maud.gui.showTextEntryDialog("Enter reduction factor:", "2",
+            CharEd.gui.closeAllPopups();
+            CharEd.gui.showTextEntryDialog("Enter reduction factor:", "2",
                     ActionPrefix.reduceTrack, controller);
         }
     }
@@ -551,13 +551,13 @@ final public class EditorDialogs {
      * Display a "rename animation" dialog.
      */
     public static void renameAnimation() {
-        LoadedAnimation animation = Maud.getModel().getTarget().getAnimation();
+        LoadedAnimation animation = CharEd.getModel().getTarget().getAnimation();
         if (animation.isReal()) {
             String oldName = animation.name();
             DialogController controller = new AnimationNameDialog("Rename");
 
-            Maud.gui.closeAllPopups();
-            Maud.gui.showTextEntryDialog("Enter new name for the animation:",
+            CharEd.gui.closeAllPopups();
+            CharEd.gui.showTextEntryDialog("Enter new name for the animation:",
                     oldName, ActionPrefix.renameAnimation, controller);
         }
     }
@@ -566,13 +566,13 @@ final public class EditorDialogs {
      * Display a "rename bone" dialog.
      */
     public static void renameBone() {
-        SelectedBone bone = Maud.getModel().getTarget().getBone();
+        SelectedBone bone = CharEd.getModel().getTarget().getBone();
         if (bone.isSelected()) {
             String oldName = bone.name();
             DialogController controller = new BoneRenameDialog("Rename");
 
-            Maud.gui.closeAllPopups();
-            Maud.gui.showTextEntryDialog("Enter new name for the bone:",
+            CharEd.gui.closeAllPopups();
+            CharEd.gui.showTextEntryDialog("Enter new name for the bone:",
                     oldName, ActionPrefix.renameBone, controller);
         }
     }
@@ -581,13 +581,13 @@ final public class EditorDialogs {
      * Display a "rename light" dialog.
      */
     public static void renameLight() {
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         if (light.isSelected()) {
             String oldName = light.name();
             DialogController controller = new LightNameDialog("Rename");
 
-            Maud.gui.closeAllPopups();
-            Maud.gui.showTextEntryDialog("Enter a new name for the light:",
+            CharEd.gui.closeAllPopups();
+            CharEd.gui.showTextEntryDialog("Enter a new name for the light:",
                     oldName, ActionPrefix.renameLight, controller);
         }
     }
@@ -596,7 +596,7 @@ final public class EditorDialogs {
      * Display a "rename material" dialog.
      */
     public static void renameMaterial() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.hasMaterial()) {
             String oldName = spatial.getMaterialName();
             if (oldName == null) {
@@ -604,8 +604,8 @@ final public class EditorDialogs {
             }
             DialogController controller = new MaterialNameDialog("Rename");
 
-            Maud.gui.closeAllPopups();
-            Maud.gui.showTextEntryDialog("Enter a new name for the material:",
+            CharEd.gui.closeAllPopups();
+            CharEd.gui.showTextEntryDialog("Enter a new name for the material:",
                     oldName, ActionPrefix.renameMaterial, controller);
         }
     }
@@ -614,13 +614,13 @@ final public class EditorDialogs {
      * Display a "rename override" dialog.
      */
     public static void renameOverride() {
-        SelectedOverride override = Maud.getModel().getTarget().getOverride();
+        SelectedOverride override = CharEd.getModel().getTarget().getOverride();
         if (override.isSelected()) {
             String oldName = override.parameterName();
             DialogController controller = new OverrideNameDialog("Rename");
 
-            Maud.gui.closeAllPopups();
-            Maud.gui.showTextEntryDialog(
+            CharEd.gui.closeAllPopups();
+            CharEd.gui.showTextEntryDialog(
                     "Enter a new name for the parameter override:",
                     oldName, ActionPrefix.renameOverride, controller);
         }
@@ -630,7 +630,7 @@ final public class EditorDialogs {
      * Display a "rename spatial" dialog to enter the new name.
      */
     public static void renameSpatial() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
 
         String defaultName = spatial.getName();
         if (defaultName == null) {
@@ -645,8 +645,8 @@ final public class EditorDialogs {
             prompt = "Enter new name for the geometry:";
         }
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog(prompt, defaultName,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog(prompt, defaultName,
                 ActionPrefix.renameSpatial, controller);
     }
 
@@ -654,12 +654,12 @@ final public class EditorDialogs {
      * Display a "rename userKey" dialog to enter the new key.
      */
     public static void renameUserKey() {
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         String oldName = target.getUserData().key();
         if (oldName != null) {
             DialogController controller = new UserKeyDialog("Rename");
-            Maud.gui.closeAllPopups();
-            Maud.gui.showTextEntryDialog("Enter a new key for the user data:",
+            CharEd.gui.closeAllPopups();
+            CharEd.gui.showTextEntryDialog("Enter a new key for the user data:",
                     oldName, ActionPrefix.renameUserKey, controller);
         }
     }
@@ -668,15 +668,15 @@ final public class EditorDialogs {
      * Display a "reparent spatials" dialog to select the spatials.
      */
     public static void reparentSpatials() {
-        SelectedSpatial ss = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial ss = CharEd.getModel().getTarget().getSpatial();
         List<SpatialItem> allItems = ss.listReparentItems();
         Collections.sort(allItems);
         ReparentDialog controller = new ReparentDialog(allItems);
 
         String prompt = "Select spatials to reparent:";
         String prefix = ActionPrefix.reparentSpatials;
-        Maud.gui.closeAllPopups();
-        Maud.gui.showMultiSelectDialog(prompt, prefix, controller);
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showMultiSelectDialog(prompt, prefix, controller);
     }
 
     /**
@@ -687,8 +687,8 @@ final public class EditorDialogs {
         String defaultPattern = "textures;textures";
         DialogController controller = new TextEntryDialog("Replace");
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog(promptMessage, defaultPattern,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog(promptMessage, defaultPattern,
                 ActionPrefix.renameMatchingTextures, controller);
     }
 
@@ -727,11 +727,11 @@ final public class EditorDialogs {
         Validate.nonEmpty(commitDescription, "commit description");
         Validate.nonEmpty(actionPrefix, "action prefix");
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         String baseFilePath = target.baseFilePathForWrite();
         DialogController controller = new TextEntryDialog(commitDescription);
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter base file path for model:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter base file path for model:",
                 baseFilePath, actionPrefix, controller);
     }
 
@@ -747,10 +747,10 @@ final public class EditorDialogs {
         Validate.nonEmpty(commitDescription, "commit description");
         Validate.nonEmpty(actionPrefix, "action prefix");
 
-        String baseFilePath = Maud.getModel().getMap().baseFilePathForWrite();
+        String baseFilePath = CharEd.getModel().getMap().baseFilePathForWrite();
         DialogController controller = new TextEntryDialog(commitDescription);
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter base file path for map:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter base file path for map:",
                 baseFilePath, actionPrefix, controller);
     }
 
@@ -767,11 +767,11 @@ final public class EditorDialogs {
         extList.add(".png");
         NewTextureDialog controller
                 = new NewTextureDialog("Save", "flipY", extList);
-        Maud.gui.closeAllPopups();
+        CharEd.gui.closeAllPopups();
 
-        SelectedTexture selTexture = Maud.getModel().getTarget().getTexture();
+        SelectedTexture selTexture = CharEd.getModel().getTarget().getTexture();
         String defaultAssetPath = selTexture.lastAssetPath();
-        Maud.gui.showTextAndCheckDialog("Enter new asset path for texture:",
+        CharEd.gui.showTextAndCheckDialog("Enter new asset path for texture:",
                 defaultAssetPath, ActionPrefix.saveTexture, controller);
     }
 
@@ -779,7 +779,7 @@ final public class EditorDialogs {
      * Display a "select boneIndex " dialog to enter the bone index.
      */
     public static void selectBoneIndex() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         int numBones = target.getSkeleton().countBones();
         int indexBase = model.getMisc().indexBase();
@@ -790,8 +790,8 @@ final public class EditorDialogs {
         int defaultIndex = (oldIndex == -1) ? indexBase : oldIndex;
         String defaultText = Integer.toString(defaultIndex);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter the index of the bone:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter the index of the bone:",
                 defaultText, ActionPrefix.selectBoneIndex, controller);
     }
 
@@ -799,7 +799,7 @@ final public class EditorDialogs {
      * Display a "select keyframe " dialog to enter the keyframe index.
      */
     public static void selectKeyframe() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         int numKeyframes = target.getTrack().countKeyframes();
         int indexBase = model.getMisc().indexBase();
@@ -810,8 +810,8 @@ final public class EditorDialogs {
         int defaultIndex = (oldIndex == -1) ? indexBase : oldIndex;
         String defaultText = Integer.toString(defaultIndex);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter the index of the keyframe:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter the index of the keyframe:",
                 defaultText, ActionPrefix.selectKeyframe, controller);
     }
 
@@ -819,7 +819,7 @@ final public class EditorDialogs {
      * Display a "select vertex " dialog to enter the vertex index.
      */
     public static void selectVertex() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         int numVertices = target.getSpatial().countVertices();
         int indexBase = model.getMisc().indexBase();
@@ -830,8 +830,8 @@ final public class EditorDialogs {
         int defaultIndex = (oldIndex == -1) ? indexBase : oldIndex;
         String defaultText = Integer.toString(defaultIndex);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter the index of the vertex:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter the index of the vertex:",
                 defaultText, ActionPrefix.selectVertex, controller);
     }
 
@@ -840,7 +840,7 @@ final public class EditorDialogs {
      * selected texture.
      */
     public static void setAnisotropy() {
-        SelectedTexture texture = Maud.getModel().getTarget().getTexture();
+        SelectedTexture texture = CharEd.getModel().getTarget().getTexture();
         if (!texture.hasKey()) {
             return;
         }
@@ -850,8 +850,8 @@ final public class EditorDialogs {
 
         DialogController controller = new IntegerDialog("Select", 0,
                 Integer.MAX_VALUE, AllowNull.No);
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter the anisotropy:", defaultText,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter the anisotropy:", defaultText,
                 ActionPrefix.setAnisotropy, controller);
     }
 
@@ -862,12 +862,12 @@ final public class EditorDialogs {
         DialogController controller = new IntegerDialog("Set", 0,
                 Integer.MAX_VALUE, AllowNull.No);
 
-        SelectedBuffer buffer = Maud.getModel().getTarget().getBuffer();
+        SelectedBuffer buffer = CharEd.getModel().getTarget().getBuffer();
         int oldSpan = buffer.instanceSpan();
         String defaultText = Integer.toString(oldSpan);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter the instance span:", defaultText,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter the instance span:", defaultText,
                 ActionPrefix.setBufferInstanceSpan, controller);
     }
 
@@ -875,7 +875,7 @@ final public class EditorDialogs {
      * Display a "set bufferLimit " dialog to enter the new buffer limit.
      */
     public static void setBufferLimit() {
-        SelectedBuffer buffer = Maud.getModel().getTarget().getBuffer();
+        SelectedBuffer buffer = CharEd.getModel().getTarget().getBuffer();
         int capacity = buffer.capacity();
         DialogController controller
                 = new IntegerDialog("Set", 1, capacity, AllowNull.No);
@@ -883,8 +883,8 @@ final public class EditorDialogs {
         int oldLimit = buffer.limit();
         String defaultText = Integer.toString(oldLimit);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter the buffer limit:", defaultText,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter the buffer limit:", defaultText,
                 ActionPrefix.setBufferLimit, controller);
     }
 
@@ -895,12 +895,12 @@ final public class EditorDialogs {
         DialogController controller
                 = new IntegerDialog("Set", 0, 999, AllowNull.No);
 
-        SelectedBuffer buffer = Maud.getModel().getTarget().getBuffer();
+        SelectedBuffer buffer = CharEd.getModel().getTarget().getBuffer();
         int oldStride = buffer.stride();
         String defaultText = Integer.toString(oldStride);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter the buffer stride in bytes:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter the buffer stride in bytes:",
                 defaultText, ActionPrefix.setBufferStride, controller);
     }
 
@@ -908,14 +908,14 @@ final public class EditorDialogs {
      * Display a "set dumpIndentSpaces" dialog.
      */
     public static void setDumpIndentSpaces() {
-        String indentIncrement = Maud.getModel().getDumper().indentIncrement();
+        String indentIncrement = CharEd.getModel().getDumper().indentIncrement();
         String defaultText = Integer.toString(indentIncrement.length());
 
         DialogController controller
                 = new IntegerDialog("Set", 0, 40, AllowNull.No);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter indent in spaces:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter indent in spaces:",
                 defaultText, ActionPrefix.setDumpIndentSpaces, controller);
     }
 
@@ -923,14 +923,14 @@ final public class EditorDialogs {
      * Display a "set dumpMaxChildren" dialog.
      */
     public static void setDumpMaxChildren() {
-        int maxChildren = Maud.getModel().getDumper().maxChildren();
+        int maxChildren = CharEd.getModel().getDumper().maxChildren();
         String defaultText = Integer.toString(maxChildren);
 
         DialogController controller
                 = new IntegerDialog("Set", 0, Integer.MAX_VALUE, AllowNull.No);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter max number of children:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter max number of children:",
                 defaultText, ActionPrefix.setDumpMaxChildren, controller);
     }
 
@@ -938,7 +938,7 @@ final public class EditorDialogs {
      * Display a "set duration proportional" dialog.
      */
     public static void setDurationProportional() {
-        LoadedAnimation animation = Maud.getModel().getTarget().getAnimation();
+        LoadedAnimation animation = CharEd.getModel().getTarget().getAnimation();
         float oldDuration = animation.duration();
         String defaultText = Float.toString(oldDuration);
 
@@ -952,8 +952,8 @@ final public class EditorDialogs {
         DialogController controller
                 = new FloatDialog("Set", min, Float.MAX_VALUE, AllowNull.No);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter new duration in seconds:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter new duration in seconds:",
                 defaultText, ActionPrefix.setDurationProportional, controller);
     }
 
@@ -961,7 +961,7 @@ final public class EditorDialogs {
      * Display a "set duration same" dialog.
      */
     public static void setDurationSame() {
-        LoadedAnimation animation = Maud.getModel().getTarget().getAnimation();
+        LoadedAnimation animation = CharEd.getModel().getTarget().getAnimation();
         float oldDuration = animation.duration();
         String defaultText = Float.toString(oldDuration);
 
@@ -969,8 +969,8 @@ final public class EditorDialogs {
         DialogController controller = new FloatDialog("Extend", finalTime,
                 Float.MAX_VALUE, AllowNull.No);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter new duration in seconds:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter new duration in seconds:",
                 defaultText, ActionPrefix.setDurationSame, controller);
     }
 
@@ -983,8 +983,8 @@ final public class EditorDialogs {
 
         FloatDialog controller = new FloatDialog("Set", Float.MIN_VALUE,
                 Float.MAX_VALUE, AllowNull.No);
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter margin for new physics shapes:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter margin for new physics shapes:",
                 defaultValue, ActionPrefix.setDefaultMargin, controller);
     }
 
@@ -992,7 +992,7 @@ final public class EditorDialogs {
      * Display a "set frameTime" dialog.
      */
     public static void setFrameTime() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedFrame frame = target.getFrame();
         int frameIndex = frame.findIndex();
         assert frameIndex > 0 : frameIndex;
@@ -1018,8 +1018,8 @@ final public class EditorDialogs {
 
         FloatDialog controller
                 = new FloatDialog("Adjust", minTime, maxTime, AllowNull.No);
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter new time for the frame in seconds:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter new time for the frame in seconds:",
                 defaultValue, ActionPrefix.setFrameTime, controller);
     }
 
@@ -1030,12 +1030,12 @@ final public class EditorDialogs {
         DialogController controller = new FloatDialog("Set", Float.MIN_VALUE,
                 Float.MAX_VALUE, AllowNull.No);
 
-        SelectedLink boneLink = Maud.getModel().getTarget().getLink();
+        SelectedLink boneLink = CharEd.getModel().getTarget().getLink();
         float oldMass = boneLink.mass();
         String defaultText = Float.toString(oldMass);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter the mass:", defaultText,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter the mass:", defaultText,
                 ActionPrefix.setLinkMass, controller);
     }
 
@@ -1073,7 +1073,7 @@ final public class EditorDialogs {
                 } else { // only 2 possible values, so toggle immediately
                     boolean newValue = !(boolean) oldValue;
                     String action = actionPrefix + newValue;
-                    Maud.perform(action);
+                    CharEd.perform(action);
                     return;
                 }
                 break;
@@ -1116,7 +1116,7 @@ final public class EditorDialogs {
             case TextureArray:
             case TextureCubeMap:
                 // Select the texture in the texture tool.
-                Cgm target = Maud.getModel().getTarget();
+                Cgm target = CharEd.getModel().getTarget();
                 MatParamRef ref;
                 if (allowNull.equals(AllowNull.Yes)) {
                     ref = target.getOverride().makeRef();
@@ -1175,7 +1175,7 @@ final public class EditorDialogs {
                 return;
         }
 
-        Maud.gui.showTextEntryDialog(promptMessage, defaultValue, actionPrefix,
+        CharEd.gui.showTextEntryDialog(promptMessage, defaultValue, actionPrefix,
                 controller);
     }
 
@@ -1186,11 +1186,11 @@ final public class EditorDialogs {
         DialogController controller = new IntegerDialog(
                 "Set", 2, Integer.MAX_VALUE, AllowNull.No);
 
-        int oldLimit = Maud.getModel().getMisc().maxCheckpoints();
+        int oldLimit = CharEd.getModel().getMisc().maxCheckpoints();
         String defaultText = Integer.toString(oldLimit);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter the desired checkpoint limit:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter the desired checkpoint limit:",
                 defaultText, ActionPrefix.setMaxCheckpoints, controller);
     }
 
@@ -1202,7 +1202,7 @@ final public class EditorDialogs {
     public static void setPhysicsRbpValue(RigidBodyParameter parameter) {
         Validate.nonNull(parameter, "parameter");
 
-        SelectedPco object = Maud.getModel().getTarget().getPco();
+        SelectedPco object = CharEd.getModel().getTarget().getPco();
         String parameterName = parameter.toString();
         if (object.canSet(parameterName)) {
             float minValue = parameter.minValue();
@@ -1214,8 +1214,8 @@ final public class EditorDialogs {
             String defaultText = object.value(parameter);
             String prefix
                     = ActionPrefix.setPcoParmValue + parameterName + " ";
-            Maud.gui.closeAllPopups();
-            Maud.gui.showTextEntryDialog(prompt, defaultText, prefix,
+            CharEd.gui.closeAllPopups();
+            CharEd.gui.showTextEntryDialog(prompt, defaultText, prefix,
                     controller);
         }
     }
@@ -1228,7 +1228,7 @@ final public class EditorDialogs {
     public static void setShapeParameterValue(ShapeParameter parameter) {
         Validate.nonNull(parameter, "parameter");
 
-        SelectedShape shape = Maud.getModel().getTarget().getShape();
+        SelectedShape shape = CharEd.getModel().getTarget().getShape();
         if (shape.canSet(parameter)) {
             float minValue = parameter.minValue();
             float maxValue = parameter.maxValue();
@@ -1243,8 +1243,8 @@ final public class EditorDialogs {
             }
             String name = parameter.toString();
             String prefix = ActionPrefix.setShapeParmValue + name + " ";
-            Maud.gui.closeAllPopups();
-            Maud.gui.showTextEntryDialog(prompt, defaultText, prefix,
+            CharEd.gui.closeAllPopups();
+            CharEd.gui.showTextEntryDialog(prompt, defaultText, prefix,
                     controller);
         }
     }
@@ -1253,8 +1253,8 @@ final public class EditorDialogs {
      * Display a "set spatial rotation" dialog.
      */
     public static void setSpatialRotation() {
-        Maud.gui.closeAllPopups();
-        EditorModel model = Maud.getModel();
+        CharEd.gui.closeAllPopups();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
 
         Quaternion q = target.getSpatial().localRotation(null);
@@ -1279,7 +1279,7 @@ final public class EditorDialogs {
         }
         String defaultText = oldValue.toString();
         DialogController controller = new VectorDialog("Set", 3, AllowNull.No);
-        Maud.gui.showTextEntryDialog("Enter new rotation vector:",
+        CharEd.gui.showTextEntryDialog("Enter new rotation vector:",
                 defaultText, ActionPrefix.setSpatialRotation, controller);
     }
 
@@ -1287,12 +1287,12 @@ final public class EditorDialogs {
      * Display a "set spatial scale" dialog.
      */
     public static void setSpatialScale() {
-        Maud.gui.closeAllPopups();
-        EditableCgm target = Maud.getModel().getTarget();
+        CharEd.gui.closeAllPopups();
+        EditableCgm target = CharEd.getModel().getTarget();
         Vector3f oldValue = target.getSpatial().localScale(null);
         String defaultText = oldValue.toString();
         DialogController controller = new VectorDialog("Set", 3, AllowNull.No);
-        Maud.gui.showTextEntryDialog("Enter new scale vector:",
+        CharEd.gui.showTextEntryDialog("Enter new scale vector:",
                 defaultText, ActionPrefix.setSpatialScale, controller);
     }
 
@@ -1302,12 +1302,12 @@ final public class EditorDialogs {
      * @param actionPrefix the action prefix for the dialog (not null)
      */
     public static void setSpatialTranslation(String actionPrefix) {
-        Maud.gui.closeAllPopups();
-        EditableCgm target = Maud.getModel().getTarget();
+        CharEd.gui.closeAllPopups();
+        EditableCgm target = CharEd.getModel().getTarget();
         Vector3f oldValue = target.getSpatial().localTranslation(null);
         String defaultText = oldValue.toString();
         DialogController controller = new VectorDialog("Set", 3, AllowNull.No);
-        Maud.gui.showTextEntryDialog("Enter new translation vector:",
+        CharEd.gui.showTextEntryDialog("Enter new translation vector:",
                 defaultText, actionPrefix, controller);
     }
 
@@ -1318,7 +1318,7 @@ final public class EditorDialogs {
      * @param whichTime which time to modify in the options (not null)
      */
     public static void setTime(WhichCgm whichCgm, PlayTimes whichTime) {
-        Cgm cgm = Maud.getModel().getCgm(whichCgm);
+        Cgm cgm = CharEd.getModel().getCgm(whichCgm);
         PlayOptions options = cgm.getPlay();
         float lowerLimit = options.getLowerLimit();
         float upperLimit = options.getUpperLimit();
@@ -1353,8 +1353,8 @@ final public class EditorDialogs {
         FloatDialog controller
                 = new FloatDialog("Set", minValue, maxValue, AllowNull.No);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter new time in seconds:", defaultText,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter new time in seconds:", defaultText,
                 actionPrefix, controller);
     }
 
@@ -1366,7 +1366,7 @@ final public class EditorDialogs {
      */
     public static void setTimeToKeyframe(WhichCgm whichCgm,
             PlayTimes whichTime) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm cgm = model.getCgm(whichCgm);
         SelectedTrack track = cgm.getTrack();
         assert track.isSelected();
@@ -1406,8 +1406,8 @@ final public class EditorDialogs {
         IntegerDialog controller = new IntegerDialog("Set",
                 indexBase + minIndex, indexBase + maxIndex, AllowNull.No);
 
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter a keyframe index:", defaultText,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter a keyframe index:", defaultText,
                 actionPrefix, controller);
     }
 
@@ -1415,8 +1415,8 @@ final public class EditorDialogs {
      * Display a "set userData" dialog.
      */
     public static void setUserData() {
-        Maud.gui.closeAllPopups();
-        EditableCgm target = Maud.getModel().getTarget();
+        CharEd.gui.closeAllPopups();
+        EditableCgm target = CharEd.getModel().getTarget();
         Object value = target.getUserData().getValue();
         DialogController controller;
         String defaultText;
@@ -1430,7 +1430,7 @@ final public class EditorDialogs {
             controller = new FloatDialog("Set", Float.NEGATIVE_INFINITY,
                     Float.POSITIVE_INFINITY, AllowNull.No);
             defaultText = Float.toString(oldValue);
-            Maud.gui.showTextEntryDialog("Enter new float value:", defaultText,
+            CharEd.gui.showTextEntryDialog("Enter new float value:", defaultText,
                     ActionPrefix.setUserData, controller);
 
         } else if (value instanceof Integer) {
@@ -1438,7 +1438,7 @@ final public class EditorDialogs {
             controller = new IntegerDialog("Set", Integer.MIN_VALUE,
                     Integer.MAX_VALUE, AllowNull.No);
             defaultText = Integer.toString(oldValue);
-            Maud.gui.showTextEntryDialog("Enter new integer value:",
+            CharEd.gui.showTextEntryDialog("Enter new integer value:",
                     defaultText, ActionPrefix.setUserData, controller);
 
         } else if (value instanceof Long) {
@@ -1446,34 +1446,34 @@ final public class EditorDialogs {
             controller = new LongDialog("Set", Long.MIN_VALUE, Long.MAX_VALUE,
                     AllowNull.No);
             defaultText = Long.toString(oldValue);
-            Maud.gui.showTextEntryDialog("Enter new long integer value:",
+            CharEd.gui.showTextEntryDialog("Enter new long integer value:",
                     defaultText, ActionPrefix.setUserData, controller);
 
         } else if (value instanceof String) {
             controller = new TextEntryDialog("Set");
             defaultText = (String) value;
-            Maud.gui.showTextEntryDialog("Enter new string value:", defaultText,
+            CharEd.gui.showTextEntryDialog("Enter new string value:", defaultText,
                     "Set", ActionPrefix.setUserData, controller);
 
         } else if (value instanceof Vector2f) {
             Vector2f oldValue = (Vector2f) value;
             controller = new VectorDialog("Set", 2, AllowNull.No);
             defaultText = oldValue.toString();
-            Maud.gui.showTextEntryDialog("Enter new Vector2f value:",
+            CharEd.gui.showTextEntryDialog("Enter new Vector2f value:",
                     defaultText, ActionPrefix.setUserData, controller);
 
         } else if (value instanceof Vector3f) {
             Vector3f oldValue = (Vector3f) value;
             controller = new VectorDialog("Set", 3, AllowNull.No);
             defaultText = oldValue.toString();
-            Maud.gui.showTextEntryDialog("Enter new Vector3f value:",
+            CharEd.gui.showTextEntryDialog("Enter new Vector3f value:",
                     defaultText, ActionPrefix.setUserData, controller);
 
         } else if (value instanceof Vector4f) {
             Vector4f oldValue = (Vector4f) value;
             controller = new VectorDialog("Set", 4, AllowNull.No);
             defaultText = oldValue.toString();
-            Maud.gui.showTextEntryDialog("Enter new Vector4f value:",
+            CharEd.gui.showTextEntryDialog("Enter new Vector4f value:",
                     defaultText, ActionPrefix.setUserData, controller);
         }
         // TODO bone data
@@ -1487,15 +1487,15 @@ final public class EditorDialogs {
     public static void setVertexData(int componentIndex) {
         Validate.inRange(componentIndex, "component index", 0, 3);
 
-        Maud.gui.closeAllPopups();
-        EditableCgm target = Maud.getModel().getTarget();
+        CharEd.gui.closeAllPopups();
+        EditableCgm target = CharEd.getModel().getTarget();
         float oldValue = target.getVertex().floatComponent(componentIndex);
         DialogController controller = new FloatDialog("Set",
                 Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, AllowNull.No);
         String defaultText = Float.toString(oldValue);
         String actionPrefix = ActionPrefix.setVertexData
                 + Integer.toString(componentIndex) + " ";
-        Maud.gui.showTextEntryDialog("Enter new float value:", defaultText,
+        CharEd.gui.showTextEntryDialog("Enter new float value:", defaultText,
                 actionPrefix, controller);
     }
 
@@ -1505,8 +1505,8 @@ final public class EditorDialogs {
     public static void wrapAnimation() {
         FloatDialog controller
                 = new FloatDialog("Wrap animation", 0f, 1f, AllowNull.No);
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter weight for end-time keyframes:",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter weight for end-time keyframes:",
                 "0", ActionPrefix.wrapAnimation, controller);
     }
 
@@ -1516,8 +1516,8 @@ final public class EditorDialogs {
     public static void wrapTrack() {
         FloatDialog controller
                 = new FloatDialog("Wrap track", 0f, 1f, AllowNull.No);
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter weight for end-time keyframe:", "0",
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter weight for end-time keyframe:", "0",
                 ActionPrefix.wrapTrack, controller);
     }
     // *************************************************************************
@@ -1534,8 +1534,8 @@ final public class EditorDialogs {
         FloatDialog controller
                 = new FloatDialog("Resample", 0.1f, 1000f, AllowNull.No);
         String prefix = actionPrefix + ResampleType.AtRate + " ";
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter samples per second:", "10", prefix,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter samples per second:", "10", prefix,
                 controller);
     }
 
@@ -1550,8 +1550,8 @@ final public class EditorDialogs {
         IntegerDialog controller
                 = new IntegerDialog("Resample", 2, 999, AllowNull.No);
         String prefix = actionPrefix + ResampleType.ToNumber + " ";
-        Maud.gui.closeAllPopups();
-        Maud.gui.showTextEntryDialog("Enter number of samples:", "17", prefix,
+        CharEd.gui.closeAllPopups();
+        CharEd.gui.showTextEntryDialog("Enter number of samples:", "17", prefix,
                 controller);
     }
 }

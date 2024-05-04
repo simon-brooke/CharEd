@@ -59,7 +59,7 @@ import jme3utilities.math.MyMath;
 import jme3utilities.wes.Pose;
 import jme3utilities.wes.TrackEdit;
 import jme3utilities.wes.TweenTransforms;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.model.EditableMap;
 import maud.model.EditorModel;
@@ -145,7 +145,7 @@ public class LoadedAnimation implements Cloneable {
             float oldDuration = duration();
             float newDuration = oldDuration - neckTime;
             Animation newAnimation = new Animation(loadedName, newDuration);
-            TweenTransforms techniques = Maud.getModel().getTweenTransforms();
+            TweenTransforms techniques = CharEd.getModel().getTweenTransforms();
             for (Object trk : oldTracks) {
                 Track oldTrack = (Track) trk;
                 Track newTrack;
@@ -213,7 +213,7 @@ public class LoadedAnimation implements Cloneable {
         Transform result
                 = (storeResult == null) ? new Transform() : storeResult;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Object oldAnim = getReal();
         if (oldAnim == null) {
             if (isRetargetedPose()) {
@@ -994,7 +994,7 @@ public class LoadedAnimation implements Cloneable {
      * Load retargeted pose.
      */
     public void loadRetargetedPose() {
-        if (Maud.getModel().getSource().isLoaded()
+        if (CharEd.getModel().getSource().isLoaded()
                 && cgm.getSkeleton().isSelected()) {
             loadedName = retargetedPoseName;
             cgm.getPlay().resetLimits();
@@ -1170,7 +1170,7 @@ public class LoadedAnimation implements Cloneable {
 
         float duration = duration();
         Object newSelectedTrack = null;
-        TweenTransforms techniques = Maud.getModel().getTweenTransforms();
+        TweenTransforms techniques = CharEd.getModel().getTweenTransforms();
         Object oldSelectedTrack = cgm.getTrack().get();
         TmpTracks.clear();
         Object[] oldTracks = getTracks();
@@ -1217,7 +1217,7 @@ public class LoadedAnimation implements Cloneable {
         float duration = duration();
         assert duration > 0f : duration;
         Object newSelectedTrack = null;
-        TweenTransforms techniques = Maud.getModel().getTweenTransforms();
+        TweenTransforms techniques = CharEd.getModel().getTweenTransforms();
         Object oldSelectedTrack = cgm.getTrack().get();
 
         TmpTracks.clear();

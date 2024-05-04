@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.action.ActionPrefix;
 import maud.model.EditState;
@@ -116,7 +116,7 @@ public class LightsOptions implements Cloneable {
         if (ambientLevel != newLevel) {
             ambientLevel = newLevel;
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedAmbientLevel();
         }
     }
@@ -133,7 +133,7 @@ public class LightsOptions implements Cloneable {
         if (!direction.equals(normalized)) {
             direction.set(normalized);
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedMainDirection();
         }
     }
@@ -149,7 +149,7 @@ public class LightsOptions implements Cloneable {
         if (mainLevel != newLevel) {
             mainLevel = newLevel;
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedMainLevel();
         }
     }

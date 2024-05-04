@@ -43,7 +43,7 @@ import jme3utilities.MyCamera;
 import jme3utilities.MySpatial;
 import jme3utilities.math.MyColor;
 import jme3utilities.ui.Locators;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.model.cgm.Cgm;
 import maud.model.option.scene.DddCursorOptions;
@@ -149,7 +149,7 @@ public class DddCursor {
     void update(Cgm cgm, float tpf) {
         // visibility
         boolean wasVisible = (geometry != null);
-        DddCursorOptions options = Maud.getModel().getScene().getCursor();
+        DddCursorOptions options = CharEd.getModel().getScene().getCursor();
         boolean visible = options.isVisible();
         if (wasVisible && !visible) {
             setGeometry(null);
@@ -190,7 +190,7 @@ public class DddCursor {
      */
     void warp() {
         Camera camera = view.getCamera();
-        InputManager inputManager = Maud.getApplication().getInputManager();
+        InputManager inputManager = CharEd.getApplication().getInputManager();
         Ray ray = MyCamera.mouseRay(camera, inputManager);
 
         // Trace the ray to the C-G model.
@@ -255,7 +255,7 @@ public class DddCursor {
         Vector3f povLocation = cgm.getScenePov().location(null);
         float range = povLocation.distance(location);
 
-        DddCursorOptions cursor = Maud.getModel().getScene().getCursor();
+        DddCursorOptions cursor = CharEd.getModel().getScene().getCursor();
         float worldScale = cursor.getSize() * range;
 
         assert worldScale >= 0f : worldScale;

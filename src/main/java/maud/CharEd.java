@@ -64,14 +64,14 @@ import net.bithaven.jme.IQELoader;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Maud extends GuiApplication {
+public class CharEd extends GuiApplication {
     // *************************************************************************
     // constants and loggers
 
     /**
      * message logger for this class
      */
-    final private static Logger logger = Logger.getLogger(Maud.class.getName());
+    final private static Logger logger = Logger.getLogger(CharEd.class.getName());
     /**
      * path to the script asset evaluated at startup
      */
@@ -110,7 +110,7 @@ public class Maud extends GuiApplication {
     /**
      * application instance
      */
-    private static Maud application;
+    private static CharEd application;
     // *************************************************************************
     // new methods exposed
 
@@ -119,7 +119,7 @@ public class Maud extends GuiApplication {
      *
      * @return the pre-existing instance (not null)
      */
-    public static Maud getApplication() {
+    public static CharEd getApplication() {
         assert application != null;
         return application;
     }
@@ -463,7 +463,7 @@ public class Maud extends GuiApplication {
                 new Object[]{showDialog, MyString.quote(renderer)});
 
         // Instantiate the application.
-        application = new Maud();
+        application = new CharEd();
 
         // Instantiate the display-settings screen.
         String applicationName = "Maud"; // v1.0.0-beta2";

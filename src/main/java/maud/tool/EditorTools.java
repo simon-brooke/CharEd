@@ -32,7 +32,7 @@ import jme3utilities.MyString;
 import jme3utilities.Validate;
 import jme3utilities.nifty.Tool;
 import maud.EditorScreen;
-import maud.Maud;
+import maud.CharEd;
 import maud.tool.option.AxesTool;
 import maud.tool.option.BackgroundTool;
 import maud.tool.option.BoundsTool;
@@ -221,11 +221,11 @@ public class EditorTools {
     public static void select(String toolName) {
         Validate.nonEmpty(toolName, "tool name");
 
-        Tool tool = Maud.gui.findTool(toolName);
+        Tool tool = CharEd.gui.findTool(toolName);
         if (tool == null) {
             String message = String.format("unimplemented feature (tool = %s)",
                     MyString.quote(toolName));
-            Maud.getModel().getMisc().setStatusMessage(message);
+            CharEd.getModel().getMisc().setStatusMessage(message);
         } else {
             tool.select();
         }

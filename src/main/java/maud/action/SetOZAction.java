@@ -39,7 +39,7 @@ import jme3utilities.math.MyQuaternion;
 import jme3utilities.math.MyVector3f;
 import jme3utilities.nifty.dialog.AllowNull;
 import jme3utilities.nifty.dialog.VectorDialog;
-import maud.Maud;
+import maud.CharEd;
 import maud.dialog.EditorDialogs;
 import maud.model.EditorModel;
 import maud.model.WhichCgm;
@@ -88,7 +88,7 @@ final class SetOZAction {
     static boolean process(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
         switch (actionString) {
             case Action.setOverrideValue:
@@ -157,7 +157,7 @@ final class SetOZAction {
                 break;
 
             case Action.setTimeLimitLower:
-                Cgm cgm = Maud.gui.mouseCgm();
+                Cgm cgm = CharEd.gui.mouseCgm();
                 if (cgm != null) {
                     PlayOptions play = cgm.getPlay();
                     float currentTime = play.getTime();
@@ -168,7 +168,7 @@ final class SetOZAction {
                 break;
 
             case Action.setTimeLimitUpper:
-                cgm = Maud.gui.mouseCgm();
+                cgm = CharEd.gui.mouseCgm();
                 if (cgm != null) {
                     PlayOptions play = cgm.getPlay();
                     float currentTime = play.getTime();
@@ -229,7 +229,7 @@ final class SetOZAction {
     private static boolean testForPrefixes(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
         String arg;
         if (actionString.startsWith(ActionPrefix.setOverrideValue)) {

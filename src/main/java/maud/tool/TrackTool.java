@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.SelectedTrack;
 
@@ -69,7 +69,7 @@ class TrackTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        boolean isReal = Maud.getModel().getTarget().getAnimation().isReal();
+        boolean isReal = CharEd.getModel().getTarget().getAnimation().isReal();
         String selectButton = isReal ? "Select track" : "";
         setButtonText("selectTrack", selectButton);
 
@@ -85,7 +85,7 @@ class TrackTool extends Tool {
      * Update the track's description.
      */
     private void updateDescription() {
-        SelectedTrack track = Maud.getModel().getTarget().getTrack();
+        SelectedTrack track = CharEd.getModel().getTarget().getTrack();
 
         String targetStatus = track.describeTarget();
         setStatusText("trackTarget", " " + targetStatus);
@@ -108,7 +108,7 @@ class TrackTool extends Tool {
     private void updateFrames() {
         String framesStatus = "";
 
-        SelectedTrack track = Maud.getModel().getTarget().getTrack();
+        SelectedTrack track = CharEd.getModel().getTarget().getTrack();
         if (track.isSelected()) {
             int numKeyframes = track.countKeyframes();
             framesStatus = Integer.toString(numKeyframes);
@@ -125,7 +125,7 @@ class TrackTool extends Tool {
         String nextButton;
         String previousButton;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numTracks = target.getAnimation().countTracks();
         if (target.getTrack().isSelected()) {
             int selectedIndex = target.getTrack().index();
@@ -165,7 +165,7 @@ class TrackTool extends Tool {
         String setScalesButton = "";
         String deleteScalesButton = "";
 
-        SelectedTrack track = Maud.getModel().getTarget().getTrack();
+        SelectedTrack track = CharEd.getModel().getTarget().getTrack();
         if (track.isSelected()) {
             int numTranslations = track.countTranslations();
             translationStatus = Integer.toString(numTranslations);

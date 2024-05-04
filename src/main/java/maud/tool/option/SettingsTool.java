@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.LoadBvhAxisOrder;
 import maud.model.option.MiscOptions;
 import maud.model.option.RotationDisplayMode;
@@ -107,7 +107,7 @@ public class SettingsTool extends Tool {
     public void onCheckBoxChanged(String name, boolean isChecked) {
         switch (name) {
             case "settingsDiagnose":
-                Maud.getModel().getMisc().setDiagnoseLoads(isChecked);
+                CharEd.getModel().getMisc().setDiagnoseLoads(isChecked);
                 break;
 
             default:
@@ -122,7 +122,7 @@ public class SettingsTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        MiscOptions options = Maud.getModel().getMisc();
+        MiscOptions options = CharEd.getModel().getMisc();
         float x = readSlider("submenuWarpX", submenuSt);
         float y = readSlider("submenuWarpY", submenuSt);
         options.setSubmenuWarp(x, y);
@@ -134,7 +134,7 @@ public class SettingsTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        MiscOptions options = Maud.getModel().getMisc();
+        MiscOptions options = CharEd.getModel().getMisc();
 
         RotationDisplayMode mode = options.rotationDisplayMode();
         String description = mode.toString();

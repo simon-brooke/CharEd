@@ -32,7 +32,7 @@ import com.jme3.material.RenderState;
 import com.jme3.scene.Mesh;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.menu.EditorMenus;
 import maud.menu.EnumMenus;
 import maud.menu.PhysicsMenus;
@@ -81,7 +81,7 @@ final class SelectFNAction {
     static boolean process(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         switch (actionString) {
             case Action.selectFaceCull:
@@ -200,7 +200,7 @@ final class SelectFNAction {
     private static boolean testForPrefixes(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
         String arg;
         if (actionString.startsWith(ActionPrefix.selectFaceCull)) {
@@ -230,7 +230,7 @@ final class SelectFNAction {
         } else if (actionString.startsWith(ActionPrefix.selectKeyframe)) {
             arg = MyString.remainder(actionString, ActionPrefix.selectKeyframe);
             int index = Integer.parseInt(arg);
-            int indexBase = Maud.getModel().getMisc().indexBase();
+            int indexBase = CharEd.getModel().getMisc().indexBase();
             target.getFrame().select(index - indexBase);
 
         } else if (actionString.startsWith(ActionPrefix.selectLight)) {

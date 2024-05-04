@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.SelectedJoint;
 
@@ -81,7 +81,7 @@ class JointTool extends Tool {
      * Update the joint description.
      */
     private void updateDescription() {
-        SelectedJoint joint = Maud.getModel().getTarget().getJoint();
+        SelectedJoint joint = CharEd.getModel().getTarget().getJoint();
         String type = joint.type();
         setStatusText("jointType", " " + type);
 
@@ -104,7 +104,7 @@ class JointTool extends Tool {
         String previousButton = "";
         String selectButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numJoints = target.getPhysics().countJoints();
         if (numJoints > 0) {
             selectButton = "Select joint";
@@ -137,7 +137,7 @@ class JointTool extends Tool {
      */
     private void updateName() {
         String name;
-        SelectedJoint joint = Maud.getModel().getTarget().getJoint();
+        SelectedJoint joint = CharEd.getModel().getTarget().getJoint();
         if (joint.isSelected()) {
             name = joint.name();
         } else {

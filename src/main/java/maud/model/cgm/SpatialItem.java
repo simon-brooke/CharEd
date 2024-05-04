@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 
 /**
  * Information about a particular Spatial, for use in a DialogController.
@@ -150,7 +150,7 @@ public class SpatialItem implements Comparable<SpatialItem> {
     public String toString() {
         String typeText = spatial.getClass().getSimpleName();
         String quotedName = MyString.quote(spatial.getName());
-        Cgm cgm = Maud.getModel().getTarget();
+        Cgm cgm = CharEd.getModel().getTarget();
         List<Integer> treePosition = cgm.findSpatial(spatial);
         String result
                 = String.format("%s %s %s", quotedName, typeText, treePosition);

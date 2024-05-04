@@ -29,7 +29,7 @@ package maud.dialog;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.dialog.TextEntryDialog;
-import maud.Maud;
+import maud.CharEd;
 
 /**
  * Controller for a text-entry dialog box used to name a new spatial.
@@ -107,7 +107,7 @@ class SpatialNameDialog extends TextEntryDialog {
     private static boolean isUsed(String name) {
         assert name != null;
 
-        if (Maud.getModel().getTarget().hasSpatial(name)) {
+        if (CharEd.getModel().getTarget().hasSpatial(name)) {
             return true;
         } else {
             return false;

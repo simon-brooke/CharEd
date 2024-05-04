@@ -28,7 +28,7 @@ package maud.action;
 
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.dialog.EditorDialogs;
 import maud.model.cgm.EditableCgm;
 
@@ -115,7 +115,7 @@ final class RenameAction {
         boolean handled = true;
 
         String newName;
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         if (actionString.startsWith(ActionPrefix.renameAnimation)) {
             newName = MyString.remainder(actionString,
                     ActionPrefix.renameAnimation);

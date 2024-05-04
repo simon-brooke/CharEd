@@ -45,7 +45,7 @@ import jme3utilities.MyString;
 import jme3utilities.Validate;
 import jme3utilities.nifty.dialog.DialogController;
 import jme3utilities.ui.Locators;
-import maud.Maud;
+import maud.CharEd;
 
 /**
  * Controller for a text-and-check dialog box used to select a path for a new
@@ -194,7 +194,7 @@ class NewTextureDialog implements DialogController {
         Locators.save();
         Locators.unregisterAll();
         Locators.registerDefault();
-        List<String> specList = Maud.getModel().getLocations().listAll();
+        List<String> specList = CharEd.getModel().getLocations().listAll();
         Locators.register(specList);
 
         // Temporarily hush AssetManager warnings about missing resources.

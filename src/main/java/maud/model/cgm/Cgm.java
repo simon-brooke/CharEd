@@ -61,7 +61,7 @@ import jme3utilities.MyString;
 import jme3utilities.Validate;
 import jme3utilities.debug.Dumper;
 import jme3utilities.wes.TweenTransforms;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.MeshUtil;
 import maud.menu.WhichSpatials;
@@ -600,7 +600,7 @@ public class Cgm implements Cloneable {
         }
 
         Transform result = spatial.getLocalTransform(); // alias
-        TweenTransforms technique = Maud.getModel().getTweenTransforms();
+        TweenTransforms technique = CharEd.getModel().getTweenTransforms();
         float time = playOptions.getTime();
         Object track = loadedAnimation.findTrackForSpatial(spatial);
         float duration = loadedAnimation.duration();
@@ -1212,7 +1212,7 @@ public class Cgm implements Cloneable {
      * Unload the (source) C-G model.
      */
     public void unload() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         assert this != target; // not allowed to unload target
 
         this.rootSpatial = null;
@@ -1378,7 +1378,7 @@ public class Cgm implements Cloneable {
     private void updateSceneWireframe(Spatial subtree) {
         if (subtree instanceof Geometry) {
             boolean setting;
-            RenderOptions options = Maud.getModel().getScene().getRender();
+            RenderOptions options = CharEd.getModel().getScene().getRender();
             TriangleMode mode = options.triangleMode();
             switch (mode) {
                 case PerMaterial:

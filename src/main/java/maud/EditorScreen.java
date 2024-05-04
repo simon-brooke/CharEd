@@ -160,7 +160,7 @@ public class EditorScreen extends GuiScreenController {
     public void goBindScreen() {
         closeAllPopups();
         texturePreviewer.removeFromParent();
-        Maud.bindScreen.activate(inputMode);
+        CharEd.bindScreen.activate(inputMode);
     }
 
     /**
@@ -169,7 +169,7 @@ public class EditorScreen extends GuiScreenController {
     public void goDisplaySettingsScreen() {
         closeAllPopups();
         texturePreviewer.removeFromParent();
-        Maud.getDisplaySettingsScreen().activate();
+        CharEd.getDisplaySettingsScreen().activate();
     }
 
     /**
@@ -179,8 +179,8 @@ public class EditorScreen extends GuiScreenController {
      * @return a pre-existing instance, or null if none applies
      */
     public Cgm mouseCgm() {
-        Cgm source = Maud.getModel().getSource();
-        Cgm target = Maud.getModel().getTarget();
+        Cgm source = CharEd.getModel().getSource();
+        Cgm target = CharEd.getModel().getTarget();
         ViewPort sScene = source.getSceneView().getViewPort();
         ViewPort sScore = source.getScoreView().getViewPort();
         ViewPort tScene = target.getSceneView().getViewPort();
@@ -211,8 +211,8 @@ public class EditorScreen extends GuiScreenController {
      * @return the pre-existing instance, or null if none applies
      */
     public Pov mousePov() {
-        Cgm source = Maud.getModel().getSource();
-        Cgm target = Maud.getModel().getTarget();
+        Cgm source = CharEd.getModel().getSource();
+        Cgm target = CharEd.getModel().getTarget();
         EditorView sScene = source.getSceneView();
         EditorView sScore = source.getScoreView();
         EditorView tScene = target.getSceneView();
@@ -249,8 +249,8 @@ public class EditorScreen extends GuiScreenController {
      * @return the pre-existing instance, or null if none applies
      */
     public EditorView mouseView() {
-        Cgm source = Maud.getModel().getSource();
-        Cgm target = Maud.getModel().getTarget();
+        Cgm source = CharEd.getModel().getSource();
+        Cgm target = CharEd.getModel().getTarget();
         EditorView sScene = source.getSceneView();
         EditorView sScore = source.getScoreView();
         EditorView tScene = target.getSceneView();
@@ -406,7 +406,7 @@ public class EditorScreen extends GuiScreenController {
     public void bind(Nifty nifty, Screen screen) {
         super.bind(nifty, screen);
 
-        Maud maud = Maud.getApplication();
+        CharEd maud = CharEd.getApplication();
         maud.startup2();
     }
 
@@ -452,10 +452,10 @@ public class EditorScreen extends GuiScreenController {
         }
 
         // Check whether further initialization remains to be done.
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         if (!target.isLoaded()) {
-            Maud.getApplication().startup3();
+            CharEd.getApplication().startup3();
         }
 
         MiscOptions options = model.getMisc();
@@ -539,7 +539,7 @@ public class EditorScreen extends GuiScreenController {
      * Update the menu bar and status bar.
      */
     private void updateBars() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         MiscOptions misc = model.getMisc();
 
         // Update visibility of both bars.
@@ -582,7 +582,7 @@ public class EditorScreen extends GuiScreenController {
     private void updateBoundaryHandle() {
         int height = cam.getHeight(); // in pixels
         int width = cam.getWidth(); // in pixels
-        float boundaryX = width * Maud.getModel().getMisc().xBoundary();
+        float boundaryX = width * CharEd.getModel().getMisc().xBoundary();
 
         ViewPort boundaryViewPort = renderManager.getMainView("Boundary");
         List<Spatial> boundaryScenes = boundaryViewPort.getScenes();
@@ -640,7 +640,7 @@ public class EditorScreen extends GuiScreenController {
                 = stateManager.getState(PerformanceAppState.class);
         StatsAppState sas = stateManager.getState(StatsAppState.class);
 
-        PerformanceMode mode = Maud.getModel().getMisc().performanceMode();
+        PerformanceMode mode = CharEd.getModel().getMisc().performanceMode();
         switch (mode) {
             case DebugPas:
                 pas.setEnabled(true);
@@ -670,9 +670,9 @@ public class EditorScreen extends GuiScreenController {
      * Update the texture previewer.
      */
     private void updateTexturePreviewer() {
-        Tool textureTool = Maud.gui.findTool("texture");
+        Tool textureTool = CharEd.gui.findTool("texture");
         boolean enabled = textureTool.isEnabled();
-        boolean visible = Maud.getModel().getMisc().isTexturePreviewVisible();
+        boolean visible = CharEd.getModel().getMisc().isTexturePreviewVisible();
         if (visible && enabled) {
             guiNode.attachChild(texturePreviewer);
             /*

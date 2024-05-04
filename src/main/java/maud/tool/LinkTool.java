@@ -37,7 +37,7 @@ import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.EditableCgm;
@@ -101,7 +101,7 @@ class LinkTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         int axisIndex = model.getMisc().linkToolAxis();
         float maxAngle = readSlider("maxLinkAngle", angleSt);
         float minAngle = readSlider("minLinkAngle", angleSt);
@@ -137,7 +137,7 @@ class LinkTool extends Tool {
         String selectButton = "";
         String shapeButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedBone selectedBone = target.getBone();
         SelectedLink selectedLink = target.getLink();
         SelectedRagdoll selectedRagdoll = target.getRagdoll();
@@ -188,7 +188,7 @@ class LinkTool extends Tool {
     private void updateChildren() {
         String button = "";
 
-        SelectedLink selectedLink = Maud.getModel().getTarget().getLink();
+        SelectedLink selectedLink = CharEd.getModel().getTarget().getLink();
         if (selectedLink.isSelected()) {
             int numChildren = selectedLink.countChildren();
             if (numChildren > 1) {
@@ -211,7 +211,7 @@ class LinkTool extends Tool {
         String previousButton;
         String selectButton;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numLinks = target.getRagdoll().countLinks();
         SelectedLink selectedLink = target.getLink();
         boolean isSelected = selectedLink.isSelected();
@@ -252,7 +252,7 @@ class LinkTool extends Tool {
     private void updateName() {
         String nameStatus;
 
-        SelectedLink selectedLink = Maud.getModel().getTarget().getLink();
+        SelectedLink selectedLink = CharEd.getModel().getTarget().getLink();
         if (selectedLink.isSelected()) {
             String name = selectedLink.name();
             nameStatus = MyString.quote(name);
@@ -269,7 +269,7 @@ class LinkTool extends Tool {
     private void updateParent() {
         String button = "";
 
-        SelectedLink selectedLink = Maud.getModel().getTarget().getLink();
+        SelectedLink selectedLink = CharEd.getModel().getTarget().getLink();
         if (selectedLink.isSelected()) {
             String parentName = selectedLink.nameParent();
             if (parentName != null) {
@@ -284,7 +284,7 @@ class LinkTool extends Tool {
      * Update the range of motion.
      */
     private void updateRangeOfMotion() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         MiscOptions misc = model.getMisc();
         int axisIndex = misc.linkToolAxis();
 

@@ -31,7 +31,7 @@ import com.jme3.shader.VarType;
 import java.util.logging.Logger;
 import jme3utilities.MeshNormals;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.ShapeType;
 import maud.dialog.EditorDialogs;
 import maud.menu.AnimationMenus;
@@ -82,7 +82,7 @@ final class NewAction {
     static boolean process(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm source = model.getSource();
         Cgm target = model.getTarget();
         switch (actionString) {
@@ -118,7 +118,7 @@ final class NewAction {
             case Action.newCheckpoint:
                 History.addCheckpoint();
                 HistoryTool historyTool
-                        = (HistoryTool) Maud.gui.findTool("history");
+                        = (HistoryTool) CharEd.gui.findTool("history");
                 historyTool.setAutoScroll();
                 break;
 
@@ -199,7 +199,7 @@ final class NewAction {
     private static boolean testForPrefixes(String actionString) {
         boolean handled = true;
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         SelectedAnimControl animControl = target.getAnimControl();
         if (actionString.startsWith(ActionPrefix.newAssetLocation)) {
             String path = MyString.remainder(actionString,
@@ -209,7 +209,7 @@ final class NewAction {
         } else if (actionString.startsWith(ActionPrefix.newAssetLocationSpec)) {
             String spec = MyString.remainder(actionString,
                     ActionPrefix.newAssetLocationSpec);
-            Maud.getModel().getLocations().addSpec(spec);
+            CharEd.getModel().getLocations().addSpec(spec);
 
         } else if (actionString.startsWith(
                 ActionPrefix.newAnimationFromChain)) {

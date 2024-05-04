@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.ScoreOptions;
 import maud.model.option.ShowBones;
 
@@ -87,7 +87,7 @@ public class ScoreTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        ScoreOptions options = Maud.getModel().getScore();
+        ScoreOptions options = CharEd.getModel().getScore();
         switch (name) {
             case "scoreRotations":
                 options.setShowRotations(isChecked);
@@ -112,7 +112,7 @@ public class ScoreTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        ScoreOptions scoreOptions = Maud.getModel().getScore();
+        ScoreOptions scoreOptions = CharEd.getModel().getScore();
 
         boolean translations = scoreOptions.showsTranslations();
         setChecked("scoreTranslations", translations);

@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.action.ActionPrefix;
 import maud.dialog.EditorDialogs;
 import maud.model.cgm.Cgm;
@@ -73,14 +73,14 @@ final public class MeshMenus {
     static void buildMeshMenu(MenuBuilder builder) {
         builder.addTool("Tool");
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<String> meshList
                 = target.listSpatialNames("", WhichSpatials.Geometries);
         if (!meshList.isEmpty()) {
             builder.addSubmenu("Select");
         }
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         List<String> bufferList = spatial.listBufferDescs("");
         int size = bufferList.size();
         if (size == 1) {
@@ -151,7 +151,7 @@ final public class MeshMenus {
     public static void selectBuffer(String prefix) {
         Validate.nonNull(prefix, "prefix");
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<String> bufferDescs = target.getSpatial().listBufferDescs(prefix);
         if (bufferDescs.contains(prefix)) {
             target.getBuffer().select(prefix);
@@ -180,7 +180,7 @@ final public class MeshMenus {
      * Display a "Mesh -&gt; Select vertex" menu.
      */
     public static void selectVertex() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numVertices = target.getSpatial().countVertices();
         if (numVertices > 0) {
             MenuBuilder builder = new MenuBuilder();
@@ -203,11 +203,11 @@ final public class MeshMenus {
      * Display a "Mesh -&gt; Select vertex -&gt; Neighbor" menu.
      */
     public static void selectVertexNeighbor() {
-        SelectedVertex vertex = Maud.getModel().getTarget().getVertex();
+        SelectedVertex vertex = CharEd.getModel().getTarget().getVertex();
         int maxNumber = 10;
         List<Integer> neighborIndices = vertex.listNeighbors(maxNumber);
 
-        int indexBase = Maud.getModel().getMisc().indexBase();
+        int indexBase = CharEd.getModel().getMisc().indexBase();
         MenuBuilder builder = new MenuBuilder();
         for (int vertexIndex : neighborIndices) {
             String text = Integer.toString(indexBase + vertexIndex);
@@ -253,13 +253,13 @@ final public class MeshMenus {
                 selectVertexNeighbor();
                 break;
             case "Next":
-                Maud.getModel().getTarget().getVertex().selectNext();
+                CharEd.getModel().getTarget().getVertex().selectNext();
                 break;
             case "None":
-                Maud.getModel().getTarget().getVertex().deselect();
+                CharEd.getModel().getTarget().getVertex().deselect();
                 break;
             case "Previous":
-                Maud.getModel().getTarget().getVertex().selectPrevious();
+                CharEd.getModel().getTarget().getVertex().selectPrevious();
                 break;
             default:
                 handled = false;

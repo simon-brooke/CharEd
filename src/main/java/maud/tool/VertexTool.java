@@ -36,7 +36,7 @@ import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.SelectedBuffer;
 import maud.model.cgm.SelectedSkeleton;
@@ -102,7 +102,7 @@ class VertexTool extends Tool {
         String boneStatus = "";
         String weightStatus = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedSpatial spatial = target.getSpatial();
         SelectedVertex vertex = target.getVertex();
         if (vertex.isSelected() && spatial.hasAnimatedMesh()) {
@@ -135,7 +135,7 @@ class VertexTool extends Tool {
      * Update the selected vertex buffer and the data read from the buffer.
      */
     private void updateBuffer() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedBuffer buffer = target.getBuffer();
         String bufferDesc = buffer.describe();
         setButtonText("vertexBufferSelect", bufferDesc);
@@ -260,7 +260,7 @@ class VertexTool extends Tool {
         String nextButton = "";
         String previousButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numVertices = target.getSpatial().countVertices();
         if (target.getVertex().isSelected()) {
             int selectedIndex = target.getVertex().getIndex();
@@ -292,7 +292,7 @@ class VertexTool extends Tool {
     private void updateSelect() {
         String sButton;
 
-        if (Maud.getModel().getTarget().getSpatial().hasMesh()) {
+        if (CharEd.getModel().getTarget().getSpatial().hasMesh()) {
             sButton = "Select";
         } else {
             sButton = "";

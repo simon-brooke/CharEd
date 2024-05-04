@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.SelectedPco;
@@ -88,7 +88,7 @@ class PcoTool extends Tool {
         String previousButton = "";
         String selectButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numPcos = target.getPhysics().countPcos();
         if (numPcos > 0) {
             selectButton = "Select";
@@ -124,7 +124,7 @@ class PcoTool extends Tool {
      */
     private void updateName() {
         String name;
-        SelectedPco object = Maud.getModel().getTarget().getPco();
+        SelectedPco object = CharEd.getModel().getTarget().getPco();
         if (object.isSelected()) {
             name = object.name();
         } else {
@@ -137,7 +137,7 @@ class PcoTool extends Tool {
      * Update the parameter buttons.
      */
     private void updateParameter() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         RigidBodyParameter rbp = model.getMisc().rbParameter();
         String name = rbp.toString();
         SelectedPco pco = model.getTarget().getPco();
@@ -154,7 +154,7 @@ class PcoTool extends Tool {
         String sButton;
         String shape;
 
-        SelectedPco pco = Maud.getModel().getTarget().getPco();
+        SelectedPco pco = CharEd.getModel().getTarget().getPco();
         if (pco.isSelected()) {
             shape = pco.shapeName();
             sButton = "Select";

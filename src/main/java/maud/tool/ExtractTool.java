@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.LoadedAnimation;
 import maud.model.cgm.LoadedCgm;
@@ -73,7 +73,7 @@ class ExtractTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        LoadedCgm target = Maud.getModel().getTarget();
+        LoadedCgm target = CharEd.getModel().getTarget();
 
         String animControlButton = "";
         SelectedAnimControl animControl = target.getAnimControl();
@@ -114,7 +114,7 @@ class ExtractTool extends Tool {
         String extractButton = "";
         String feedback;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         if (!target.getAnimControl().isSelected()) {
             feedback = "select an anim control";
         } else if (!target.getAnimation().isReal()) {
@@ -137,7 +137,7 @@ class ExtractTool extends Tool {
         String endFrameButton = "";
         String endTimeButton = "";
 
-        LoadedCgm target = Maud.getModel().getTarget();
+        LoadedCgm target = CharEd.getModel().getTarget();
         LoadedAnimation animation = target.getAnimation();
         SelectedTrack track = target.getTrack();
 

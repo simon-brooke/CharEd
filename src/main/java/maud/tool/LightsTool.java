@@ -35,7 +35,7 @@ import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.SelectedLight;
 
@@ -90,7 +90,7 @@ class LightsTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         switch (name) {
             case "lightEnable":
                 light.setEnabled(isChecked);
@@ -117,7 +117,7 @@ class LightsTool extends Tool {
         String ownerStatus;
         String typeStatus;
 
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         if (light.isSelected()) {
             boolean isEnabled = light.isEnabled();
             setChecked("lightEnable", isEnabled);
@@ -160,7 +160,7 @@ class LightsTool extends Tool {
         String previousButton;
         String indexStatus;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numLights = target.countLights(Light.class);
         SelectedLight light = target.getLight();
         if (light.isSelected()) {
@@ -193,7 +193,7 @@ class LightsTool extends Tool {
         String directionStatus;
         String positionStatus;
 
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         if (light.isSelected()) {
             ColorRGBA color = light.color();
             colorStatus = String.format("%.3f %.3f %.3f",

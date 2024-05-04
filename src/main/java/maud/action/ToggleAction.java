@@ -27,7 +27,7 @@
 package maud.action;
 
 import java.util.logging.Logger;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.EditableCgm;
@@ -69,7 +69,7 @@ final class ToggleAction {
     static boolean toggleAction(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         MiscOptions miscOptions = model.getMisc();
         SceneOptions sceneOptions = model.getScene();
         Cgm source = model.getSource();

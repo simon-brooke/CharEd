@@ -50,7 +50,7 @@ import jme3utilities.MyAsset;
 import jme3utilities.mesh.RectangleOutlineMesh;
 import jme3utilities.mesh.RoundedRectangle;
 import jme3utilities.ui.Locators;
-import maud.Maud;
+import maud.CharEd;
 
 /**
  * Constants, fonts, materials, and meshes used for 2-D visualization of
@@ -196,7 +196,7 @@ public class ScoreResources {
          * wireframe materials for axes
          */
         float pointSize = 3f;
-        AppSettings current = Maud.getApplication().getSettings();
+        AppSettings current = CharEd.getApplication().getSettings();
         int msaaSamples = current.getSamples();
         if (msaaSamples == 16) { // work around JME issue #878
             pointSize *= 2f;

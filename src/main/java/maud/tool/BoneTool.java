@@ -31,7 +31,7 @@ import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.EditableCgm;
 import maud.model.cgm.LoadedAnimation;
@@ -91,7 +91,7 @@ class BoneTool extends Tool {
         String button = "";
         String status = "";
 
-        SelectedBone selectedBone = Maud.getModel().getTarget().getBone();
+        SelectedBone selectedBone = CharEd.getModel().getTarget().getBone();
         if (selectedBone.isSelected()) {
             int numChildren = selectedBone.countChildren();
             if (numChildren > 1) {
@@ -120,7 +120,7 @@ class BoneTool extends Tool {
         String nextButton = "";
         String previousButton = "";
 
-        Cgm cgm = Maud.getModel().getTarget();
+        Cgm cgm = CharEd.getModel().getTarget();
         int numSkeletons = cgm.countSkeletons();
         if (numSkeletons > 0) {
             selectButton = "Select armature";
@@ -159,13 +159,13 @@ class BoneTool extends Tool {
         String button = "";
         String status = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedBone selectedBone = target.getBone();
         if (selectedBone.isSelected()) {
             LoadedAnimation animation = target.getAnimation();
             if (animation.isRetargetedPose()) {
                 String name = selectedBone.name();
-                if (Maud.getModel().getMap().isBoneMapped(name)) {
+                if (CharEd.getModel().getMap().isBoneMapped(name)) {
                     status = "mapped";
                 } else {
                     status = "unmapped";
@@ -193,7 +193,7 @@ class BoneTool extends Tool {
         String previousButton;
         String selectButton;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numBones = target.getSkeleton().countBones();
         if (target.getBone().isSelected()) {
             int selectedIndex = target.getBone().index();
@@ -230,7 +230,7 @@ class BoneTool extends Tool {
     private void updateInfluence() {
         String status = "";
 
-        SelectedBone bone = Maud.getModel().getTarget().getBone();
+        SelectedBone bone = CharEd.getModel().getTarget().getBone();
         if (bone.isSelected()) {
             boolean attachmentsNode = bone.influencesAttachmentsNode();
             boolean meshVertices = bone.influencesVertices();
@@ -259,7 +259,7 @@ class BoneTool extends Tool {
         String nameStatus;
         String renameButton;
 
-        SelectedBone bone = Maud.getModel().getTarget().getBone();
+        SelectedBone bone = CharEd.getModel().getTarget().getBone();
         if (bone.isSelected()) {
             String name = bone.name();
             nameStatus = MyString.quote(name);
@@ -281,7 +281,7 @@ class BoneTool extends Tool {
         String button = "";
         String status = "";
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         SelectedBone selectedBone = target.getBone();
         if (selectedBone.isSelected()) {
             if (selectedBone.isRootBone()) {

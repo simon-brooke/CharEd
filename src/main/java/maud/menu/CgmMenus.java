@@ -29,7 +29,7 @@ package maud.menu;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Spatial;
 import java.util.logging.Logger;
-import maud.Maud;
+import maud.CharEd;
 import maud.action.ActionPrefix;
 import maud.dialog.EditorDialogs;
 import maud.model.EditorModel;
@@ -74,7 +74,7 @@ final public class CgmMenus {
         builder.addSubmenu("Load");
         builder.addDialog("Save");
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
         SelectedSpatial ss = target.getSpatial();
         if (!ss.isCgmRoot()) {
@@ -142,7 +142,7 @@ final public class CgmMenus {
      * @return true if the action is handled, otherwise false
      */
     static boolean menuCgm(String remainder) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
 
         String actionPrefix;

@@ -132,7 +132,7 @@ final public class EditorViewPorts {
         Validate.nonNull(vp, "view port");
 
         AssetManager manager = Locators.getAssetManager();
-        RenderOptions options = Maud.getModel().getScene().getRender();
+        RenderOptions options = CharEd.getModel().getScene().getRender();
         int mapSize = options.shadowMapSize();
         int numSplits = options.numSplits();
         DirectionalLightShadowRenderer dlsr
@@ -149,7 +149,7 @@ final public class EditorViewPorts {
      * @return true if split, otherwise false
      */
     static boolean isSplitScreen() {
-        EditorModel editorModel = Maud.getModel();
+        EditorModel editorModel = CharEd.getModel();
         boolean twoModelsLoaded = editorModel.getSource().isLoaded();
         ViewMode viewMode = editorModel.getMisc().viewMode();
         boolean split = twoModelsLoaded || viewMode == ViewMode.Hybrid;
@@ -166,7 +166,7 @@ final public class EditorViewPorts {
          * Configure the default view port, camera, and root node
          * for use by the target scene view.
          */
-        Maud application = Maud.getApplication();
+        CharEd application = CharEd.getApplication();
         targetSceneWideBase = application.getViewPort();
         Camera camera = targetSceneWideBase.getCamera();
         camera.setName("Target Scene Wide");
@@ -195,7 +195,7 @@ final public class EditorViewPorts {
         createTargetScoreWideViewPort();
 
         // Create 2 scene views, each with its own BulletAppState.
-        EditorModel editorModel = Maud.getModel();
+        EditorModel editorModel = CharEd.getModel();
         Node sourceORoot = (Node) sourceSceneOverlay.getScenes().get(0);
         SceneView sourceSceneView = new SceneView(editorModel.getSource(),
                 sourceSceneParent, null, sourceSceneBase, sourceORoot);
@@ -221,7 +221,7 @@ final public class EditorViewPorts {
      * Update the configuration of view ports to reflect the MVC model.
      */
     static void update() {
-        EditorModel editorModel = Maud.getModel();
+        EditorModel editorModel = CharEd.getModel();
         boolean twoModelsLoaded = editorModel.getSource().isLoaded();
 
         MiscOptions misc = editorModel.getMisc();
@@ -290,7 +290,7 @@ final public class EditorViewPorts {
      */
     private static void createBoundaryViewPort() {
         String name = "Boundary";
-        Maud application = Maud.getApplication();
+        CharEd application = CharEd.getApplication();
         Camera cam = application.getGuiViewPort().getCamera();
         Camera camera = cam.clone();
         camera.setName(name);
@@ -316,7 +316,7 @@ final public class EditorViewPorts {
     private static ViewPort createOverlay(ViewPort base, Node overlayRoot) {
         String name = base.getName() + " Overlay";
         Camera camera = base.getCamera();
-        RenderManager renderManager = Maud.getApplication().getRenderManager();
+        RenderManager renderManager = CharEd.getApplication().getRenderManager();
         ViewPort viewPort = renderManager.createMainView(name, camera);
         viewPort.attachScene(overlayRoot);
         viewPort.setClearFlags(false, false, false);
@@ -334,7 +334,7 @@ final public class EditorViewPorts {
     private static Camera createSideCamera(Side side) {
         assert side != null;
 
-        Camera cam = Maud.getApplication().getCamera();
+        Camera cam = CharEd.getApplication().getCamera();
         Camera newCamera = cam.clone();
         updateSideCamera(newCamera, side);
 
@@ -352,7 +352,7 @@ final public class EditorViewPorts {
         String name = "Source Scene Left";
         Camera camera = createSideCamera(Side.Left);
         camera.setName(name);
-        RenderManager renderManager = Maud.getApplication().getRenderManager();
+        RenderManager renderManager = CharEd.getApplication().getRenderManager();
         sourceSceneBase = renderManager.createMainView(name, camera);
         sourceSceneBase.setClearFlags(true, true, true);
         sourceSceneBase.setEnabled(false);
@@ -375,7 +375,7 @@ final public class EditorViewPorts {
         Camera camera = createSideCamera(Side.Left);
         camera.setName("Source Score Left");
         camera.setParallelProjection(true);
-        RenderManager renderManager = Maud.getApplication().getRenderManager();
+        RenderManager renderManager = CharEd.getApplication().getRenderManager();
         sourceScore = renderManager.createMainView("Source Score", camera);
         sourceScore.setClearFlags(true, true, true);
         sourceScore.setEnabled(false);
@@ -394,7 +394,7 @@ final public class EditorViewPorts {
         String name = "Target Scene Right";
         Camera camera = createSideCamera(Side.Right);
         camera.setName(name);
-        Maud application = Maud.getApplication();
+        CharEd application = CharEd.getApplication();
         RenderManager renderManager = application.getRenderManager();
         targetSceneRightBase = renderManager.createMainView(name, camera);
         targetSceneRightBase.setClearFlags(true, true, true);
@@ -419,7 +419,7 @@ final public class EditorViewPorts {
         Camera camera = createSideCamera(Side.Left);
         camera.setName(name);
         camera.setParallelProjection(true);
-        RenderManager renderManager = Maud.getApplication().getRenderManager();
+        RenderManager renderManager = CharEd.getApplication().getRenderManager();
         targetScoreLeft = renderManager.createMainView(name, camera);
         targetScoreLeft.setClearFlags(true, true, true);
         targetScoreLeft.setEnabled(false);
@@ -437,7 +437,7 @@ final public class EditorViewPorts {
         Camera camera = createSideCamera(Side.Right);
         camera.setName(name);
         camera.setParallelProjection(true);
-        RenderManager renderManager = Maud.getApplication().getRenderManager();
+        RenderManager renderManager = CharEd.getApplication().getRenderManager();
         targetScoreRight = renderManager.createMainView(name, camera);
         targetScoreRight.setClearFlags(true, true, true);
         targetScoreRight.setEnabled(false);
@@ -452,7 +452,7 @@ final public class EditorViewPorts {
      */
     private static void createTargetScoreWideViewPort() {
         String name = "Target Score Wide";
-        Maud application = Maud.getApplication();
+        CharEd application = CharEd.getApplication();
         Camera cam = application.getCamera();
         Camera camera = cam.clone();
         camera.setName(name);
@@ -474,7 +474,7 @@ final public class EditorViewPorts {
      * @param side which side of the boundary the viewport is on (not null)
      */
     private static void updateSideCamera(Camera camera, Side side) {
-        float xBoundary = Maud.getModel().getMisc().xBoundary();
+        float xBoundary = CharEd.getModel().getMisc().xBoundary();
 
         float leftEdge;
         float rightEdge;

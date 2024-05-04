@@ -32,7 +32,7 @@ import com.jme3.scene.VertexBuffer;
 import com.jme3.shadow.EdgeFilteringMode;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.menu.AnimationMenus;
 import maud.menu.BoneMenus;
 import maud.menu.EnumMenus;
@@ -80,7 +80,7 @@ final class SelectAEAction {
     static boolean process(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         switch (actionString) {
             case Action.selectAnimationEditMenu:
@@ -160,7 +160,7 @@ final class SelectAEAction {
     private static boolean testForPrefixes(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
         String arg;
         if (actionString.startsWith(ActionPrefix.selectAnimControl)) {
@@ -205,7 +205,7 @@ final class SelectAEAction {
             arg = MyString.remainder(actionString,
                     ActionPrefix.selectBoneIndex);
             int index = Integer.parseInt(arg);
-            int indexBase = Maud.getModel().getMisc().indexBase();
+            int indexBase = CharEd.getModel().getMisc().indexBase();
             target.getBone().select(index - indexBase);
 
         } else if (actionString.startsWith(ActionPrefix.selectBuffer)) {

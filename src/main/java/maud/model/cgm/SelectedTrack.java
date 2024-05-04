@@ -67,7 +67,7 @@ import jme3utilities.wes.SmoothVectors;
 import jme3utilities.wes.SupportUtils;
 import jme3utilities.wes.TrackEdit;
 import jme3utilities.wes.TweenTransforms;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.tool.EditorTools;
 
@@ -663,7 +663,7 @@ public class SelectedTrack implements JmeCloneable {
                 float duration = cgm.getAnimation().duration();
                 if (selected instanceof Track) {
                     TweenTransforms technique
-                            = Maud.getModel().getTweenTransforms();
+                            = CharEd.getModel().getTweenTransforms();
                     newTrack = technique.resampleAtRate(
                             (Track) selected, sampleRate, duration);
                     newSelected = newTrack;
@@ -708,7 +708,7 @@ public class SelectedTrack implements JmeCloneable {
                 assert duration > 0f : duration;
                 if (selected instanceof Track) {
                     TweenTransforms technique
-                            = Maud.getModel().getTweenTransforms();
+                            = CharEd.getModel().getTweenTransforms();
                     newTrack = technique.resampleToNumber(
                             (Track) selected, numSamples, duration);
                     newSelected = newTrack;
@@ -1008,7 +1008,7 @@ public class SelectedTrack implements JmeCloneable {
         boolean success = translateForSupport(bindSupportY);
         if (!success) {
             String message = "track translation failed";
-            Maud.getModel().getMisc().setStatusMessage(message);
+            CharEd.getModel().getMisc().setStatusMessage(message);
         }
     }
 
@@ -1045,7 +1045,7 @@ public class SelectedTrack implements JmeCloneable {
         // Calculate a new bone translation for each keyframe.
         float[] times = MaudUtil.getTrackTimes(selected);
         Vector3f[] translations = MaudUtil.getTrackTranslations(selected);
-        TweenTransforms technique = Maud.getModel().getTweenTransforms();
+        TweenTransforms technique = CharEd.getModel().getTweenTransforms();
         int numKeyframes = times.length;
         int previousVertexIndex = -1;
         for (int frameIndex = 0; frameIndex < numKeyframes; ++frameIndex) {
@@ -1305,7 +1305,7 @@ public class SelectedTrack implements JmeCloneable {
         // Calculate a new bone translation for each keyframe.
         float[] times = MaudUtil.getTrackTimes(selected);
         Vector3f[] translations = MaudUtil.getTrackTranslations(selected);
-        TweenTransforms techniques = Maud.getModel().getTweenTransforms();
+        TweenTransforms techniques = CharEd.getModel().getTweenTransforms();
         int boneIndex = targetBoneIndex();
 
         int numKeyframes = times.length;

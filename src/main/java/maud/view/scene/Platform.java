@@ -44,7 +44,7 @@ import com.jme3.texture.Texture;
 import java.util.logging.Logger;
 import jme3utilities.MyAsset;
 import jme3utilities.ui.Locators;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.model.EditorModel;
 import maud.model.WhichCgm;
@@ -163,7 +163,7 @@ public class Platform implements BulletDebugAppState.DebugAppStateFilter {
      * Update the platform based on the MVC model.
      */
     void update() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         SceneOptions options = model.getScene();
         Cgm cgm = view.getCgm();
         WhichCgm whichCgm = model.whichCgm(cgm);

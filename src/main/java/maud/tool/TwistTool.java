@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.model.EditableMap;
 import maud.model.EditorModel;
@@ -102,7 +102,7 @@ class TwistTool extends Tool {
      */
     @Override
     public void onSliderChanged(String name) {
-        EditableMap map = Maud.getModel().getMap();
+        EditableMap map = CharEd.getModel().getMap();
         if (map.isBoneMappingSelected()) {
             float[] sliderPositions = new float[numAxes];
             for (int iAxis = 0; iAxis < numAxes; iAxis++) {
@@ -113,7 +113,7 @@ class TwistTool extends Tool {
 
             Quaternion twist = new Quaternion();
             RotationDisplayMode mode
-                    = Maud.getModel().getMisc().rotationDisplayMode();
+                    = CharEd.getModel().getMisc().rotationDisplayMode();
             if (mode == RotationDisplayMode.QuatCoeff) {
                 MaudUtil.setFromSliders(sliderPositions, twist);
             } else {
@@ -132,7 +132,7 @@ class TwistTool extends Tool {
         updateSelected();
 
         RotationDisplayMode mode
-                = Maud.getModel().getMisc().rotationDisplayMode();
+                = CharEd.getModel().getMisc().rotationDisplayMode();
         String dButton = mode.toString();
         setButtonText("rotationMode3", dButton);
     }
@@ -154,9 +154,9 @@ class TwistTool extends Tool {
      * Set all 3 sliders (and their status labels) based on the mapping twist.
      */
     private void setSlidersToTwist() {
-        Quaternion effTwist = Maud.getModel().getMap().copyTwist(null);
+        Quaternion effTwist = CharEd.getModel().getMap().copyTwist(null);
         RotationDisplayMode mode
-                = Maud.getModel().getMisc().rotationDisplayMode();
+                = CharEd.getModel().getMisc().rotationDisplayMode();
         float[] statusValues = new float[numAxes];
         float[] sliderPositions = new float[numAxes];
         String unitSuffix = MaudUtil.displayRotation(effTwist, mode,
@@ -179,7 +179,7 @@ class TwistTool extends Tool {
         String sButton = "";
         String xyzButton = "";
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         if (model.getMap().isBoneMappingSelected()) {
             setSlidersToTwist();
             rButton = "Reset";

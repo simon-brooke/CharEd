@@ -88,7 +88,7 @@ import jme3utilities.NameGenerator;
 import jme3utilities.Validate;
 import jme3utilities.minie.MyControlP;
 import jme3utilities.wes.AnimationEdit;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.MeshUtil;
 import maud.ParseUtil;
@@ -443,7 +443,7 @@ public class EditableCgm extends LoadedCgm {
     public void copyAndSplitGeometry() {
         Geometry geometry = (Geometry) getSpatial().find();
         Mesh mesh = geometry.getMesh();
-        float tolerance = Maud.getModel().getMisc().vertexPositionTolerance();
+        float tolerance = CharEd.getModel().getMisc().vertexPositionTolerance();
         Mesh[] submeshes = MeshUtil.partition(
                 mesh, VertexBuffer.Type.Position, tolerance);
         int numSubmeshes = submeshes.length;
@@ -831,7 +831,7 @@ public class EditableCgm extends LoadedCgm {
         }
 
         if (success) {
-            Maud.getModel().getMap().renameBone(oldName, newName);
+            CharEd.getModel().getMap().renameBone(oldName, newName);
             editState.setEdited("rename bone");
         }
 

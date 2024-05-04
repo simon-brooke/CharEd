@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.ShowBones;
 import maud.model.option.scene.SkeletonColors;
 import maud.model.option.scene.SkeletonOptions;
@@ -102,7 +102,7 @@ public class SkeletonTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        SkeletonOptions options = Maud.getModel().getScene().getSkeleton();
+        SkeletonOptions options = CharEd.getModel().getScene().getSkeleton();
 
         float lineWidth = readSlider("skeletonLineWidth", widthSt);
         options.setLineWidth(lineWidth);
@@ -121,7 +121,7 @@ public class SkeletonTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        SkeletonOptions options = Maud.getModel().getScene().getSkeleton();
+        SkeletonOptions options = CharEd.getModel().getScene().getSkeleton();
 
         ShowBones showBones = options.getShowBones();
         String showBonesStatus = showBones.toString();

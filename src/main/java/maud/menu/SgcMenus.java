@@ -28,7 +28,7 @@ package maud.menu;
 
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.action.ActionPrefix;
 import maud.dialog.EditorDialogs;
 import maud.model.cgm.SelectedSpatial;
@@ -68,7 +68,7 @@ final class SgcMenus {
         builder.addTool("Tool");
         builder.addSubmenu("Select");
         builder.addSubmenu("Add new");
-        if (Maud.getModel().getTarget().getSgc().isSelected()) {
+        if (CharEd.getModel().getTarget().getSgc().isSelected()) {
             builder.addDialog("Delete"); // user must confirm
             builder.add("Deselect");
         }
@@ -98,7 +98,7 @@ final class SgcMenus {
                     break;
 
                 case "Deselect":
-                    Maud.getModel().getTarget().getSgc().selectNone();
+                    CharEd.getModel().getTarget().getSgc().selectNone();
                     break;
 
                 case "Select":
@@ -127,7 +127,7 @@ final class SgcMenus {
      */
     private static boolean menuSgcAdd(String remainder) {
         boolean handled = true;
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         switch (remainder) {
             case "Anim":
                 spatial.addAnimControl();

@@ -28,7 +28,7 @@ package maud.action;
 
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.menu.AnimationMenus;
 import maud.menu.BuildMenus;
 import maud.menu.CgmMenus;
@@ -71,8 +71,8 @@ final class LoadAction {
     static boolean process(String actionString) {
         boolean handled = true;
 
-        LoadedCgm source = Maud.getModel().getSource();
-        LoadedCgm target = Maud.getModel().getTarget();
+        LoadedCgm source = CharEd.getModel().getSource();
+        LoadedCgm target = CharEd.getModel().getTarget();
         switch (actionString) {
             case Action.loadAnimation:
                 AnimationMenus.loadAnimation(target);
@@ -121,7 +121,7 @@ final class LoadAction {
     private static boolean testForPrefixes(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         LoadedCgm source = model.getSource();
         EditableCgm target = model.getTarget();
 

@@ -33,7 +33,7 @@ import jme3utilities.math.MyMath;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.SelectedLight;
 
 /**
@@ -102,7 +102,7 @@ class LightColorTool extends Tool {
         color.g *= level;
         color.b *= level;
 
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         light.setColor(color);
     }
 
@@ -118,7 +118,7 @@ class LightColorTool extends Tool {
         float b = 1f;
         float level = 1f;
 
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         boolean selected = light.isSelected();
         if (selected) {
             resetButton = "Reset";

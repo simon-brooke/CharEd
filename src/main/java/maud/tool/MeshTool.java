@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.menu.WhichSpatials;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.EditableCgm;
@@ -93,7 +93,7 @@ class MeshTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         switch (name) {
             case "vbNormalized":
                 target.getBuffer().setNormalized(isChecked);
@@ -132,7 +132,7 @@ class MeshTool extends Tool {
         String typeText;
         String usageButton;
 
-        SelectedBuffer buffer = Maud.getModel().getTarget().getBuffer();
+        SelectedBuffer buffer = CharEd.getModel().getTarget().getBuffer();
         if (buffer.isSelected()) {
             int capacity = buffer.capacity();
             capacityText = Integer.toString(capacity);
@@ -194,7 +194,7 @@ class MeshTool extends Tool {
         String deleteButton = "";
         String selectButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<String> list = target.getSpatial().listBufferDescs("");
         int numBuffers = list.size();
         if (numBuffers > 0) {
@@ -237,7 +237,7 @@ class MeshTool extends Tool {
         String nextButton = "";
         String previousButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numGeometries = target.countSpatials(Geometry.class);
         SelectedSpatial selected = target.getSpatial();
         int selectedIndex = selected.findGeometryIndex();
@@ -275,7 +275,7 @@ class MeshTool extends Tool {
         String verticesButton;
         String weightsButton;
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.hasMesh()) {
             calcButton = "Recalc normals";
 
@@ -339,7 +339,7 @@ class MeshTool extends Tool {
     private void updateSelect() {
         String selectButton;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<String> names
                 = target.listSpatialNames("", WhichSpatials.Geometries);
         if (names.isEmpty()) {
@@ -357,7 +357,7 @@ class MeshTool extends Tool {
     private void updateTreePosition() {
         String positionText;
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.isCgmRoot()) {
             positionText = "model root";
         } else {

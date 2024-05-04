@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.LoadedMap;
 import maud.model.cgm.Cgm;
@@ -73,7 +73,7 @@ class RetargetTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         LoadedCgm target = model.getTarget();
         String targetCgmName = target.getName();
         String targetCgmText = MyString.quote(targetCgmName);
@@ -124,7 +124,7 @@ class RetargetTool extends Tool {
         }
         setButtonText("retargetAnimation", animationText);
 
-        int numBoneMappings = Maud.getModel().getMap().countMappings();
+        int numBoneMappings = CharEd.getModel().getMap().countMappings();
         String mappingDesc = Integer.toString(numBoneMappings);
         setStatusText("mappingCount", mappingDesc);
 
@@ -140,9 +140,9 @@ class RetargetTool extends Tool {
         String feedback;
         String rButton = "";
 
-        LoadedMap map = Maud.getModel().getMap();
-        Cgm source = Maud.getModel().getSource();
-        Cgm target = Maud.getModel().getTarget();
+        LoadedMap map = CharEd.getModel().getMap();
+        Cgm source = CharEd.getModel().getSource();
+        Cgm target = CharEd.getModel().getTarget();
         if (!target.getAnimControl().isSelected()) {
             feedback = "select a target anim control";
         } else if (!source.isLoaded()) {

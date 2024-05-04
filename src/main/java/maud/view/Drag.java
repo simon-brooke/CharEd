@@ -32,7 +32,7 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import java.util.logging.Logger;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.WhichCgm;
 import maud.model.cgm.Cgm;
 
@@ -97,7 +97,7 @@ final public class Drag {
      */
     static void startDraggingGnomon(Cgm cgm) {
         assert cgm != null;
-        dragGnomonCgm = Maud.getModel().whichCgm(cgm);
+        dragGnomonCgm = CharEd.getModel().whichCgm(cgm);
     }
 
     /**
@@ -119,12 +119,12 @@ final public class Drag {
      */
     public static void updateBoundary() {
         if (isDraggingBoundary) {
-            Maud application = Maud.getApplication();
+            CharEd application = CharEd.getApplication();
             InputManager inputManager = application.getInputManager();
             Vector2f mouseXY = inputManager.getCursorPosition();
             Camera cam = application.getCamera();
             float x = mouseXY.x / cam.getWidth();
-            Maud.getModel().getMisc().setXBoundary(x);
+            CharEd.getModel().getMisc().setXBoundary(x);
         }
     }
 
@@ -132,9 +132,9 @@ final public class Drag {
      * Update any active gnomon drag.
      */
     public static void updateGnomon() {
-        Cgm cgm = Maud.getModel().getCgm(dragGnomonCgm);
+        Cgm cgm = CharEd.getModel().getCgm(dragGnomonCgm);
         if (cgm != null) {
-            Maud application = Maud.getApplication();
+            CharEd application = CharEd.getApplication();
             InputManager inputManager = application.getInputManager();
             Camera camera = cgm.getScoreView().getCamera();
             Vector2f mouseXY = inputManager.getCursorPosition();

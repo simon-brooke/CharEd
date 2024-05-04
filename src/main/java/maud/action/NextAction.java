@@ -27,7 +27,7 @@
 package maud.action;
 
 import java.util.logging.Logger;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.History;
 import maud.model.cgm.EditableCgm;
@@ -66,7 +66,7 @@ final class NextAction {
     static boolean process(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
         switch (actionString) {
             case Action.nextAnimation:

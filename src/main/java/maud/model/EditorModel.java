@@ -45,7 +45,7 @@ import jme3utilities.ui.ActionApplication;
 import jme3utilities.wes.TweenRotations;
 import jme3utilities.wes.TweenTransforms;
 import jme3utilities.wes.TweenVectors;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.ScriptLoader;
 import maud.action.ActionPrefix;
@@ -389,12 +389,12 @@ public class EditorModel {
      */
     public void updateStartupScript() {
         try {
-            writeStartupScript(Maud.startupScriptAssetPath);
+            writeStartupScript(CharEd.startupScriptAssetPath);
             optionsEditState.setPristine("write startup script");
         } catch (IOException exception) {
             logger.log(Level.SEVERE,
                     "Output exception while writing startup script to {0}!",
-                    MyString.quote(Maud.startupScriptAssetPath));
+                    MyString.quote(CharEd.startupScriptAssetPath));
             throw new RuntimeException(exception);
         }
     }
@@ -545,7 +545,7 @@ public class EditorModel {
                 ActionPrefix.loadCgmNamed + "Jaime");
 
         // Select and position each selected tool.
-        for (WindowController tool : Maud.gui.listWindowControllers()) {
+        for (WindowController tool : CharEd.gui.listWindowControllers()) {
             if (tool.isEnabled()) {
                 String toolId = tool.getId();
                 assert toolId.contains("Tool") : toolId;

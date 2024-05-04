@@ -43,7 +43,7 @@ import jme3utilities.wes.TweenRotations;
 import jme3utilities.wes.TweenTransforms;
 import jme3utilities.wes.TweenVectors;
 import jme3utilities.wes.VectorCurve;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.view.ScoreResources;
 import maud.view.ScoreView;
@@ -245,7 +245,7 @@ final public class StaffTrack {
         }
 
         if (numSamples > 0) { // interpolate to obtain sample values
-            TweenTransforms tt = Maud.getModel().getTweenTransforms();
+            TweenTransforms tt = CharEd.getModel().getTweenTransforms();
             TweenRotations technique = tt.getTweenRotations();
             float[] times = MaudUtil.getTrackTimes(track);
             float duration = cgm.getAnimation().duration();
@@ -335,7 +335,7 @@ final public class StaffTrack {
         }
 
         if (numSamples > 0) { // interpolate to obtain sample values
-            TweenTransforms tt = Maud.getModel().getTweenTransforms();
+            TweenTransforms tt = CharEd.getModel().getTweenTransforms();
             TweenVectors technique = tt.getTweenScales();
             float[] times = MaudUtil.getTrackTimes(track);
             float duration = cgm.getAnimation().duration();
@@ -418,7 +418,7 @@ final public class StaffTrack {
         }
 
         if (numSamples > 0) { // interpolate to obtain sample values
-            TweenTransforms tt = Maud.getModel().getTweenTransforms();
+            TweenTransforms tt = CharEd.getModel().getTweenTransforms();
             TweenVectors technique = tt.getTweenTranslations();
             float[] times = MaudUtil.getTrackTimes(track);
             float duration = cgm.getAnimation().duration();

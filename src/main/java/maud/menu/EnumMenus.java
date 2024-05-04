@@ -45,7 +45,7 @@ import jme3utilities.wes.TweenRotations;
 import jme3utilities.wes.TweenTransforms;
 import jme3utilities.wes.TweenVectors;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.action.ActionPrefix;
 import maud.dialog.LicenseType;
 import maud.model.cgm.SelectedBuffer;
@@ -116,7 +116,7 @@ final public class EnumMenus {
             String name = type.toString();
             builder.addDialog(name);
         }
-        if (Maud.getModel().getTarget().getLight().isSelected()) {
+        if (CharEd.getModel().getTarget().getLight().isSelected()) {
             builder.addDialog(copySelected);
         }
 
@@ -130,7 +130,7 @@ final public class EnumMenus {
     public static void newNormals() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedSpatial ss = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial ss = CharEd.getModel().getTarget().getSpatial();
         Mesh.Mode mode = ss.getMeshMode();
         assert mode == Mesh.Mode.Triangles
                 || mode == Mesh.Mode.TriangleStrip
@@ -154,7 +154,7 @@ final public class EnumMenus {
         MenuBuilder builder = new MenuBuilder();
 
         AxesDragEffect selectedEffect
-                = Maud.getModel().getScene().getAxes().getDragEffect();
+                = CharEd.getModel().getScene().getAxes().getDragEffect();
         for (AxesDragEffect effect : AxesDragEffect.values()) {
             if (effect != selectedEffect) {
                 String name = effect.toString();
@@ -173,7 +173,7 @@ final public class EnumMenus {
         MenuBuilder builder = new MenuBuilder();
 
         AxesSubject selectedSubject
-                = Maud.getModel().getScene().getAxes().getSubject();
+                = CharEd.getModel().getScene().getAxes().getSubject();
         for (AxesSubject subject : AxesSubject.values()) {
             if (subject != selectedSubject) {
                 String name = subject.toString();
@@ -191,7 +191,7 @@ final public class EnumMenus {
     public static void selectBackground() {
         MenuBuilder builder = new MenuBuilder();
 
-        MiscOptions options = Maud.getModel().getMisc();
+        MiscOptions options = CharEd.getModel().getMisc();
         Background selectedBackground = options.background();
         for (Background background : Background.values()) {
             if (background != selectedBackground) {
@@ -210,7 +210,7 @@ final public class EnumMenus {
     public static void selectBatchHint() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         Spatial.BatchHint selectedHint = spatial.getLocalBatchHint();
         for (Spatial.BatchHint hint : Spatial.BatchHint.values()) {
             if (hint != selectedHint) {
@@ -228,7 +228,7 @@ final public class EnumMenus {
     public static void selectBufferUsage() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedBuffer buffer = Maud.getModel().getTarget().getBuffer();
+        SelectedBuffer buffer = CharEd.getModel().getTarget().getBuffer();
         boolean isIndexBuffer = (buffer.type() == VertexBuffer.Type.Index);
         VertexBuffer.Usage currentUsage = buffer.usage();
         for (VertexBuffer.Usage usage : VertexBuffer.Usage.values()) {
@@ -250,7 +250,7 @@ final public class EnumMenus {
     public static void selectCullHint() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         Spatial.CullHint selectedHint = spatial.getLocalCullHint();
         for (Spatial.CullHint hint : Spatial.CullHint.values()) {
             if (hint != selectedHint) {
@@ -269,7 +269,7 @@ final public class EnumMenus {
     public static void selectEdgeFilter() {
         MenuBuilder builder = new MenuBuilder();
 
-        RenderOptions options = Maud.getModel().getScene().getRender();
+        RenderOptions options = CharEd.getModel().getScene().getRender();
         EdgeFilteringMode selectedMode = options.edgeFilter();
         for (EdgeFilteringMode mode : EdgeFilteringMode.values()) {
             if (mode != selectedMode) {
@@ -288,7 +288,7 @@ final public class EnumMenus {
     public static void selectFaceCull() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         RenderState state = spatial.copyAdditionalRenderState();
         RenderState.FaceCullMode selectedMode = state.getFaceCullMode();
         for (RenderState.FaceCullMode mode
@@ -309,7 +309,7 @@ final public class EnumMenus {
     public static void selectLinkShape() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedLink link = Maud.getModel().getTarget().getLink();
+        SelectedLink link = CharEd.getModel().getTarget().getLink();
         ShapeHeuristic selected = link.config().shapeHeuristic();
         for (ShapeHeuristic heuristic : ShapeHeuristic.values()) {
             if (heuristic != selected) {
@@ -339,7 +339,7 @@ final public class EnumMenus {
      * Display a "select orbitCenter" menu.
      */
     public static void selectOrbitCenter() {
-        CameraOptions options = Maud.getModel().getScene().getCamera();
+        CameraOptions options = CharEd.getModel().getScene().getCamera();
         if (options.isOrbitMode()) {
             MenuBuilder builder = new MenuBuilder();
 
@@ -381,7 +381,7 @@ final public class EnumMenus {
     public static void selectMeshMode() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         Mesh.Mode selectedMode = spatial.getMeshMode();
         for (Mesh.Mode mode : Mesh.Mode.values()) {
             if (mode != selectedMode && mode != Mesh.Mode.Hybrid) {
@@ -400,7 +400,7 @@ final public class EnumMenus {
     public static void selectPlatformType() {
         MenuBuilder builder = new MenuBuilder();
 
-        SceneOptions options = Maud.getModel().getScene();
+        SceneOptions options = CharEd.getModel().getScene();
         PlatformType selectedType = options.getPlatformType();
         for (PlatformType type : PlatformType.values()) {
             if (type != selectedType) {
@@ -419,7 +419,7 @@ final public class EnumMenus {
     public static void selectQueueBucket() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         RenderQueue.Bucket selectedBucket = spatial.getLocalQueueBucket();
         for (RenderQueue.Bucket bucket : RenderQueue.Bucket.values()) {
             if (bucket != selectedBucket) {
@@ -438,7 +438,7 @@ final public class EnumMenus {
     public static void selectShadowMode() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         RenderQueue.ShadowMode selectedMode = spatial.getLocalShadowMode();
         for (RenderQueue.ShadowMode mode : RenderQueue.ShadowMode.values()) {
             if (mode != selectedMode) {
@@ -479,7 +479,7 @@ final public class EnumMenus {
     public static void selectSkeletonColor() {
         MenuBuilder builder = new MenuBuilder();
 
-        SkeletonOptions options = Maud.getModel().getScene().getSkeleton();
+        SkeletonOptions options = CharEd.getModel().getScene().getSkeleton();
         SkeletonColors selected = options.getEditColor();
         for (SkeletonColors editColor : SkeletonColors.values()) {
             if (editColor != selected) {
@@ -498,7 +498,7 @@ final public class EnumMenus {
     public static void selectTextureMag() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedTexture texture = Maud.getModel().getTarget().getTexture();
+        SelectedTexture texture = CharEd.getModel().getTarget().getTexture();
         Texture.MagFilter selected = texture.magFilter();
         for (Texture.MagFilter type : Texture.MagFilter.values()) {
             if (type != selected) {
@@ -517,7 +517,7 @@ final public class EnumMenus {
     public static void selectTextureMin() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedTexture texture = Maud.getModel().getTarget().getTexture();
+        SelectedTexture texture = CharEd.getModel().getTarget().getTexture();
         Texture.MinFilter selected = texture.minFilter();
         for (Texture.MinFilter type : Texture.MinFilter.values()) {
             if (type != selected) {
@@ -536,7 +536,7 @@ final public class EnumMenus {
     public static void selectTextureType() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedTexture texture = Maud.getModel().getTarget().getTexture();
+        SelectedTexture texture = CharEd.getModel().getTarget().getTexture();
         if (!texture.hasKey()) {
             return;
         }
@@ -562,7 +562,7 @@ final public class EnumMenus {
         Validate.nonNull(axis, "axis");
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedTexture texture = Maud.getModel().getTarget().getTexture();
+        SelectedTexture texture = CharEd.getModel().getTarget().getTexture();
         Texture.WrapMode selected = texture.wrapMode(axis);
         for (Texture.WrapMode type : wrapValues) {
             if (type != selected) {
@@ -581,7 +581,7 @@ final public class EnumMenus {
     public static void selectTriangleMode() {
         MenuBuilder builder = new MenuBuilder();
 
-        RenderOptions options = Maud.getModel().getScene().getRender();
+        RenderOptions options = CharEd.getModel().getScene().getRender();
         TriangleMode selected = options.triangleMode();
         for (TriangleMode mode : TriangleMode.values()) {
             if (mode != selected) {
@@ -600,7 +600,7 @@ final public class EnumMenus {
     public static void selectTweenRotations() {
         MenuBuilder builder = new MenuBuilder();
 
-        TweenTransforms techniques = Maud.getModel().getTweenTransforms();
+        TweenTransforms techniques = CharEd.getModel().getTweenTransforms();
         TweenRotations selected = techniques.getTweenRotations();
         for (TweenRotations t : TweenRotations.values()) {
             if (t != selected) {
@@ -619,7 +619,7 @@ final public class EnumMenus {
     public static void selectTweenScales() {
         MenuBuilder builder = new MenuBuilder();
 
-        TweenTransforms techniques = Maud.getModel().getTweenTransforms();
+        TweenTransforms techniques = CharEd.getModel().getTweenTransforms();
         TweenVectors selected = techniques.getTweenScales();
         for (TweenVectors t : TweenVectors.values()) {
             if (t != selected) {
@@ -638,7 +638,7 @@ final public class EnumMenus {
     public static void selectTweenTranslations() {
         MenuBuilder builder = new MenuBuilder();
 
-        TweenTransforms techniques = Maud.getModel().getTweenTransforms();
+        TweenTransforms techniques = CharEd.getModel().getTweenTransforms();
         TweenVectors selected = techniques.getTweenTranslations();
         for (TweenVectors t : TweenVectors.values()) {
             if (t != selected) {
@@ -671,7 +671,7 @@ final public class EnumMenus {
     static void selectViewMode() {
         MenuBuilder builder = new MenuBuilder();
 
-        ViewMode currentMode = Maud.getModel().getMisc().viewMode();
+        ViewMode currentMode = CharEd.getModel().getMisc().viewMode();
         for (ViewMode mode : ViewMode.values()) {
             if (mode != currentMode) {
                 builder.add(mode.toString());

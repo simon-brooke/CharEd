@@ -92,7 +92,7 @@ import jme3utilities.sky.StarsOption;
 import jme3utilities.sky.Updater;
 import jme3utilities.ui.Locators;
 import jme3utilities.wes.Pose;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.model.EditorModel;
 import maud.model.WhichCgm;
@@ -276,7 +276,7 @@ public class SceneViewCore implements EditorView, JmeCloneable {
      * location and frustum.
      */
     public void addLightProbe() {
-        assert !Maud.envCamIsBusy;
+        assert !CharEd.envCamIsBusy;
 
         ViewPort viewPort = getViewPort();
         ColorRGBA backgroundColor = viewPort.getBackgroundColor(); // alias
@@ -284,7 +284,7 @@ public class SceneViewCore implements EditorView, JmeCloneable {
         Vector3f location = camera.getLocation(); // alias
         float far = camera.getFrustumFar();
 
-        AppStateManager stateManager = Maud.getApplication().getStateManager();
+        AppStateManager stateManager = CharEd.getApplication().getStateManager();
         EnvironmentCamera environmentCamera
                 = stateManager.getState(EnvironmentCamera.class);
         environmentCamera.setPosition(location);
@@ -296,12 +296,12 @@ public class SceneViewCore implements EditorView, JmeCloneable {
         progress = new JobProgressAdapter<LightProbe>() {
             @Override
             public void done(LightProbe result) {
-                Maud.envCamIsBusy = false;
+                CharEd.envCamIsBusy = false;
                 logger.log(Level.WARNING, "Finished generating {0}.", lpName);
             }
         };
         logger.log(Level.WARNING, "Began generating {0}.", lpName);
-        Maud.envCamIsBusy = true;
+        CharEd.envCamIsBusy = true;
 
         Node sceneRoot = getSceneRoot();
         LightProbe probe = LightProbeFactory.makeProbe(environmentCamera,
@@ -784,7 +784,7 @@ public class SceneViewCore implements EditorView, JmeCloneable {
         Validate.nonNull(selection, "selection");
 
         // Determine which bones to consider.
-        SkeletonOptions options = Maud.getModel().getScene().getSkeleton();
+        SkeletonOptions options = CharEd.getModel().getScene().getSkeleton();
         ShowBones showBones = options.getShowBones();
         int selectedBoneIndex = cgm.getBone().index();
         BitSet boneIndexSet = cgm.getSkeleton().listShown(
@@ -820,7 +820,7 @@ public class SceneViewCore implements EditorView, JmeCloneable {
 
         Camera camera = getCamera();
         if (!MyCamera.isFullWidth(camera)) {
-            MiscOptions misc = Maud.getModel().getMisc();
+            MiscOptions misc = CharEd.getModel().getMisc();
             int width = camera.getWidth();
             float boundaryX = misc.xBoundary() * width;
             Vector2f inputXY = selection.copyInputXY();
@@ -869,7 +869,7 @@ public class SceneViewCore implements EditorView, JmeCloneable {
         Validate.nonNull(selection, "selection");
 
         Camera camera = getCamera();
-        InputManager inputManager = Maud.getApplication().getInputManager();
+        InputManager inputManager = CharEd.getApplication().getInputManager();
         Ray ray = MyCamera.mouseRay(camera, inputManager);
 
         // Trace the ray to the C-G model's visualization.
@@ -929,8 +929,8 @@ public class SceneViewCore implements EditorView, JmeCloneable {
     @Override
     public ViewPort getViewPort() {
         ViewPort result;
-        ViewMode viewMode = Maud.getModel().getMisc().viewMode();
-        if (Maud.getModel().getSource().isLoaded()
+        ViewMode viewMode = CharEd.getModel().getMisc().viewMode();
+        if (CharEd.getModel().getSource().isLoaded()
                 || viewMode == ViewMode.Hybrid) {
             result = viewPort2; // split-screen view port
         } else {
@@ -961,7 +961,7 @@ public class SceneViewCore implements EditorView, JmeCloneable {
             skyControl.setCamera(camera);
 
             PhysicsSpace space = getPhysicsSpace();
-            SceneOptions options = Maud.getModel().getScene();
+            SceneOptions options = CharEd.getModel().getScene();
             int numIterations = options.numPhysicsIterations();
             space.setSolverNumIterations(numIterations);
         }
@@ -1138,7 +1138,7 @@ public class SceneViewCore implements EditorView, JmeCloneable {
             }
             sk.updateWorldVectors();
             skeletonControl.update(0f);
-            RenderManager rm = Maud.getApplication().getRenderManager();
+            RenderManager rm = CharEd.getApplication().getRenderManager();
             skeletonControl.render(rm, null);
         }
 
@@ -1183,7 +1183,7 @@ public class SceneViewCore implements EditorView, JmeCloneable {
             minMax[1].set(1f, 1f, 1f);
         }
         Vector3f center = MyVector3f.midpoint(minMax[0], minMax[1], null);
-        boolean zUp = Maud.getModel().getMisc().isLoadZup();
+        boolean zUp = CharEd.getModel().getMisc().isLoadZup();
         float baseElevation = zUp ? minMax[0].z : minMax[0].y;
         cgmTransform.loadCgm(center, baseElevation, zUp);
 
@@ -1349,7 +1349,7 @@ public class SceneViewCore implements EditorView, JmeCloneable {
         result.setSpeed(1f);
         result.setThreadingType(BulletAppState.ThreadingType.PARALLEL);
 
-        Maud application = Maud.getApplication();
+        CharEd application = CharEd.getApplication();
         AppStateManager stateManager = application.getStateManager();
         stateManager.attach(result);
 
@@ -1398,7 +1398,7 @@ public class SceneViewCore implements EditorView, JmeCloneable {
         cursor.setLocation(cursorStartLocation.mult(maxExtent));
 
         // Reset the platform diameter.
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         WhichCgm whichCgm = model.whichCgm(cgm);
         model.getScene().setPlatformDiameter(whichCgm, maxExtent);
 
@@ -1454,7 +1454,7 @@ public class SceneViewCore implements EditorView, JmeCloneable {
      */
     private void updateParentShadowMode() {
         RenderQueue.ShadowMode mode;
-        RenderOptions options = Maud.getModel().getScene().getRender();
+        RenderOptions options = CharEd.getModel().getScene().getRender();
         boolean enableShadows = options.areShadowsRendered();
         if (enableShadows) {
             mode = RenderQueue.ShadowMode.CastAndReceive;

@@ -43,7 +43,7 @@ import jme3utilities.ui.ActionApplication;
 import jme3utilities.ui.Locators;
 import maud.CheckLoaded;
 import maud.LoadUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.dialog.EditorDialogs;
 import maud.menu.BuildMenus;
 import maud.model.History;
@@ -158,7 +158,7 @@ public class LoadedCgm extends Cgm {
         Validate.nonEmpty(assetPath, "asset path");
 
         boolean useCache = false;
-        boolean diagnose = Maud.getModel().getMisc().diagnoseLoads();
+        boolean diagnose = CharEd.getModel().getMisc().diagnoseLoads();
 
         Locators.save();
         Locators.unregisterAll();
@@ -262,7 +262,7 @@ public class LoadedCgm extends Cgm {
 
         String assetPath = String.format("Models/%s/%s", folderName, fileName);
         boolean useCache = false;
-        boolean diagnose = Maud.getModel().getMisc().diagnoseLoads();
+        boolean diagnose = CharEd.getModel().getMisc().diagnoseLoads();
 
         Locators.save();
         Locators.useDefault();
@@ -329,7 +329,7 @@ public class LoadedCgm extends Cgm {
         } else {
             showBonesInScene = ShowBones.Influencers;
         }
-        Maud.getModel().getScene().getSkeleton().setShowBones(showBonesInScene);
+        CharEd.getModel().getScene().getSkeleton().setShowBones(showBonesInScene);
     }
     // *************************************************************************
     // Cgm methods
@@ -351,7 +351,7 @@ public class LoadedCgm extends Cgm {
      */
     @Override
     public void unload() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         assert this != target; // not allowed to unload target
 
         this.assetRootPath = null;
@@ -424,7 +424,7 @@ public class LoadedCgm extends Cgm {
                 assetManager.clearCache();
             }
             Locators.registerDefault();
-            List<String> specList = Maud.getModel().getLocations().listAll();
+            List<String> specList = CharEd.getModel().getLocations().listAll();
             Locators.register(specList);
 
             loaded = LoadUtil.loadCgmAsset(assetManager, key, diagnose);
@@ -437,7 +437,7 @@ public class LoadedCgm extends Cgm {
             logger.log(Level.INFO, "Loaded model from asset {0}",
                     MyString.quote(assetPath));
 
-            if (this == Maud.getModel().getTarget() && isLoaded()) {
+            if (this == CharEd.getModel().getTarget() && isLoaded()) {
                 History.autoAdd();
             }
             this.extension = ext;

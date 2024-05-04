@@ -55,7 +55,7 @@ import jme3utilities.wes.AnimationEdit;
 import jme3utilities.wes.Pose;
 import jme3utilities.wes.TrackEdit;
 import jme3utilities.wes.TweenTransforms;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.model.EditorModel;
 import maud.model.WhichCgm;
@@ -110,7 +110,7 @@ public class SelectedAnimControl implements JmeCloneable {
         assert !MaudUtil.isReservedAnimationName(animationName) : animationName;
         assert !hasRealAnimation(animationName) : animationName;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
 
         Cgm cgm1 = model.getCgm(which1);
         LoadedAnimation loadedAnimation1 = cgm1.getAnimation();
@@ -220,7 +220,7 @@ public class SelectedAnimControl implements JmeCloneable {
         float endTime = cgm.getPlay().getUpperLimit();
         float duration = cgm.getAnimation().duration();
         endTime = Math.min(endTime, duration);
-        TweenTransforms techniques = Maud.getModel().getTweenTransforms();
+        TweenTransforms techniques = CharEd.getModel().getTweenTransforms();
 
         Object extracted;
         if (real instanceof Animation) {
@@ -335,12 +335,12 @@ public class SelectedAnimControl implements JmeCloneable {
     public void addRetarget(String newAnimName) {
         Validate.nonNull(newAnimName, "new animation name");
 
-        Cgm source = Maud.getModel().getSource();
+        Cgm source = CharEd.getModel().getSource();
         Object sourceAnimation = source.getAnimation().getReal();
         Object sourceSkeleton = source.getSkeleton().find();
         Object targetSkeleton = editableCgm.getSkeleton().find();
-        SkeletonMapping effectiveMap = Maud.getModel().getMap().effectiveMap();
-        TweenTransforms techniques = Maud.getModel().getTweenTransforms();
+        SkeletonMapping effectiveMap = CharEd.getModel().getMap().effectiveMap();
+        TweenTransforms techniques = CharEd.getModel().getTweenTransforms();
 
         Object newAnim = null;
         if (sourceAnimation instanceof Animation
@@ -559,8 +559,8 @@ public class SelectedAnimControl implements JmeCloneable {
     public List<String> listAnimationNames() {
         List<String> names = listRealAnimationsSorted();
         names.add(LoadedAnimation.bindPoseName);
-        if (cgm == Maud.getModel().getTarget()
-                && Maud.getModel().getSource().isLoaded()) {
+        if (cgm == CharEd.getModel().getTarget()
+                && CharEd.getModel().getSource().isLoaded()) {
             names.add(LoadedAnimation.retargetedPoseName);
         }
 

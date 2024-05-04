@@ -32,7 +32,7 @@ import jme3utilities.TimeOfDay;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.scene.RenderOptions;
 
 /**
@@ -108,7 +108,7 @@ public class SkyTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        RenderOptions options = Maud.getModel().getScene().getRender();
+        RenderOptions options = CharEd.getModel().getScene().getRender();
         switch (name) {
             case "sky":
                 options.setSkySimulated(isChecked);
@@ -126,7 +126,7 @@ public class SkyTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        RenderOptions options = Maud.getModel().getScene().getRender();
+        RenderOptions options = CharEd.getModel().getScene().getRender();
 
         float cloudiness = readSlider("cloudiness", cloudinessSt);
         options.setCloudiness(cloudiness);
@@ -141,7 +141,7 @@ public class SkyTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        RenderOptions options = Maud.getModel().getScene().getRender();
+        RenderOptions options = CharEd.getModel().getScene().getRender();
 
         boolean isSkySimulated = options.isSkySimulated();
         setChecked("sky", isSkySimulated);

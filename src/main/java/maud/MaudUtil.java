@@ -1174,7 +1174,7 @@ final public class MaudUtil {
         }
         field.setAccessible(true);
 
-        AppStateManager stateManager = Maud.getApplication().getStateManager();
+        AppStateManager stateManager = CharEd.getApplication().getStateManager();
         EnvironmentCamera environmentCamera
                 = stateManager.getState(EnvironmentCamera.class);
         try {

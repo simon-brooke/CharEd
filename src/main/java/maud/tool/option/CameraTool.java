@@ -29,7 +29,7 @@ package maud.tool.option;
 import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.scene.CameraOptions;
 import maud.model.option.scene.MovementMode;
 import maud.model.option.scene.OrbitCenter;
@@ -75,7 +75,7 @@ public class CameraTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        CameraOptions options = Maud.getModel().getScene().getCamera();
+        CameraOptions options = CharEd.getModel().getScene().getCamera();
 
         MovementMode movement = options.getMovementMode();
         String mButton = movement.toString();

@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.cgm.Cgm;
 
@@ -69,7 +69,7 @@ class BoneMirrorTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         String targetBoneName = target.getBone().name();
         setButtonText("bmTarget", targetBoneName);
@@ -94,7 +94,7 @@ class BoneMirrorTool extends Tool {
         String feedback;
         String mButton = "";
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         Cgm source = model.getSource();
         if (!target.getBone().isSelected()) {

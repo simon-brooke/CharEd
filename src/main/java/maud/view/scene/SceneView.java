@@ -62,7 +62,7 @@ import jme3utilities.MySpatial;
 import jme3utilities.Validate;
 import jme3utilities.debug.AxesVisualizer;
 import jme3utilities.minie.MyControlP;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.MeshUtil;
 import maud.PhysicsUtil;
@@ -317,7 +317,7 @@ public class SceneView extends SceneViewCore {
         assert getCgm().isLoaded();
 
         Camera camera = getCamera();
-        InputManager inputManager = Maud.getApplication().getInputManager();
+        InputManager inputManager = CharEd.getApplication().getInputManager();
         Line worldLine = MyCamera.mouseLine(camera, inputManager);
         SceneDrag.updateSubject(axesVisualizer, worldLine);
     }

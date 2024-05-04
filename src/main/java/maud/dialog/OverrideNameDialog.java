@@ -29,7 +29,7 @@ package maud.dialog;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.dialog.TextEntryDialog;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.SelectedOverride;
 
 /**
@@ -111,7 +111,7 @@ class OverrideNameDialog extends TextEntryDialog {
     private static boolean isUsed(String name) {
         assert name != null;
 
-        if (Maud.getModel().getTarget().getSpatial().hasOverride(name)) {
+        if (CharEd.getModel().getTarget().getSpatial().hasOverride(name)) {
             return true;
         } else {
             return false;

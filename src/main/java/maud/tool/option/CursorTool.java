@@ -33,7 +33,7 @@ import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.scene.DddCursorOptions;
 import maud.model.option.scene.SceneOptions;
 import maud.model.option.scene.VertexOptions;
@@ -125,7 +125,7 @@ public class CursorTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        DddCursorOptions options = Maud.getModel().getScene().getCursor();
+        DddCursorOptions options = CharEd.getModel().getScene().getCursor();
         switch (name) {
             case "3DCursor":
                 options.setVisible(isChecked);
@@ -143,10 +143,10 @@ public class CursorTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        SceneOptions sOptions = Maud.getModel().getScene();
+        SceneOptions sOptions = CharEd.getModel().getScene();
         DddCursorOptions options = sOptions.getCursor();
 
-        int colorIndex = Maud.getModel().getMisc().colorIndex();
+        int colorIndex = CharEd.getModel().getMisc().colorIndex();
         ColorRGBA color = readColorBank("cursor", colorSt, null);
         options.setColor(colorIndex, color);
 
@@ -167,13 +167,13 @@ public class CursorTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        SceneOptions sOptions = Maud.getModel().getScene();
+        SceneOptions sOptions = CharEd.getModel().getScene();
         DddCursorOptions options = sOptions.getCursor();
 
         boolean visible = options.isVisible();
         setChecked("3DCursor", visible);
 
-        int colorIndex = Maud.getModel().getMisc().colorIndex();
+        int colorIndex = CharEd.getModel().getMisc().colorIndex();
         String indexStatus = DescribeUtil.index(colorIndex);
         setButtonText("cursorColorIndex", indexStatus);
 

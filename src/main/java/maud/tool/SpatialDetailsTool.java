@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.SelectedSpatial;
 
 /**
@@ -91,7 +91,7 @@ class SpatialDetailsTool extends Tool {
     public void onCheckBoxChanged(String name, boolean isChecked) {
         switch (name) {
             case "spatialIgnoreTransform":
-                Maud.getModel().getTarget().setIgnoreTransform(isChecked);
+                CharEd.getModel().getTarget().setIgnoreTransform(isChecked);
                 break;
 
             default:
@@ -125,7 +125,7 @@ class SpatialDetailsTool extends Tool {
      * Update the display of the spatial's batch hint.
      */
     private void updateBatchHint() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         Spatial.BatchHint hint = spatial.getLocalBatchHint();
         String description = hint.toString();
         setButtonText("spatialBatchHint", description);
@@ -135,7 +135,7 @@ class SpatialDetailsTool extends Tool {
      * Update the spatial's (world) bounding volume.
      */
     private void updateBound() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         BoundingVolume.Type type = spatial.getWorldBoundType();
         String typeText = "null";
         if (type != null) {
@@ -148,7 +148,7 @@ class SpatialDetailsTool extends Tool {
      * Update the display of the spatial's render-queue bucket.
      */
     private void updateBucket() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         RenderQueue.Bucket bucket = spatial.getLocalQueueBucket();
         String description = bucket.toString();
         setButtonText("spatialBucket", description);
@@ -158,7 +158,7 @@ class SpatialDetailsTool extends Tool {
      * Update the display of the spatial's cull hint.
      */
     private void updateCull() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         Spatial.CullHint hint = spatial.getLocalCullHint();
         String description = hint.toString();
         setButtonText("spatialCullHint", description);
@@ -168,7 +168,7 @@ class SpatialDetailsTool extends Tool {
      * Update the "ignore transform" check box.
      */
     private void updateIgnoreTransform() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         boolean isGeometry = spatial.isGeometry();
         if (isGeometry) {
             boolean flag = spatial.isTransformIgnored();
@@ -184,7 +184,7 @@ class SpatialDetailsTool extends Tool {
     private void updateInfluence() {
         List<String> list = new ArrayList<>(3);
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         int sgcCount = spatial.countSubtreeSgcs();
         if (sgcCount == 1) {
             String item = " one control";
@@ -226,7 +226,7 @@ class SpatialDetailsTool extends Tool {
      * Update the count of local lights.
      */
     private void updateLights() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         int numLights = spatial.countLights();
         String buttonText = Integer.toString(numLights);
         setButtonText("spatialLights", buttonText);
@@ -236,7 +236,7 @@ class SpatialDetailsTool extends Tool {
      * Update the display of the spatial's name.
      */
     private void updateName() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         String name = spatial.getName();
         String description = MyString.quote(name);
         setStatusText("spatialName2", " " + description);
@@ -246,7 +246,7 @@ class SpatialDetailsTool extends Tool {
      * Update the count of material-parameter overrides.
      */
     private void updateOverrides() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         int numOverrides = spatial.countOverrides();
         String buttonText = Integer.toString(numOverrides);
         setButtonText("spatialOverrides", buttonText);
@@ -256,7 +256,7 @@ class SpatialDetailsTool extends Tool {
      * Update the count of scene-graph controls.
      */
     private void updateSgcs() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         int numSgcs = spatial.countSgcs();
         String buttonText = Integer.toString(numSgcs);
         setButtonText("spatialControls", buttonText);
@@ -266,7 +266,7 @@ class SpatialDetailsTool extends Tool {
      * Update the display of the spatial's shadow mode.
      */
     private void updateShadows() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         RenderQueue.ShadowMode mode = spatial.getLocalShadowMode();
         String description = mode.toString();
         setButtonText("spatialShadows", description);
@@ -276,7 +276,7 @@ class SpatialDetailsTool extends Tool {
      * Update the count of user data.
      */
     private void updateUserData() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         int numKeys = spatial.countUserData();
         String buttonText = Integer.toString(numKeys);
         setButtonText("spatialUserData", buttonText);

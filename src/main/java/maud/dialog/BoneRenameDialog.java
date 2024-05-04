@@ -29,7 +29,7 @@ package maud.dialog;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.dialog.TextEntryDialog;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.SelectedSkeleton;
 
 /**
@@ -110,7 +110,7 @@ class BoneRenameDialog extends TextEntryDialog {
     private static boolean isUsed(String name) {
         assert name != null;
 
-        if (Maud.getModel().getTarget().getSkeleton().hasBone(name)) {
+        if (CharEd.getModel().getTarget().getSkeleton().hasBone(name)) {
             return true;
         } else {
             return false;

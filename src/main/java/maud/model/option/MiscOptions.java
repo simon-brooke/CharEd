@@ -34,7 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.action.ActionPrefix;
 import maud.model.EditState;
@@ -578,7 +578,7 @@ public class MiscOptions implements Cloneable {
             warpX = newWarpX;
             warpY = newWarpY;
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedSubmenuWarp();
         }
     }
@@ -607,7 +607,7 @@ public class MiscOptions implements Cloneable {
         if (xBoundary != newBoundary) {
             xBoundary = newBoundary;
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedXBoundary();
         }
     }

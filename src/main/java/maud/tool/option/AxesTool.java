@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.scene.AxesDragEffect;
 import maud.model.option.scene.AxesOptions;
 import maud.model.option.scene.AxesSubject;
@@ -104,7 +104,7 @@ public class AxesTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        AxesOptions options = Maud.getModel().getScene().getAxes();
+        AxesOptions options = CharEd.getModel().getScene().getAxes();
         switch (name) {
             case "axesDepthTest":
                 options.setDepthTestFlag(isChecked);
@@ -123,7 +123,7 @@ public class AxesTool extends Tool {
     @Override
     public void onSliderChanged(String sliderName) {
         float lineWidth = readSlider("axesLineWidth", widthSt);
-        Maud.getModel().getScene().getAxes().setLineWidth(lineWidth);
+        CharEd.getModel().getScene().getAxes().setLineWidth(lineWidth);
     }
 
     /**
@@ -132,7 +132,7 @@ public class AxesTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        AxesOptions options = Maud.getModel().getScene().getAxes();
+        AxesOptions options = CharEd.getModel().getScene().getAxes();
         boolean depthTestFlag = options.getDepthTestFlag();
         setChecked("axesDepthTest", depthTestFlag);
 
@@ -148,7 +148,7 @@ public class AxesTool extends Tool {
      * Update buttons and status labels based on the MVC model.
      */
     private void updateLabels() {
-        AxesOptions options = Maud.getModel().getScene().getAxes();
+        AxesOptions options = CharEd.getModel().getScene().getAxes();
 
         float lineWidth = options.getLineWidth();
         lineWidth = Math.round(lineWidth);

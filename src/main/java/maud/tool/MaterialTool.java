@@ -35,7 +35,7 @@ import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.menu.WhichSpatials;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.EditableCgm;
@@ -95,7 +95,7 @@ class MaterialTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         switch (name) {
             case "matDepthTest":
                 target.setDepthTest(isChecked);
@@ -136,7 +136,7 @@ class MaterialTool extends Tool {
         String nextButton = "";
         String previousButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numGeometries = target.countSpatials(Geometry.class);
         SelectedSpatial selected = target.getSpatial();
         int selectedIndex = selected.findGeometryIndex();
@@ -173,7 +173,7 @@ class MaterialTool extends Tool {
         String editButton = "";
         String renameButton = "";
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.hasMaterial()) {
             String defName = spatial.getMaterialDefName();
             if (defName == null) {
@@ -224,7 +224,7 @@ class MaterialTool extends Tool {
     private void updateRenderState() {
         String faceCullButton = "";
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.hasMaterial()) {
             RenderState state = spatial.copyAdditionalRenderState();
             boolean depthTest = state.isDepthTest();
@@ -250,7 +250,7 @@ class MaterialTool extends Tool {
         String previousButton = "";
         String selectButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedSpatial spatial = target.getSpatial();
         List<String> defined
                 = spatial.listMatParamNames("", WhichParams.Defined);
@@ -290,7 +290,7 @@ class MaterialTool extends Tool {
         String nameText;
         String typeText;
 
-        SelectedMatParam param = Maud.getModel().getTarget().getMatParam();
+        SelectedMatParam param = CharEd.getModel().getTarget().getMatParam();
         if (param.isSelected()) {
             dButton = "Delete";
             String name = param.getName();
@@ -318,7 +318,7 @@ class MaterialTool extends Tool {
     private void updateParameterValue() {
         String valueButton = "";
 
-        SelectedMatParam param = Maud.getModel().getTarget().getMatParam();
+        SelectedMatParam param = CharEd.getModel().getTarget().getMatParam();
         if (param.isSelected()) {
             if (param.isOverridden()) {
                 valueButton = "(overridden)";
@@ -340,7 +340,7 @@ class MaterialTool extends Tool {
     private void updateSelect() {
         String selectButton;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<String> names
                 = target.listSpatialNames("", WhichSpatials.Geometries);
         if (names.isEmpty()) {
@@ -358,7 +358,7 @@ class MaterialTool extends Tool {
     private void updateTreePosition() {
         String positionText;
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.isCgmRoot()) {
             positionText = "model root";
         } else {

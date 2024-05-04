@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.cgm.SelectedTexture;
 
@@ -90,7 +90,7 @@ class TextureTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         SelectedTexture texture = model.getTarget().getTexture();
         switch (name) {
             case "flipY":
@@ -122,7 +122,7 @@ class TextureTool extends Tool {
 
         String cloneButton = "";
         String nullButton = "";
-        SelectedTexture texture = Maud.getModel().getTarget().getTexture();
+        SelectedTexture texture = CharEd.getModel().getTarget().getTexture();
         boolean isNull = texture.isNull();
         if (!isNull) {
             int numUsers = texture.countSelectedRefs();
@@ -169,7 +169,7 @@ class TextureTool extends Tool {
         setStatusText("textureImage", imageStatus);
 
         Texture tex = texture.get();
-        Maud.gui.setPreviewedTexture(tex);
+        CharEd.gui.setPreviewedTexture(tex);
     }
     // *************************************************************************
     // private methods
@@ -182,7 +182,7 @@ class TextureTool extends Tool {
         String nextButton = "";
         String previousButton = "";
 
-        SelectedTexture texture = Maud.getModel().getTarget().getTexture();
+        SelectedTexture texture = CharEd.getModel().getTarget().getTexture();
         int numSelections = texture.countSelectables();
         int selectedIndex = texture.findIndex();
         if (selectedIndex >= 0) {
@@ -214,7 +214,7 @@ class TextureTool extends Tool {
         String pathButton;
         String typeButton;
 
-        SelectedTexture texture = Maud.getModel().getTarget().getTexture();
+        SelectedTexture texture = CharEd.getModel().getTarget().getTexture();
         if (texture.hasKey()) {
             int anisotropy = texture.anisotropy();
             anisotropyButton = Integer.toString(anisotropy);
@@ -254,7 +254,7 @@ class TextureTool extends Tool {
         String stButton = "";
         String suButton = "";
 
-        SelectedTexture texture = Maud.getModel().getTarget().getTexture();
+        SelectedTexture texture = CharEd.getModel().getTarget().getTexture();
         if (texture.isSelected()) {
             int numUsers = texture.countSelectedRefs();
             if (numUsers == 1) {

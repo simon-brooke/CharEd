@@ -29,7 +29,7 @@ package maud.dialog;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.dialog.TextEntryDialog;
-import maud.Maud;
+import maud.CharEd;
 
 /**
  * Controller for a text-entry dialog box used to name a new user key.
@@ -90,7 +90,7 @@ class UserKeyDialog extends TextEntryDialog {
     private static boolean existsInSpatial(String key) {
         assert key != null;
 
-        if (Maud.getModel().getTarget().getSpatial().hasUserKey(key)) {
+        if (CharEd.getModel().getTarget().getSpatial().hasUserKey(key)) {
             return true;
         } else {
             return false;

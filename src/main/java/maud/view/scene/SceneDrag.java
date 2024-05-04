@@ -42,7 +42,7 @@ import jme3utilities.math.MyMath;
 import jme3utilities.math.MyQuaternion;
 import jme3utilities.math.MyVector3f;
 import jme3utilities.wes.Pose;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditableMap;
 import maud.model.EditorModel;
 import maud.model.cgm.Cgm;
@@ -121,7 +121,7 @@ final public class SceneDrag {
     public static Cgm getCgm() {
         assert isActive();
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm result;
         if (dragSourceCgm) {
             result = model.getSource();
@@ -163,7 +163,7 @@ final public class SceneDrag {
         dragAxisIndex = axisIndex;
         previousLength = initialLength;
         dragFarSide = farSideFlag;
-        if (cgm == Maud.getModel().getSource()) {
+        if (cgm == CharEd.getModel().getSource()) {
             dragSourceCgm = true;
         } else {
             dragSourceCgm = false;
@@ -195,7 +195,7 @@ final public class SceneDrag {
 
         Line axisLine;
         Vector3f newTipWorld;
-        AxesOptions options = Maud.getModel().getScene().getAxes();
+        AxesOptions options = CharEd.getModel().getScene().getAxes();
         AxesDragEffect effect = options.getDragEffect();
         switch (effect) {
             case None:
@@ -270,7 +270,7 @@ final public class SceneDrag {
 
         EditableCgm result = null;
         if (!dragSourceCgm) {
-            result = Maud.getModel().getTarget();
+            result = CharEd.getModel().getTarget();
         }
 
         return result;
@@ -286,7 +286,7 @@ final public class SceneDrag {
         SelectedBone bone = cgm.getBone();
         int boneIndex = bone.index();
         assert boneIndex != -1;
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableMap map = model.getMap();
         EditableCgm target = model.getTarget();
         Pose pose = cgm.getPose().get();
@@ -347,7 +347,7 @@ final public class SceneDrag {
          * Determine which MVC-model object the axes control is visualizing,
          * and rotate that object.
          */
-        AxesSubject subject = Maud.getModel().getScene().getAxes().getSubject();
+        AxesSubject subject = CharEd.getModel().getScene().getAxes().getSubject();
         switch (subject) {
             case Bone:
                 rotateBone(rotation);
@@ -424,7 +424,7 @@ final public class SceneDrag {
          * Determine which MVC-model object the control is visualizing,
          * and scale that object.
          */
-        AxesSubject subject = Maud.getModel().getScene().getAxes().getSubject();
+        AxesSubject subject = CharEd.getModel().getScene().getAxes().getSubject();
         switch (subject) {
             case Bone:
                 if (cgm.getBone().shouldEnableControls()) {
@@ -500,7 +500,7 @@ final public class SceneDrag {
          * Determine which MVC-model object the control is visualizing,
          * and scale that object.
          */
-        AxesSubject subject = Maud.getModel().getScene().getAxes().getSubject();
+        AxesSubject subject = CharEd.getModel().getScene().getAxes().getSubject();
         switch (subject) {
             case Bone: // ignore attempts to scale bones
             case CollisionObject: // ignore attempts to scale objects
@@ -545,7 +545,7 @@ final public class SceneDrag {
          * Determine which MVC-model object the control is visualizing,
          * and translate that object.
          */
-        AxesSubject subject = Maud.getModel().getScene().getAxes().getSubject();
+        AxesSubject subject = CharEd.getModel().getScene().getAxes().getSubject();
         switch (subject) {
             case Bone:
                 if (cgm.getBone().shouldEnableControls()) {

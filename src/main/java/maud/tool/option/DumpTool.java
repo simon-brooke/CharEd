@@ -32,7 +32,7 @@ import jme3utilities.minie.DumpFlags;
 import jme3utilities.minie.PhysicsDumper;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 
 /**
  * The controller for the "Dump" tool in Maud's editor screen.
@@ -93,7 +93,7 @@ public class DumpTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        PhysicsDumper dumper = Maud.getModel().getDumper();
+        PhysicsDumper dumper = CharEd.getModel().getDumper();
 
         switch (name) {
             case "dumpBuckets":
@@ -135,7 +135,7 @@ public class DumpTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        PhysicsDumper dumper = Maud.getModel().getDumper();
+        PhysicsDumper dumper = CharEd.getModel().getDumper();
 
         boolean dumpBuckets = dumper.isDumpBucket();
         setChecked("dumpBuckets", dumpBuckets);

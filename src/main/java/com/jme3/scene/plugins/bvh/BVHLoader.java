@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.logging.Logger;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.LoadBvhAxisOrder;
 import maud.model.option.MiscOptions;
 
@@ -107,7 +107,7 @@ public class BVHLoader implements AssetLoader {
         Vector3f[] translations = new Vector3f[animation.getNbFrames()];
         Quaternion[] rotations = new Quaternion[animation.getNbFrames()];
         float time = 0;
-        MiscOptions options = Maud.getModel().getMisc();
+        MiscOptions options = CharEd.getModel().getMisc();
         LoadBvhAxisOrder axisOrder = options.loadBvhAxisOrder();
 
         Quaternion rx = new Quaternion();

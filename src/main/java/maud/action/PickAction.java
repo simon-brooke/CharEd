@@ -27,7 +27,7 @@
 package maud.action;
 
 import java.util.logging.Logger;
-import maud.Maud;
+import maud.CharEd;
 import maud.menu.ViewMenus;
 import maud.view.Drag;
 import maud.view.scene.SceneDrag;
@@ -68,23 +68,23 @@ final class PickAction {
 
         switch (actionString) {
             case Action.pickAny:
-                Maud.gui.pickAny();
+                CharEd.gui.pickAny();
                 break;
 
             case Action.pickBone:
-                Maud.gui.pickBone();
+                CharEd.gui.pickBone();
                 break;
 
             case Action.pickGnomon:
-                Maud.gui.pickGnomon();
+                CharEd.gui.pickGnomon();
                 break;
 
             case Action.pickKeyframe:
-                Maud.gui.pickKeyframe();
+                CharEd.gui.pickKeyframe();
                 break;
 
             case Action.pickVertex:
-                Maud.gui.pickVertex();
+                CharEd.gui.pickVertex();
                 break;
 
             case Action.pickViewMenu:

@@ -86,7 +86,7 @@ import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
 import jme3utilities.math.MyQuaternion;
 import jme3utilities.ui.Locators;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.MeshUtil;
 import maud.PhysicsUtil;
@@ -439,9 +439,9 @@ public class SelectedSpatial implements JmeCloneable {
      * Attach a clone of the source C-G model to the selected Node.
      */
     public void attachClone() {
-        assert cgm == Maud.getModel().getTarget();
+        assert cgm == CharEd.getModel().getTarget();
 
-        LoadedCgm sourceCgm = Maud.getModel().getSource();
+        LoadedCgm sourceCgm = CharEd.getModel().getSource();
         Node parentNode = (Node) find();
         assert sourceCgm.isLoaded();
         Spatial cgmRoot = sourceCgm.getRootSpatial();
@@ -460,7 +460,7 @@ public class SelectedSpatial implements JmeCloneable {
      */
     public void attachLeafNode(String leafNodeName) {
         Validate.nonEmpty(leafNodeName, "leaf-node name");
-        assert cgm == Maud.getModel().getTarget();
+        assert cgm == CharEd.getModel().getTarget();
 
         Node parentNode = (Node) find();
         Node leafNode = new Node(leafNodeName);

@@ -34,7 +34,7 @@ import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.SelectedSpatial;
 
 /**
@@ -75,7 +75,7 @@ class SpatialBoundsTool extends Tool {
         updateName();
         updateType();
 
-        SelectedSpatial selected = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial selected = CharEd.getModel().getTarget().getSpatial();
         BoundingVolume meshBound = selected.copyBound(true);
         updateBound("spatialBoundM", meshBound);
 
@@ -133,7 +133,7 @@ class SpatialBoundsTool extends Tool {
      * Update the display of the spatial's name.
      */
     private void updateName() {
-        SelectedSpatial selected = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial selected = CharEd.getModel().getTarget().getSpatial();
         String name = selected.getName();
         String description = MyString.quote(name);
         setStatusText("spatialName3", " " + description);
@@ -143,7 +143,7 @@ class SpatialBoundsTool extends Tool {
      * Update the spatial's bound-type status and toggle button.
      */
     private void updateType() {
-        SelectedSpatial selected = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial selected = CharEd.getModel().getTarget().getSpatial();
         BoundingVolume.Type type = selected.getWorldBoundType();
         String typeText = "null";
         if (type != null) {

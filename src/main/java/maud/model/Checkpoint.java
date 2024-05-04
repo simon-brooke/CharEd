@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
-import maud.Maud;
+import maud.CharEd;
 
 /**
  * A checkpoint in the Maud application.
@@ -73,7 +73,7 @@ public class Checkpoint {
     Checkpoint(List<String> descriptions) {
         this.timestamp = new Date();
 
-        EditorModel live = Maud.getModel();
+        EditorModel live = CharEd.getModel();
         live.preCheckpoint();
         this.model = new EditorModel(live);
         live.postCheckpoint();
@@ -108,6 +108,6 @@ public class Checkpoint {
      */
     void restore() {
         EditorModel newLiveState = new EditorModel(model);
-        Maud.setModel(newLiveState);
+        CharEd.setModel(newLiveState);
     }
 }

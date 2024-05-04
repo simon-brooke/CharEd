@@ -30,7 +30,7 @@ import com.jme3.renderer.queue.RenderQueue;
 import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.menu.AnimationMenus;
 import maud.menu.BoneMenus;
 import maud.menu.EnumMenus;
@@ -90,7 +90,7 @@ final class SelectOSAction {
     static boolean process(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         SelectedSpatial spatial = target.getSpatial();
 
@@ -251,7 +251,7 @@ final class SelectOSAction {
     private static boolean testForPrefixes(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
         String arg;
         if (actionString.startsWith(ActionPrefix.selectOrbitCenter)) {

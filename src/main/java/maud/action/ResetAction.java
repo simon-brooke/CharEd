@@ -30,7 +30,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.History;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.EditableCgm;
@@ -90,9 +90,9 @@ final class ResetAction {
     static boolean process(String actionString) {
         boolean handled = true;
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         SelectedBone bone = target.getBone();
-        Cgm mouseCgm = Maud.gui.mouseCgm();
+        Cgm mouseCgm = CharEd.gui.mouseCgm();
 
         switch (actionString) {
             case Action.resetBoneAngleToAnimation:
@@ -152,7 +152,7 @@ final class ResetAction {
                 break;
 
             case Action.resetTwist:
-                Maud.getModel().getMap().setTwist(rotateIdentity);
+                CharEd.getModel().getMap().setTwist(rotateIdentity);
                 break;
 
             case Action.resetVertexSelection:

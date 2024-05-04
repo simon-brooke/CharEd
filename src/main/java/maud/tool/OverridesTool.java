@@ -33,7 +33,7 @@ import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.SelectedOverride;
 
@@ -90,7 +90,7 @@ class OverridesTool extends Tool {
     public void onCheckBoxChanged(String name, boolean isChecked) {
         switch (name) {
             case "mpoEnable":
-                Maud.getModel().getTarget().getOverride().setEnabled(isChecked);
+                CharEd.getModel().getTarget().getOverride().setEnabled(isChecked);
                 break;
 
             default:
@@ -121,7 +121,7 @@ class OverridesTool extends Tool {
         String previousButton = "";
         String selectButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numMpos = target.getSpatial().countOverrides();
         int selectedIndex = target.getOverride().findNameIndex();
         if (selectedIndex >= 0) {
@@ -157,7 +157,7 @@ class OverridesTool extends Tool {
         String nameText;
         String rButton;
 
-        SelectedOverride override = Maud.getModel().getTarget().getOverride();
+        SelectedOverride override = CharEd.getModel().getTarget().getOverride();
         String name = override.parameterName();
         if (name == null) {
             dButton = "";
@@ -180,7 +180,7 @@ class OverridesTool extends Tool {
     private void updateType() {
         String typeText = "";
 
-        SelectedOverride override = Maud.getModel().getTarget().getOverride();
+        SelectedOverride override = CharEd.getModel().getTarget().getOverride();
         if (override.isSelected()) {
             boolean isEnabled = override.isEnabled();
             setChecked("mpoEnable", isEnabled);
@@ -206,7 +206,7 @@ class OverridesTool extends Tool {
     private void updateValue() {
         String valueButton = "";
 
-        SelectedOverride override = Maud.getModel().getTarget().getOverride();
+        SelectedOverride override = CharEd.getModel().getTarget().getOverride();
         if (override.isSelected()) {
             Object data = override.getValue();
             valueButton = DescribeUtil.matParam(data);

@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.scene.SceneOptions;
 
 /**
@@ -102,7 +102,7 @@ public class PhysicsTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        SceneOptions options = Maud.getModel().getScene();
+        SceneOptions options = CharEd.getModel().getScene();
         switch (name) {
             case "physics2":
                 options.getRender().setPhysicsRendered(isChecked);
@@ -120,7 +120,7 @@ public class PhysicsTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        SceneOptions options = Maud.getModel().getScene();
+        SceneOptions options = CharEd.getModel().getScene();
 
         float floatMax = readSlider("maxIterations", iterSt);
         int intMax = Math.round(floatMax);
@@ -133,7 +133,7 @@ public class PhysicsTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        SceneOptions options = Maud.getModel().getScene();
+        SceneOptions options = CharEd.getModel().getScene();
 
         boolean isRendered = options.getRender().isPhysicsRendered();
         setChecked("physics2", isRendered);

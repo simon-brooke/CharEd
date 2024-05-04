@@ -33,7 +33,7 @@ import jme3utilities.math.MyMath;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.EditableCgm;
 import maud.model.cgm.SelectedBone;
 
@@ -106,7 +106,7 @@ class BoneScaleTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         if (target.getBone().shouldEnableControls()) {
             Vector3f scales = readVectorBank("Sca", axisSt, null);
 
@@ -130,7 +130,7 @@ class BoneScaleTool extends Tool {
     @Override
     protected void toolUpdate() {
         boolean enableSliders = false;
-        SelectedBone bone = Maud.getModel().getTarget().getBone();
+        SelectedBone bone = CharEd.getModel().getTarget().getBone();
         if (bone.isSelected()) {
             setSlidersToPose();
             if (bone.shouldEnableControls()) {
@@ -167,7 +167,7 @@ class BoneScaleTool extends Tool {
      * Set all 4 sliders (and their status labels) based on the pose.
      */
     private void setSlidersToPose() {
-        Vector3f vector = Maud.getModel().getTarget().getBone().userScale(null);
+        Vector3f vector = CharEd.getModel().getTarget().getBone().userScale(null);
         float maxScale = MyMath.max(vector.x, vector.y, vector.z);
         assert maxScale > 0f : maxScale;
         setSlider("scaMaster", masterSt, maxScale);

@@ -32,7 +32,7 @@ import java.io.Writer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.action.ActionPrefix;
 import maud.model.EditState;
@@ -199,8 +199,8 @@ public class CameraOptions implements Cloneable {
         if (movementMode != newMode) {
             movementMode = newMode;
             if (newMode == MovementMode.Orbit) {
-                Maud.getModel().getSource().getScenePov().setOrbitGoal();
-                Maud.getModel().getTarget().getScenePov().setOrbitGoal();
+                CharEd.getModel().getSource().getScenePov().setOrbitGoal();
+                CharEd.getModel().getTarget().getScenePov().setOrbitGoal();
             }
 
             EditState.optionSetEdited("camera movement=" + newMode);

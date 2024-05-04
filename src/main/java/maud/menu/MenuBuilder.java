@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.PopupMenuBuilder;
-import maud.Maud;
+import maud.CharEd;
 
 /**
  * A menu builder for Maud. TODO implement menu reduction
@@ -404,7 +404,7 @@ class MenuBuilder extends PopupMenuBuilder {
     void show(String actionPrefix) {
         int numItems = items.size();
         if (numItems > 0) {
-            Maud.gui.showPopupMenu(actionPrefix, this);
+            CharEd.gui.showPopupMenu(actionPrefix, this);
         }
     }
 }

@@ -28,7 +28,7 @@ package maud.action;
 
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.EditableCgm;
 import maud.view.scene.SceneView;
 
@@ -66,7 +66,7 @@ final class DeleteAction {
     static boolean process(String actionString) {
         boolean handled = true;
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         switch (actionString) {
             case Action.deleteAnimation:
                 target.getAnimation().delete();
@@ -85,7 +85,7 @@ final class DeleteAction {
                 break;
 
             case Action.deleteMapping:
-                Maud.getModel().getMap().deleteBoneMapping();
+                CharEd.getModel().getMap().deleteBoneMapping();
                 break;
 
             case Action.deleteMatParam:
@@ -144,11 +144,11 @@ final class DeleteAction {
     private static boolean testForPrefixes(String actionString) {
         boolean handled = true;
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         if (actionString.startsWith(ActionPrefix.deleteAssetLocationSpec)) {
             String spec = MyString.remainder(actionString,
                     ActionPrefix.deleteAssetLocationSpec);
-            Maud.getModel().getLocations().remove(spec);
+            CharEd.getModel().getLocations().remove(spec);
 
         } else if (actionString.startsWith(ActionPrefix.deleteNextKeyframes)) {
             String arg = MyString.remainder(actionString,

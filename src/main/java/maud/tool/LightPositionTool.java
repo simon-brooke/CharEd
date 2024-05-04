@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.SelectedLight;
 
 /**
@@ -117,7 +117,7 @@ class LightPositionTool extends Tool {
         float masterScale = readSlider("lPosMaster", masterSt);
         offsets.multLocal(masterScale);
 
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         light.setPosition(offsets);
     }
 
@@ -129,7 +129,7 @@ class LightPositionTool extends Tool {
     protected void toolUpdate() {
         String resetButton = "";
 
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         boolean enabled = light.canPosition();
         if (enabled) {
             resetButton = "Reset";
@@ -160,7 +160,7 @@ class LightPositionTool extends Tool {
      * selected light.
      */
     private void setSlidersToPosition() {
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         Vector3f pos = light.position();
         float[] offsets = pos.toArray(null);
 

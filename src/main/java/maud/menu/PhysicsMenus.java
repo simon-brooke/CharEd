@@ -37,7 +37,7 @@ import jme3utilities.Heart;
 import jme3utilities.MyString;
 import jme3utilities.Validate;
 import jme3utilities.minie.MyPco;
-import maud.Maud;
+import maud.CharEd;
 import maud.ShapeType;
 import maud.action.ActionPrefix;
 import maud.dialog.EditorDialogs;
@@ -88,7 +88,7 @@ final public class PhysicsMenus {
         builder.addSubmenu("Add control");
         builder.addTool("Shape tool");
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         CgmPhysics physics = target.getPhysics();
         int numShapes = physics.countShapes();
         if (numShapes == 1) {
@@ -161,7 +161,7 @@ final public class PhysicsMenus {
             handled = menuPhysicsSelectLink(arg);
         } else {
 
-            Cgm target = Maud.getModel().getTarget();
+            Cgm target = CharEd.getModel().getTarget();
             switch (remainder) {
                 case "Add control":
                     addControl();
@@ -245,7 +245,7 @@ final public class PhysicsMenus {
      * Handle a "select link" action without arguments.
      */
     public static void selectLink() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedRagdoll selectedRagdoll = target.getRagdoll();
         SelectedLink selectedLink = target.getLink();
         boolean isSelected = selectedLink.isSelected();
@@ -288,7 +288,7 @@ final public class PhysicsMenus {
      * Handle a "select linkChild" action without arguments.
      */
     public static void selectLinkChild() {
-        SelectedLink link = Maud.getModel().getTarget().getLink();
+        SelectedLink link = CharEd.getModel().getTarget().getLink();
         if (link.countChildren() == 1) {
             List<String> linkNames = link.childNames();
             assert linkNames.size() == 1 : linkNames.size();
@@ -313,7 +313,7 @@ final public class PhysicsMenus {
      * @param argument action argument (not null)
      */
     public static void selectLinkChild(String argument) {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         if (argument.startsWith("!")) {
             String name = argument.substring(1);
             target.getLink().select(name);
@@ -338,7 +338,7 @@ final public class PhysicsMenus {
      * Handle a "select linkToolAxis" action without arguments.
      */
     public static void selectLinkToolAxis() {
-        int selectedAxis = Maud.getModel().getMisc().linkToolAxis();
+        int selectedAxis = CharEd.getModel().getMisc().linkToolAxis();
         MenuBuilder builder = new MenuBuilder();
 
         for (int axisIndex = PhysicsSpace.AXIS_X;
@@ -381,7 +381,7 @@ final public class PhysicsMenus {
 
         Set<String> matchingNames = new TreeSet<>();
         RigidBodyParameter selectedRbp
-                = Maud.getModel().getMisc().rbParameter();
+                = CharEd.getModel().getMisc().rbParameter();
         for (RigidBodyParameter rbp : RigidBodyParameter.values()) {
             if (rbp != selectedRbp) {
                 String name = rbp.toString();
@@ -442,7 +442,7 @@ final public class PhysicsMenus {
      * Handle a "select shapeChild" action without arguments.
      */
     public static void selectShapeChild() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedShape shape = target.getShape();
         int numChildren = shape.countChildren();
         if (numChildren == 1) {
@@ -465,7 +465,7 @@ final public class PhysicsMenus {
     public static void selectShapeParameter() {
         MenuBuilder builder = new MenuBuilder();
 
-        ShapeParameter selected = Maud.getModel().getMisc().shapeParameter();
+        ShapeParameter selected = CharEd.getModel().getMisc().shapeParameter();
         for (ShapeParameter parm : ShapeParameter.values()) {
             if (parm != selected) {
                 String name = parm.toString();
@@ -480,7 +480,7 @@ final public class PhysicsMenus {
      * Handle a "select shapeUser" action without arguments.
      */
     public static void selectShapeUser() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         CgmPhysics physics = target.getPhysics();
         SelectedShape shape = target.getShape();
         Set<Long> userSet = shape.userSet();
@@ -513,7 +513,7 @@ final public class PhysicsMenus {
     public static void selectShapeUser(String namePrefix) {
         Validate.nonNull(namePrefix, "name prefix");
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         CgmPhysics physics = target.getPhysics();
         SelectedShape shape = target.getShape();
         if (namePrefix.contains(":")) {
@@ -585,7 +585,7 @@ final public class PhysicsMenus {
     private static void addControl() {
         MenuBuilder builder = new MenuBuilder();
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         builder.addEdit("BetterCharacter");
         builder.addEdit("Character");
         if (spatial.hasSkeletonControls()) {
@@ -605,7 +605,7 @@ final public class PhysicsMenus {
      */
     private static boolean menuPhysicsAddControl(String remainder) {
         boolean handled = true;
-        SelectedSpatial ss = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial ss = CharEd.getModel().getTarget().getSpatial();
         switch (remainder) {
             case "BetterCharacter":
                 ss.addBetterCharacterControl();
@@ -643,7 +643,7 @@ final public class PhysicsMenus {
     private static boolean menuPhysicsSelectLink(String remainder) {
         boolean handled = true;
 
-        SelectedLink selectedLink = Maud.getModel().getTarget().getLink();
+        SelectedLink selectedLink = CharEd.getModel().getTarget().getLink();
         switch (remainder) {
             case "By name":
                 selectLinkByName();
@@ -684,7 +684,7 @@ final public class PhysicsMenus {
      * Select a link by name, using submenus if necessary.
      */
     private static void selectLinkByName() {
-        SelectedRagdoll ragdoll = Maud.getModel().getTarget().getRagdoll();
+        SelectedRagdoll ragdoll = CharEd.getModel().getTarget().getRagdoll();
         List<String> nameList = ragdoll.listLinkNames("");
         showLinkSubmenu(nameList);
     }
@@ -695,7 +695,7 @@ final public class PhysicsMenus {
     private static void selectLinkByParent() {
         List<String> linkNames = new ArrayList<>(1);
         linkNames.add("Torso:");
-        Maud.gui.showPopupMenu(ActionPrefix.selectLinkChild, linkNames);
+        CharEd.gui.showPopupMenu(ActionPrefix.selectLinkChild, linkNames);
     }
 
     /**
@@ -712,7 +712,7 @@ final public class PhysicsMenus {
 
         MenuBuilder builder = new MenuBuilder();
         for (String linkName : nameList) {
-            if (Maud.getModel().getTarget().getRagdoll().hasLink(linkName)) {
+            if (CharEd.getModel().getTarget().getRagdoll().hasLink(linkName)) {
                 builder.add(linkName);
             } else {
                 builder.addEllipsis(linkName);

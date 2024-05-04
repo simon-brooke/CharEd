@@ -37,7 +37,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Heart;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.action.ActionPrefix;
 import maud.dialog.EditorDialogs;
 import maud.model.EditorModel;
@@ -121,7 +121,7 @@ final public class BuildMenus {
      * @param loadedCgm load slot (not null)
      */
     public static void loadCgmAsset(String args, LoadedCgm loadedCgm) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         String menuPrefix;
         if (loadedCgm == model.getSource()) {
             menuPrefix = ActionPrefix.loadSourceCgmAsset;
@@ -198,9 +198,9 @@ final public class BuildMenus {
     public static void loadCgmLocator(String spec, LoadedCgm slot) {
         if (spec.equals(EditorMenus.defaultLocation)) {
             buildClasspathCgmMenu();
-            if (slot == Maud.getModel().getSource()) {
+            if (slot == CharEd.getModel().getSource()) {
                 builder.show(ActionPrefix.loadSourceCgmNamed);
-            } else if (slot == Maud.getModel().getTarget()) {
+            } else if (slot == CharEd.getModel().getTarget()) {
                 builder.show(ActionPrefix.loadCgmNamed);
             } else {
                 throw new IllegalArgumentException();
@@ -209,7 +209,7 @@ final public class BuildMenus {
         } else if (spec.startsWith("file://") || spec.endsWith(".jar")
                 || spec.endsWith(".zip")) {
             String indexString
-                    = Maud.getModel().getLocations().indexForSpec(spec);
+                    = CharEd.getModel().getLocations().indexForSpec(spec);
             String args = indexString + " /";
             loadCgmAsset(args, slot);
 
@@ -224,7 +224,7 @@ final public class BuildMenus {
      * @param args action arguments (not null, not empty)
      */
     public static void loadMapAsset(String args) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         String indexString = args.split(" ")[0];
         String spec = model.getLocations().specForIndex(indexString);
         String assetPath = MyString.remainder(args, indexString + " ");
@@ -272,7 +272,7 @@ final public class BuildMenus {
      * defaultLocation/identityForSource/identityForTarget(not null, not empty)
      */
     public static void loadMapLocator(String spec) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         switch (spec) {
             case EditorMenus.defaultLocation:
                 buildClasspathMapMenu();
@@ -310,7 +310,7 @@ final public class BuildMenus {
     public static void loadTextureAsset(String args) {
         String indexString = args.split(" ")[0];
         String assetPath = MyString.remainder(args, indexString + " ");
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         String spec = model.getLocations().specForIndex(indexString);
         SelectedTexture texture = model.getTarget().getTexture();
 
@@ -382,7 +382,7 @@ final public class BuildMenus {
         } else if (spec.startsWith("file://") || spec.endsWith(".jar")
                 || spec.endsWith(".zip")) {
             String indexString
-                    = Maud.getModel().getLocations().indexForSpec(spec);
+                    = CharEd.getModel().getLocations().indexForSpec(spec);
             String args = indexString + " /";
             loadTextureAsset(args);
         }
@@ -484,10 +484,10 @@ final public class BuildMenus {
     public static void newAssetLocation(String argument) {
         if (argument.endsWith(EditorMenus.addThis)) {
             String path = MyString.removeSuffix(argument, EditorMenus.addThis);
-            Maud.getModel().getLocations().addFilesystem(path);
+            CharEd.getModel().getLocations().addFilesystem(path);
 
         } else if (argument.endsWith(".jar") || argument.endsWith(".zip")) {
-            Maud.getModel().getLocations().addFilesystem(argument);
+            CharEd.getModel().getLocations().addFilesystem(argument);
 
         } else { // open folder
             Map<String, File> folderMap = EditorMenus.folderMap(argument);
@@ -695,7 +695,7 @@ final public class BuildMenus {
     private static void buildMapMenu() {
         builder.addTool("Tool");
         builder.addSubmenu("Load");
-        LoadedMap map = Maud.getModel().getMap();
+        LoadedMap map = CharEd.getModel().getMap();
         if (!map.isEmpty()) {
             if (map.hasInvalidMappings()) {
                 builder.addEdit("Delete invalid mappings");
@@ -714,7 +714,7 @@ final public class BuildMenus {
     private static void buildMaterialMenu() {
         builder.addTool("Tool");
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<String> materialList
                 = target.listSpatialNames("", WhichSpatials.Geometries);
         if (!materialList.isEmpty()) {
@@ -742,7 +742,7 @@ final public class BuildMenus {
     private static void buildSettingsMenu() {
         builder.addTool("Tool");
         builder.addSubmenu("Add asset location");
-        if (Maud.getModel().getLocations().hasRemovable()) {
+        if (CharEd.getModel().getLocations().hasRemovable()) {
             builder.addSubmenu("Remove asset location");
         }
         builder.addScreen("Display settings");
@@ -753,7 +753,7 @@ final public class BuildMenus {
         builder.addSubmenu("Score-view options");
         builder.addTool("Tweening tool");
         builder.addEdit("Update startup script");
-        if (Maud.isStartupScriptCustomized()) {
+        if (CharEd.isStartupScriptCustomized()) {
             builder.addEdit("Revert startup script to default");
         }
     }

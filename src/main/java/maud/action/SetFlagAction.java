@@ -29,7 +29,7 @@ package maud.action;
 import java.util.logging.Logger;
 import jme3utilities.minie.DumpFlags;
 import jme3utilities.minie.PhysicsDumper;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.option.scene.SceneOptions;
 
@@ -65,7 +65,7 @@ final class SetFlagAction {
      * @return true if the action is handled, otherwise false
      */
     static boolean process(String actionString) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         PhysicsDumper dumper = model.getDumper();
         SceneOptions scene = model.getScene();
 

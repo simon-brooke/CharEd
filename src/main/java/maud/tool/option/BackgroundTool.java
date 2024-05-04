@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.option.Background;
 import maud.model.option.ScoreOptions;
@@ -93,12 +93,12 @@ public class BackgroundTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        EditorModel editorModel = Maud.getModel();
+        EditorModel editorModel = CharEd.getModel();
         RenderOptions forScenes = editorModel.getScene().getRender();
         ScoreOptions forScores = editorModel.getScore();
 
         ColorRGBA color = readColorBank("bg", colorSt, null);
-        Background background = Maud.getModel().getMisc().background();
+        Background background = CharEd.getModel().getMisc().background();
         switch (background) {
             case SourceScenesWithNoSky:
                 forScenes.setSourceBackgroundColor(color);
@@ -127,12 +127,12 @@ public class BackgroundTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        EditorModel editorModel = Maud.getModel();
+        EditorModel editorModel = CharEd.getModel();
         RenderOptions forScenes = editorModel.getScene().getRender();
         ScoreOptions forScores = editorModel.getScore();
 
         ColorRGBA color;
-        Background background = Maud.getModel().getMisc().background();
+        Background background = CharEd.getModel().getMisc().background();
         switch (background) {
             case SourceScenesWithNoSky:
                 color = forScenes.sourceBackgroundColor(null);

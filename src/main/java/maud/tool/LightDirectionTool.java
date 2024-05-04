@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.SelectedLight;
 
 /**
@@ -102,7 +102,7 @@ class LightDirectionTool extends Tool {
         Vector3f direction = readVectorBank("LDir", axisSt, null);
         direction.normalizeLocal();
 
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         light.setDirection(direction);
     }
 
@@ -116,7 +116,7 @@ class LightDirectionTool extends Tool {
         String reverseButton = "";
         String snapButton = "";
 
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         boolean enabled = light.canDirect();
         if (enabled) {
             resetButton = "Reset";
@@ -151,7 +151,7 @@ class LightDirectionTool extends Tool {
      * selected light.
      */
     private void setSlidersToDirection() {
-        SelectedLight light = Maud.getModel().getTarget().getLight();
+        SelectedLight light = CharEd.getModel().getTarget().getLight();
         Vector3f dir = light.direction();
         float[] cosines = dir.toArray(null);
         for (int iAxis = 0; iAxis < numAxes; iAxis++) {

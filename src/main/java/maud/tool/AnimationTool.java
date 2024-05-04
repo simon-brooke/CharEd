@@ -33,7 +33,7 @@ import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.LoadedAnimation;
 import maud.model.cgm.PlayOptions;
@@ -115,10 +115,10 @@ class AnimationTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         Cgm cgm;
         if (target.getAnimation().isRetargetedPose()) {
-            cgm = Maud.getModel().getSource();
+            cgm = CharEd.getModel().getSource();
         } else {
             cgm = target;
         }
@@ -153,10 +153,10 @@ class AnimationTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         Cgm cgm;
         if (target.getAnimation().isRetargetedPose()) {
-            cgm = Maud.getModel().getSource();
+            cgm = CharEd.getModel().getSource();
         } else {
             cgm = target;
         }
@@ -201,7 +201,7 @@ class AnimationTool extends Tool {
         String nextButton = "";
         String previousButton = "";
 
-        Cgm cgm = Maud.getModel().getTarget();
+        Cgm cgm = CharEd.getModel().getTarget();
         int numAnimControls = cgm.countAnimationControls();
         if (numAnimControls > 0) {
             selectButton = "Select animControl";
@@ -243,7 +243,7 @@ class AnimationTool extends Tool {
         String nextButton = "";
         String previousButton = "";
 
-        Cgm cgm = Maud.getModel().getTarget();
+        Cgm cgm = CharEd.getModel().getTarget();
         SelectedAnimControl animControl = cgm.getAnimControl();
         if (animControl.isSelected()) {
             addButton = "Add new";
@@ -280,13 +280,13 @@ class AnimationTool extends Tool {
      * Update the freeze/loop/pin/pong check boxes and the pause button label.
      */
     private void updateLooping() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         boolean pinned = target.getPlay().isPinned();
         setChecked("pin", pinned);
 
         Cgm cgm;
         if (target.getAnimation().isRetargetedPose()) {
-            cgm = Maud.getModel().getSource();
+            cgm = CharEd.getModel().getSource();
         } else {
             cgm = target;
         }
@@ -320,7 +320,7 @@ class AnimationTool extends Tool {
         String nameText;
         String rButton;
 
-        LoadedAnimation animation = Maud.getModel().getTarget().getAnimation();
+        LoadedAnimation animation = CharEd.getModel().getTarget().getAnimation();
         String name = animation.name();
         if (animation.isReal()) {
             eButton = "Edit";
@@ -341,10 +341,10 @@ class AnimationTool extends Tool {
      * Update the speed slider and its status label.
      */
     private void updateSpeed() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         Cgm cgm;
         if (target.getAnimation().isRetargetedPose()) {
-            cgm = Maud.getModel().getSource();
+            cgm = CharEd.getModel().getSource();
         } else {
             cgm = target;
         }
@@ -361,7 +361,7 @@ class AnimationTool extends Tool {
      * Update the track counts.
      */
     private void updateTrackCounts() {
-        LoadedAnimation animation = Maud.getModel().getTarget().getAnimation();
+        LoadedAnimation animation = CharEd.getModel().getTarget().getAnimation();
         int numBoneTracks = animation.countBoneTracks();
         String boneTracksText = Integer.toString(numBoneTracks);
         setStatusText("boneTracks", boneTracksText);
@@ -380,10 +380,10 @@ class AnimationTool extends Tool {
      * Update the track-time slider and its status label.
      */
     private void updateTrackTime() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         Cgm cgm;
         if (target.getAnimation().isRetargetedPose()) {
-            cgm = Maud.getModel().getSource();
+            cgm = CharEd.getModel().getSource();
         } else {
             cgm = target;
         }

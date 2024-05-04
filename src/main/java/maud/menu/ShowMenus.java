@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.action.ActionPrefix;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.EditableCgm;
@@ -84,7 +84,7 @@ final public class ShowMenus {
     public static void addNewMatParam(String namePrefix) {
         Validate.nonNull(namePrefix, "name prefix");
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         SelectedSpatial spatial = target.getSpatial();
         List<String> matParamNames
                 = spatial.listMatParamNames(namePrefix, WhichParams.Undefined);
@@ -117,7 +117,7 @@ final public class ShowMenus {
 
         builder.addEdit("Anim");
         builder.addEdit("BetterCharacter");
-        SelectedSpatial ss = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial ss = CharEd.getModel().getTarget().getSpatial();
         if (ss.hasSkeletonControls()) {
             builder.addEdit("DynamicAnim");
         }
@@ -134,7 +134,7 @@ final public class ShowMenus {
      */
     static void removeAssetLocation() {
         MenuBuilder builder = new MenuBuilder();
-        List<String> specs = Maud.getModel().getLocations().listAll();
+        List<String> specs = CharEd.getModel().getLocations().listAll();
         for (String spec : specs) {
             builder.addFile(spec);
         }
@@ -163,7 +163,7 @@ final public class ShowMenus {
     public static void selectLight() {
         MenuBuilder builder = new MenuBuilder();
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         String selectedName = target.getLight().name();
         List<String> names = target.listLightNames(Light.class);
         for (String name : names) {
@@ -185,7 +185,7 @@ final public class ShowMenus {
     public static void selectMatParam(String namePrefix) {
         Validate.nonNull(namePrefix, "name prefix");
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         SelectedSpatial spatial = target.getSpatial();
         List<String> matParamNames
                 = spatial.listMatParamNames(namePrefix, WhichParams.Defined);
@@ -219,7 +219,7 @@ final public class ShowMenus {
     public static void selectOverride() {
         MenuBuilder builder = new MenuBuilder();
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         List<String> nameList = target.getSpatial().listOverrideNames();
         String selectedName = target.getOverride().parameterName();
         for (String name : nameList) {
@@ -238,7 +238,7 @@ final public class ShowMenus {
     public static void selectSgc() {
         MenuBuilder builder = new MenuBuilder();
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         String selectedName = target.getSgc().name();
         List<String> names = target.listSgcNames(Control.class);
         for (String name : names) {
@@ -256,7 +256,7 @@ final public class ShowMenus {
      * texture " action prefix.
      */
     public static void selectTexture() {
-        SelectedTexture selection = Maud.getModel().getTarget().getTexture();
+        SelectedTexture selection = CharEd.getModel().getTarget().getTexture();
         boolean isSelected = selection.isSelected();
         List<String> descList = selection.listSelectables("");
         int numSelectables = descList.size();
@@ -298,7 +298,7 @@ final public class ShowMenus {
     public static void selectUserKey() {
         MenuBuilder builder = new MenuBuilder();
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         List<String> keyList = target.getSpatial().listUserKeys();
         String selectedKey = target.getUserData().key();
         for (String key : keyList) {

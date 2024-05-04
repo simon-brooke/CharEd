@@ -37,7 +37,7 @@ import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.minie.PhysicsDumper;
 import jme3utilities.ui.InputMode;
-import maud.Maud;
+import maud.CharEd;
 import maud.dialog.EditorDialogs;
 import maud.dialog.LicenseType;
 import maud.dialog.ResampleType;
@@ -285,7 +285,7 @@ final public class EditorInputMode extends InputMode {
      * @return true if the action is handled, otherwise false
      */
     private static boolean applyAction(String actionString) {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
 
         boolean handled = true;
         switch (actionString) {
@@ -306,11 +306,11 @@ final public class EditorInputMode extends InputMode {
      * @return true if the action is handled, otherwise false
      */
     private boolean dumpAction(String actionString) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         PhysicsDumper dumper = model.getDumper();
         Cgm source = model.getSource();
         Cgm target = model.getTarget();
-        Cgm mouseCgm = Maud.gui.mouseCgm();
+        Cgm mouseCgm = CharEd.gui.mouseCgm();
 
         boolean handled = true;
         switch (actionString) {
@@ -325,7 +325,7 @@ final public class EditorInputMode extends InputMode {
                 dumper.dump(space);
                 break;
             case Action.dumpRenderer:
-                RenderManager rm = Maud.getApplication().getRenderManager();
+                RenderManager rm = CharEd.getApplication().getRenderManager();
                 dumper.dump(rm);
                 break;
             case Action.dumpSourceCgm:
@@ -358,7 +358,7 @@ final public class EditorInputMode extends InputMode {
     private static boolean launchAction(String actionString) {
         boolean handled = false;
         if (actionString.equals(Action.launchProjectile)) {
-            EditorView view = Maud.gui.mouseView();
+            EditorView view = CharEd.gui.mouseView();
             if (view instanceof SceneView) {
                 SceneView sceneView = (SceneView) view;
                 sceneView.getProjectile().launch();
@@ -376,7 +376,7 @@ final public class EditorInputMode extends InputMode {
      * @return true if the action has been handled, otherwise false
      */
     private static boolean mergeAction(String actionString) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
 
         String args;
@@ -405,7 +405,7 @@ final public class EditorInputMode extends InputMode {
      * @return true if the action is handled, otherwise false
      */
     private static boolean reduceAction(String actionString) {
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         String arg;
         boolean handled = false;
         if (actionString.equals(Action.reduceAnimation)) {
@@ -440,7 +440,7 @@ final public class EditorInputMode extends InputMode {
      * @return true if the action is handled, otherwise false
      */
     private static boolean reparentAction(String actionString) {
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         String arg;
         boolean handled = false;
         if (actionString.startsWith(ActionPrefix.reparentSpatials)) {
@@ -460,7 +460,7 @@ final public class EditorInputMode extends InputMode {
      * @return true if the action is handled, otherwise false
      */
     private static boolean resampleAction(String actionString) {
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         String arg;
         boolean handled = false;
         if (actionString.startsWith(ActionPrefix.resampleAnimation)) {
@@ -515,7 +515,7 @@ final public class EditorInputMode extends InputMode {
      * @return true if the action is handled, otherwise false
      */
     private static boolean saveAction(String actionString) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
         CgmOutputFormat format;
         CgmOutputSet outputSet;
@@ -606,9 +606,9 @@ final public class EditorInputMode extends InputMode {
         boolean handled = false;
         switch (actionString) {
             case Action.viewHorizontal:
-                ViewType viewType = Maud.gui.mouseViewType();
+                ViewType viewType = CharEd.gui.mouseViewType();
                 if (viewType == ViewType.Scene) {
-                    Cgm cgm = Maud.gui.mouseCgm();
+                    Cgm cgm = CharEd.gui.mouseCgm();
                     cgm.getScenePov().goHorizontal();
                 }
                 handled = true;
@@ -637,7 +637,7 @@ final public class EditorInputMode extends InputMode {
         boolean handled = false;
         switch (actionString) {
             case Action.warpCursor:
-                EditorView mouseView = Maud.gui.mouseView();
+                EditorView mouseView = CharEd.gui.mouseView();
                 if (mouseView != null) {
                     mouseView.warpCursor();
                 }
@@ -664,7 +664,7 @@ final public class EditorInputMode extends InputMode {
     private static boolean wrapAction(String actionString) {
         boolean handled = true;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedTrack track = target.getTrack();
         if (actionString.equals(Action.wrapTrack)) {
             if (track.endsWithKeyframe()) {

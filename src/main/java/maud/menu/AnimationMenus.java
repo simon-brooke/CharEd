@@ -32,7 +32,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.action.ActionPrefix;
 import maud.dialog.EditorDialogs;
 import maud.dialog.ResampleType;
@@ -78,7 +78,7 @@ final public class AnimationMenus {
     public static void addNewAnimation() {
         MenuBuilder builder = new MenuBuilder();
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         LoadedAnimation sourceAnimation = model.getSource().getAnimation();
         LoadedAnimation targetAnimation = model.getTarget().getAnimation();
         if (sourceAnimation.isReal() && targetAnimation.isReal()) {
@@ -101,7 +101,7 @@ final public class AnimationMenus {
      */
     static void buildAnimationMenu(MenuBuilder builder) {
         builder.addTool("Tool");
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         if (target.getAnimControl().isSelected()) {
             builder.addSubmenu("Load");
             builder.addSubmenu("Add new");
@@ -118,7 +118,7 @@ final public class AnimationMenus {
         builder.addSubmenu("Select AnimControl");
 
         builder.addTool("Source tool");
-        Cgm source = Maud.getModel().getSource();
+        Cgm source = CharEd.getModel().getSource();
         if (source.isLoaded() && source.getSkeleton().countBones() > 0) {
             builder.addSubmenu("Load source");
         }
@@ -132,7 +132,7 @@ final public class AnimationMenus {
      */
     static void buildTrackMenu(MenuBuilder builder) {
         builder.addTool("Tool");
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         if (target.getAnimation().isReal()) {
             builder.addSubmenu("Select track");
         } else {
@@ -170,7 +170,7 @@ final public class AnimationMenus {
     public static void editAnimation() {
         MenuBuilder builder = new MenuBuilder();
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         LoadedAnimation animation = target.getAnimation();
         float time = target.getPlay().getTime();
         if (time > 0f) {
@@ -252,7 +252,7 @@ final public class AnimationMenus {
             handled = menuAnimationEdit(arg);
 
         } else {
-            EditableCgm target = Maud.getModel().getTarget();
+            EditableCgm target = CharEd.getModel().getTarget();
             switch (remainder) {
                 case "Add new":
                     addNewAnimation();
@@ -271,7 +271,7 @@ final public class AnimationMenus {
                     break;
 
                 case "Load source":
-                    loadAnimation(Maud.getModel().getSource());
+                    loadAnimation(CharEd.getModel().getSource());
                     break;
 
                 case "Rename":
@@ -315,7 +315,7 @@ final public class AnimationMenus {
     static boolean menuTrack(String remainder) {
         boolean handled = true;
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         SelectedTrack track = target.getTrack();
         switch (remainder) {
             case "Create bone track":
@@ -392,9 +392,9 @@ final public class AnimationMenus {
                 builder.add(name);
             }
 
-            if (cgm == Maud.getModel().getTarget()) {
+            if (cgm == CharEd.getModel().getTarget()) {
                 builder.show(ActionPrefix.selectAnimControl);
-            } else if (cgm == Maud.getModel().getSource()) {
+            } else if (cgm == CharEd.getModel().getSource()) {
                 builder.show(ActionPrefix.selectSourceAnimControl);
             } else {
                 throw new IllegalArgumentException();
@@ -406,7 +406,7 @@ final public class AnimationMenus {
      * Handle a "select track" action without an argument.
      */
     public static void selectTrack() {
-        LoadedAnimation animation = Maud.getModel().getTarget().getAnimation();
+        LoadedAnimation animation = CharEd.getModel().getTarget().getAnimation();
         assert animation.isReal();
 
         List<TrackItem> items = animation.listTracks();
@@ -425,7 +425,7 @@ final public class AnimationMenus {
      * @param argument action argument (not null)
      */
     public static void selectTrack(String argument) {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         LoadedAnimation animation = target.getAnimation();
         if (animation.hasTrack(argument)) {
             target.getTrack().selectWithDescription(argument);
@@ -461,7 +461,7 @@ final public class AnimationMenus {
                 break;
 
             case "Copy":
-                Cgm target = Maud.getModel().getTarget();
+                Cgm target = CharEd.getModel().getTarget();
                 String originalName = target.getAnimation().name();
                 EditorDialogs.newAnimation(ActionPrefix.newAnimationFromCopy,
                         "Copy", originalName);
@@ -504,7 +504,7 @@ final public class AnimationMenus {
      */
     private static boolean menuAnimationEdit(String remainder) {
         boolean handled = true;
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         LoadedAnimation animation = target.getAnimation();
         switch (remainder) {
             case "Behead":
@@ -598,9 +598,9 @@ final public class AnimationMenus {
             }
         }
 
-        if (cgm == Maud.getModel().getTarget()) {
+        if (cgm == CharEd.getModel().getTarget()) {
             builder.show(ActionPrefix.loadAnimation);
-        } else if (cgm == Maud.getModel().getSource()) {
+        } else if (cgm == CharEd.getModel().getSource()) {
             builder.show(ActionPrefix.loadSourceAnimation);
         } else {
             throw new IllegalArgumentException();
@@ -620,7 +620,7 @@ final public class AnimationMenus {
 
         MenuBuilder builder = new MenuBuilder();
         for (String desc : descriptions) {
-            if (Maud.getModel().getTarget().getAnimation().hasTrack(desc)) {
+            if (CharEd.getModel().getTarget().getAnimation().hasTrack(desc)) {
                 builder.add(desc);
             } else {
                 builder.addEllipsis(desc);

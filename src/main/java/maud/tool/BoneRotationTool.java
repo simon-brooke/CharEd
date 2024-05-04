@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.model.EditorModel;
 import maud.model.cgm.Cgm;
@@ -103,7 +103,7 @@ class BoneRotationTool extends Tool {
      */
     @Override
     public void onSliderChanged(String name) {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         if (target.getBone().shouldEnableControls()) {
             float[] sliderPositions = new float[numAxes];
             for (int iAxis = 0; iAxis < numAxes; iAxis++) {
@@ -114,7 +114,7 @@ class BoneRotationTool extends Tool {
 
             Quaternion rotation = new Quaternion();
             RotationDisplayMode mode
-                    = Maud.getModel().getMisc().rotationDisplayMode();
+                    = CharEd.getModel().getMisc().rotationDisplayMode();
             if (mode == RotationDisplayMode.QuatCoeff) {
                 MaudUtil.setFromSliders(sliderPositions, rotation);
             } else {
@@ -135,7 +135,7 @@ class BoneRotationTool extends Tool {
         updateSnapButtons();
 
         RotationDisplayMode mode
-                = Maud.getModel().getMisc().rotationDisplayMode();
+                = CharEd.getModel().getMisc().rotationDisplayMode();
         String dButton = mode.toString();
         setButtonText("rotationMode", dButton);
     }
@@ -157,11 +157,11 @@ class BoneRotationTool extends Tool {
      * Set all 3 sliders (and their status labels) based on the displayed pose.
      */
     private void setSlidersToPose() {
-        SelectedBone bone = Maud.getModel().getTarget().getBone();
+        SelectedBone bone = CharEd.getModel().getTarget().getBone();
         Quaternion rotation = bone.userRotation(null);
 
         RotationDisplayMode mode
-                = Maud.getModel().getMisc().rotationDisplayMode();
+                = CharEd.getModel().getMisc().rotationDisplayMode();
         float[] statusValues = new float[numAxes];
         float[] sliderPositions = new float[numAxes];
         String unitSuffix = MaudUtil.displayRotation(rotation, mode,
@@ -181,7 +181,7 @@ class BoneRotationTool extends Tool {
     private void updateSnapButtons() {
         String xyzButton = "";
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         if (target.getBone().shouldEnableControls()) {
             RotationDisplayMode mode = model.getMisc().rotationDisplayMode();
@@ -203,7 +203,7 @@ class BoneRotationTool extends Tool {
         String aButton = "";
         String bButton = "";
 
-        SelectedBone bone = Maud.getModel().getTarget().getBone();
+        SelectedBone bone = CharEd.getModel().getTarget().getBone();
         if (bone.isSelected()) {
             setSlidersToPose();
             if (bone.shouldEnableControls()) {

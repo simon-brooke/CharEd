@@ -33,7 +33,7 @@ import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.EditableCgm;
 import maud.model.cgm.SelectedSgc;
@@ -90,7 +90,7 @@ class SgcTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         switch (name) {
             case "sgcEnable":
                 target.setSgcEnabled(isChecked);
@@ -121,7 +121,7 @@ class SgcTool extends Tool {
         String spatialStatus;
         String typeStatus;
 
-        SelectedSgc sgc = Maud.getModel().getTarget().getSgc();
+        SelectedSgc sgc = CharEd.getModel().getTarget().getSgc();
         if (sgc.isSelected()) {
             boolean isEnabled = sgc.isEnabled();
             setChecked("sgcEnable", isEnabled);
@@ -179,7 +179,7 @@ class SgcTool extends Tool {
         String nextButton;
         String previousButton;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numSgcs = target.countSgcs(Control.class);
         if (target.getSgc().isSelected()) {
             nextButton = "+";

@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.action.ActionPrefix;
 import maud.model.EditState;
@@ -79,7 +79,7 @@ public class VertexOptions implements Cloneable {
         if (pointSize != size) {
             pointSize = size;
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedVertexSize();
         }
     }

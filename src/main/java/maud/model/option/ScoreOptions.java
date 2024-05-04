@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.action.ActionPrefix;
 import maud.model.EditState;
@@ -220,7 +220,7 @@ public class ScoreOptions implements Cloneable {
         if (!sourceBackground.equals(newColor)) {
             sourceBackground.set(newColor);
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             Background background = Background.SourceScores;
             editState.setEditedBackgroundColor(background);
         }
@@ -237,7 +237,7 @@ public class ScoreOptions implements Cloneable {
         if (!targetBackground.equals(newColor)) {
             targetBackground.set(newColor);
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             Background background = Background.TargetScores;
             editState.setEditedBackgroundColor(background);
         }

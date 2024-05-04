@@ -30,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.action.ActionPrefix;
 import maud.dialog.EditorDialogs;
 import maud.model.EditorModel;
@@ -73,7 +73,7 @@ final public class BoneMenus {
     static void buildBoneMenu(MenuBuilder builder) {
         builder.addTool("Tool");
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         SelectedSkeleton skeleton = target.getSkeleton();
         if (skeleton.countBones() > 0) {
@@ -122,7 +122,7 @@ final public class BoneMenus {
             handled = menuBoneSelectSource(selectArg);
 
         } else {
-            EditableCgm target = Maud.getModel().getTarget();
+            EditableCgm target = CharEd.getModel().getTarget();
             switch (remainder) {
                 case "Attach node":
                     target.addAttachmentsNode();
@@ -185,7 +185,7 @@ final public class BoneMenus {
         builder.addSubmenu("By name");
         builder.addSubmenu("By parent");
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numRoots = target.getSkeleton().countRootBones();
         if (numRoots == 1) {
             builder.addBone("Root");
@@ -205,9 +205,9 @@ final public class BoneMenus {
             builder.addSubmenu("Attached");
         }
 
-        String sourceBoneName = Maud.getModel().getSource().getBone().name();
+        String sourceBoneName = CharEd.getModel().getSource().getBone().name();
         String boneName;
-        boneName = Maud.getModel().getMap().targetBoneName(sourceBoneName);
+        boneName = CharEd.getModel().getMap().targetBoneName(sourceBoneName);
         if (boneName != null && target.getSkeleton().hasBone(boneName)) {
             builder.addBone("Mapped");
         }
@@ -241,7 +241,7 @@ final public class BoneMenus {
      * @param argument action argument (not null)
      */
     public static void selectBone(String argument) {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedSkeleton skeleton = target.getSkeleton();
         if (skeleton.hasBone(argument)) {
             target.getBone().select(argument);
@@ -256,7 +256,7 @@ final public class BoneMenus {
      * Handle a "select boneChild" action without arguments.
      */
     public static void selectBoneChild() {
-        SelectedBone bone = Maud.getModel().getTarget().getBone();
+        SelectedBone bone = CharEd.getModel().getTarget().getBone();
         if (bone.isSelected()) {
             int numChildren = bone.countChildren();
             if (numChildren == 1) {
@@ -274,7 +274,7 @@ final public class BoneMenus {
      * @param argument action argument (not null)
      */
     public static void selectBoneChild(String argument) {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         if (argument.startsWith("!")) {
             String name = argument.substring(1);
             target.getBone().select(name);
@@ -308,7 +308,7 @@ final public class BoneMenus {
                 builder.add(name);
             }
 
-            if (cgm == Maud.getModel().getTarget()) {
+            if (cgm == CharEd.getModel().getTarget()) {
                 builder.show(ActionPrefix.selectSkeleton);
 //            } else if (cgm == Maud.getModel().getSource()) {
 //                builder.show(ActionPrefix.selectSourceSkeleton);
@@ -322,7 +322,7 @@ final public class BoneMenus {
      * Handle a "select sourceBone" action without an argument.
      */
     public static void selectSourceBone() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         if (model.getSource().isLoaded()) {
             MenuBuilder builder = new MenuBuilder();
 
@@ -350,7 +350,7 @@ final public class BoneMenus {
      * @param argument action argument (not null)
      */
     public static void selectSourceBone(String argument) {
-        Cgm source = Maud.getModel().getSource();
+        Cgm source = CharEd.getModel().getSource();
         SelectedSkeleton skeleton = source.getSkeleton();
         if (skeleton.hasBone(argument)) {
             source.getBone().select(argument);
@@ -372,7 +372,7 @@ final public class BoneMenus {
     private static boolean menuBoneSelect(String remainder) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         SelectedBone selection = model.getTarget().getBone();
         switch (remainder) {
             case "Attached":
@@ -442,7 +442,7 @@ final public class BoneMenus {
         boolean handled = false;
         switch (remainder) {
             case "Mapped":
-                Maud.getModel().getMap().selectFromTarget();
+                CharEd.getModel().getMap().selectFromTarget();
                 handled = true;
                 break;
             case "Root":
@@ -459,7 +459,7 @@ final public class BoneMenus {
      * Select a bone with an attachments node, using submenus.
      */
     private static void selectAttachedBone() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<String> boneNames = target.getSkeleton().listAttachedBones();
         int numAttachmentNodes = boneNames.size();
         if (numAttachmentNodes == 1) {
@@ -473,7 +473,7 @@ final public class BoneMenus {
      * Select a bone by name, using submenus if necessary.
      */
     private static void selectBoneByName() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<String> nameList = target.getSkeleton().listBoneNames();
         showBoneSubmenu(nameList);
     }
@@ -482,16 +482,16 @@ final public class BoneMenus {
      * Select a bone by parent, using submenus.
      */
     private static void selectBoneByParent() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<String> boneNames = target.getSkeleton().listRootBoneNames();
-        Maud.gui.showPopupMenu(ActionPrefix.selectBoneChild, boneNames);
+        CharEd.gui.showPopupMenu(ActionPrefix.selectBoneChild, boneNames);
     }
 
     /**
      * Handle a "select rootBone" action.
      */
     private static void selectRootBone() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numRoots = target.getSkeleton().countRootBones();
         if (numRoots == 1) {
             target.getBone().selectFirstRoot();
@@ -505,7 +505,7 @@ final public class BoneMenus {
      * Handle a "select sourceRootBone" action.
      */
     private static void selectSourceRootBone() {
-        Cgm source = Maud.getModel().getSource();
+        Cgm source = CharEd.getModel().getSource();
         int numRoots = source.getSkeleton().countRootBones();
         if (numRoots == 1) {
             source.getBone().selectFirstRoot();
@@ -519,7 +519,7 @@ final public class BoneMenus {
      * Select a tracked bone, using submenus.
      */
     private static void selectTrackedBone() {
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         List<String> boneNames = target.getAnimation().listTrackedBones();
         int numBoneTracks = boneNames.size();
         if (numBoneTracks == 1) {
@@ -543,7 +543,7 @@ final public class BoneMenus {
 
         MenuBuilder builder = new MenuBuilder();
         for (String name : nameList) {
-            if (Maud.getModel().getTarget().getSkeleton().hasBone(name)) {
+            if (CharEd.getModel().getTarget().getSkeleton().hasBone(name)) {
                 builder.addBone(name);
             } else {
                 builder.addEllipsis(name);
@@ -566,7 +566,7 @@ final public class BoneMenus {
 
         MenuBuilder builder = new MenuBuilder();
         for (String name : nameList) {
-            if (Maud.getModel().getSource().getSkeleton().hasBone(name)) {
+            if (CharEd.getModel().getSource().getSkeleton().hasBone(name)) {
                 builder.addBone(name);
             } else {
                 builder.addEllipsis(name);

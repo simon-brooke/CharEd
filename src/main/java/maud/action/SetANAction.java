@@ -36,7 +36,7 @@ import jme3utilities.MyString;
 import jme3utilities.math.MyColor;
 import jme3utilities.math.MyVector3f;
 import jme3utilities.nifty.dialog.AllowNull;
-import maud.Maud;
+import maud.CharEd;
 import maud.dialog.EditorDialogs;
 import maud.menu.MeshMenus;
 import maud.model.EditorModel;
@@ -79,7 +79,7 @@ final class SetANAction {
     static boolean process(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
         switch (actionString) {
             case Action.setAnisotropy:
@@ -173,7 +173,7 @@ final class SetANAction {
     private static boolean testForPrefixes(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         EditableCgm target = model.getTarget();
         String arg;
         if (actionString.startsWith(ActionPrefix.set3DCursorColor)) {

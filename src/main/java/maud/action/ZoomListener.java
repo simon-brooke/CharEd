@@ -34,7 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Pov;
 
 /**
@@ -67,7 +67,7 @@ class ZoomListener implements AnalogListener {
      * Map the input device.
      */
     void map() {
-        Maud application = Maud.getApplication();
+        CharEd application = CharEd.getApplication();
         InputManager inputMgr = application.getInputManager();
 
         // Turning the mouse wheel up triggers positive Pov.moveBackward().
@@ -89,7 +89,7 @@ class ZoomListener implements AnalogListener {
      * Unmap the input device.
      */
     static void unmap() {
-        Maud application = Maud.getApplication();
+        CharEd application = CharEd.getApplication();
         InputManager inputMgr = application.getInputManager();
 
         inputMgr.deleteMapping(povForward);
@@ -111,7 +111,7 @@ class ZoomListener implements AnalogListener {
         logger.log(Level.FINE, "Received analog event {0} with amount={1}",
                 new Object[]{MyString.quote(eventString), amount});
 
-        Pov pov = Maud.gui.mousePov();
+        Pov pov = CharEd.gui.mousePov();
         if (pov == null || amount == 0f) {
             return;
         }

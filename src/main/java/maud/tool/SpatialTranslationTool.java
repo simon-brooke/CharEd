@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.SelectedSpatial;
 
 /**
@@ -116,7 +116,7 @@ class SpatialTranslationTool extends Tool {
         Vector3f offsets = readVectorBank("So", axisSt, null);
         float masterScale = readSlider("soMaster", masterSt);
         offsets.multLocal(masterScale);
-        Maud.getModel().getTarget().setSpatialTranslation(offsets);
+        CharEd.getModel().getTarget().setSpatialTranslation(offsets);
     }
 
     /**
@@ -128,7 +128,7 @@ class SpatialTranslationTool extends Tool {
         setSlidersToTransform();
 
         String buttonText = "";
-        boolean isNode = Maud.getModel().getTarget().getSpatial().isNode();
+        boolean isNode = CharEd.getModel().getTarget().getSpatial().isNode();
         if (isNode) {
             buttonText = "Smart set";
         }
@@ -142,7 +142,7 @@ class SpatialTranslationTool extends Tool {
      * translation of the selected spatial.
      */
     private void setSlidersToTransform() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         Vector3f vector = spatial.localTranslation(null);
         float[] offsets = vector.toArray(null);
 

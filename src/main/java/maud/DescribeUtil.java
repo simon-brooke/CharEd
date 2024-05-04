@@ -74,7 +74,7 @@ final public class DescribeUtil {
         Validate.nonNegative(index, "index");
 
         String result;
-        int indexBase = Maud.getModel().getMisc().indexBase();
+        int indexBase = CharEd.getModel().getMisc().indexBase();
         if (indexBase == 0) {
             result = String.format("[%d]", index);
         } else if (indexBase == 1) {

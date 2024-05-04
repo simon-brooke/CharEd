@@ -28,7 +28,7 @@ package maud.menu;
 
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.ViewMode;
 import maud.tool.EditorTools;
 import maud.view.ViewType;
@@ -67,7 +67,7 @@ final public class ViewMenus {
     static void buildViewMenu(MenuBuilder builder) {
         builder.addSubmenu("Select mode");
 
-        ViewMode viewMode = Maud.getModel().getMisc().viewMode();
+        ViewMode viewMode = CharEd.getModel().getMisc().viewMode();
         if (viewMode == ViewMode.Scene
                 || viewMode == ViewMode.Hybrid) {
             builder.addSubmenu("Scene options");
@@ -124,7 +124,7 @@ final public class ViewMenus {
      * Display an options menu for the view where the mouse is located.
      */
     public static void pick() {
-        ViewType type = Maud.gui.mouseViewType();
+        ViewType type = CharEd.gui.mouseViewType();
         if (type == ViewType.Scene) {
             sceneViewOptions();
         } else if (type == ViewType.Score) {
@@ -190,7 +190,7 @@ final public class ViewMenus {
                 EditorTools.select("camera");
                 break;
             case "Clear rotation":
-                SceneView view = Maud.getModel().getTarget().getSceneView();
+                SceneView view = CharEd.getModel().getTarget().getSceneView();
                 view.getTransform().setYAngle(0f);
                 break;
             case "Cursor":
@@ -252,6 +252,6 @@ final public class ViewMenus {
         assert remainder != null;
 
         ViewMode viewMode = ViewMode.valueOf(remainder);
-        Maud.getModel().getMisc().selectViewMode(viewMode);
+        CharEd.getModel().getMisc().selectViewMode(viewMode);
     }
 }

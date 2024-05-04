@@ -39,7 +39,7 @@ import jme3utilities.MyString;
 import jme3utilities.Validate;
 import jme3utilities.math.MyQuaternion;
 import jme3utilities.ui.ActionApplication;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.CgmOutputFormat;
 import maud.model.cgm.SelectedSkeleton;
@@ -114,8 +114,8 @@ public class EditableMap extends LoadedMap {
      */
     public void deleteInvalidMappings() {
         if (hasInvalidMappings()) {
-            Cgm source = Maud.getModel().getSource();
-            Cgm target = Maud.getModel().getTarget();
+            Cgm source = CharEd.getModel().getSource();
+            Cgm target = CharEd.getModel().getTarget();
             SelectedSkeleton skeleton;
             if (isInvertingMap()) {
                 skeleton = source.getSkeleton();
@@ -205,8 +205,8 @@ public class EditableMap extends LoadedMap {
      * Add a bone mapping for the selected source and target bones.
      */
     public void mapBones() {
-        Cgm source = Maud.getModel().getSource();
-        Cgm target = Maud.getModel().getTarget();
+        Cgm source = CharEd.getModel().getSource();
+        Cgm target = CharEd.getModel().getTarget();
         if (!isBoneMappingSelected()
                 && source.getBone().isSelected()
                 && target.getBone().isSelected()) {
@@ -453,7 +453,7 @@ public class EditableMap extends LoadedMap {
      * @return a new quaternion
      */
     private static Quaternion estimateTwist() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Quaternion sourceMo
                 = model.getSource().getBone().modelOrientation(null);
         Quaternion targetMo

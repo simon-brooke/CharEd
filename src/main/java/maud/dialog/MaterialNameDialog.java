@@ -29,7 +29,7 @@ package maud.dialog;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.dialog.TextEntryDialog;
-import maud.Maud;
+import maud.CharEd;
 
 /**
  * Controller for a text-entry dialog box used to rename a material.
@@ -107,7 +107,7 @@ class MaterialNameDialog extends TextEntryDialog {
     private static boolean isUsed(String name) {
         assert name != null;
 
-        if (Maud.getModel().getTarget().hasMaterial(name)) {
+        if (CharEd.getModel().getTarget().hasMaterial(name)) {
             return true;
         } else {
             return false;

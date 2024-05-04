@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.EditableCgm;
 import maud.model.cgm.SelectedTrack;
@@ -74,7 +74,7 @@ class KeyframeTool extends Tool {
         String indexStatus;
         String timeStatus;
 
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         float time = target.getPlay().getTime();
         int numKeyframes = target.getTrack().countKeyframes();
         if (numKeyframes == 0) {
@@ -116,7 +116,7 @@ class KeyframeTool extends Tool {
         String deleteButton = "";
         String insertButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         if (target.getTrack().isSelected()) {
             int index = target.getFrame().findIndex();
             if (index == -1) {
@@ -143,7 +143,7 @@ class KeyframeTool extends Tool {
         String nextButton = "";
         String lastButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         int numKeyframes = target.getTrack().countKeyframes();
         if (numKeyframes > 0) {
             float time = target.getPlay().getTime();
@@ -178,7 +178,7 @@ class KeyframeTool extends Tool {
     private void updateTrackDescription() {
         String status;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedTrack track = target.getTrack();
         if (!target.getAnimation().isReal()) {
             status = "(load an animation)";

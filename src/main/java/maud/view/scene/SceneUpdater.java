@@ -52,7 +52,7 @@ import jme3utilities.math.MyMath;
 import jme3utilities.sky.SkyControl;
 import jme3utilities.sky.Updater;
 import maud.EditorViewPorts;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.SelectedLight;
@@ -106,7 +106,7 @@ final public class SceneUpdater {
     public static Transform axesTransform(Cgm cgm) {
         Transform transform = null;
         SceneView sceneView = cgm.getSceneView();
-        AxesSubject subject = Maud.getModel().getScene().getAxes().getSubject();
+        AxesSubject subject = CharEd.getModel().getScene().getAxes().getSubject();
         switch (subject) {
             case Bone:
                 if (cgm.getBone().isSelected()) {
@@ -224,7 +224,7 @@ final public class SceneUpdater {
      * @param sceneView which view (not null)
      */
     private static void updateAmbientLight(SceneView sceneView) {
-        SceneOptions options = Maud.getModel().getScene();
+        SceneOptions options = CharEd.getModel().getScene();
         assert !options.getRender().isSkySimulated();
 
         float ambientLevel = options.getLights().getAmbientLevel();
@@ -247,7 +247,7 @@ final public class SceneUpdater {
         boolean enable = (transform != null);
         visualizer.setEnabled(enable);
         if (enable) {
-            AxesOptions options = Maud.getModel().getScene().getAxes();
+            AxesOptions options = CharEd.getModel().getScene().getAxes();
             boolean depthTestFlag = options.getDepthTestFlag();
             visualizer.setDepthTest(depthTestFlag);
 
@@ -290,7 +290,7 @@ final public class SceneUpdater {
      * @param cgm which C-G model (not null)
      */
     private static void updateBackground(Cgm cgm) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         RenderOptions renderOptions = model.getScene().getRender();
         assert !renderOptions.isSkySimulated();
 
@@ -315,7 +315,7 @@ final public class SceneUpdater {
         BoundsVisualizer visualizer = sceneView.getBoundsVisualizer();
         visualizer.setEnabled(true);
 
-        BoundsOptions options = Maud.getModel().getScene().getBounds();
+        BoundsOptions options = CharEd.getModel().getScene().getBounds();
         ColorRGBA color = options.copyColor(null);
         visualizer.setColor(color);
 
@@ -336,7 +336,7 @@ final public class SceneUpdater {
      * @param sceneView which view (not null)
      */
     private static void updateMainLight(SceneView sceneView) {
-        SceneOptions options = Maud.getModel().getScene();
+        SceneOptions options = CharEd.getModel().getScene();
         assert !options.getRender().isSkySimulated();
 
         LightsOptions lightsOptions = options.getLights();
@@ -358,7 +358,7 @@ final public class SceneUpdater {
     private static void updatePhysics(Cgm cgm) {
         SceneView sceneView = cgm.getSceneView();
         BulletAppState bulletAppState = sceneView.getBulletAppState();
-        RenderOptions renderOptions = Maud.getModel().getScene().getRender();
+        RenderOptions renderOptions = CharEd.getModel().getScene().getRender();
         boolean enable = renderOptions.isPhysicsRendered();
         bulletAppState.setDebugEnabled(enable);
     }
@@ -369,7 +369,7 @@ final public class SceneUpdater {
      * @param sceneView which view (not null)
      */
     private static void updateShadowIntensity(SceneView sceneView) {
-        SceneOptions options = Maud.getModel().getScene();
+        SceneOptions options = CharEd.getModel().getScene();
         assert !options.getRender().isSkySimulated();
 
         DirectionalLightShadowRenderer dlsr = sceneView.getShadowRenderer();
@@ -401,7 +401,7 @@ final public class SceneUpdater {
             DirectionalLightShadowRenderer dlsr = sceneView.getShadowRenderer();
             Updater skyUpdater = sceneView.getSkyControl().getUpdater();
 
-            SceneOptions sceneOptions = Maud.getModel().getScene();
+            SceneOptions sceneOptions = CharEd.getModel().getScene();
             RenderOptions renderOptions = sceneOptions.getRender();
             if (renderOptions.areShadowsRendered()) {
                 if (dlsr == null) {
@@ -442,7 +442,7 @@ final public class SceneUpdater {
         SkeletonVisualizer visualizer
                 = cgm.getSceneView().getSkeletonVisualizer();
 
-        SkeletonOptions options = Maud.getModel().getScene().getSkeleton();
+        SkeletonOptions options = CharEd.getModel().getScene().getSkeleton();
         ShowBones showBones = options.getShowBones();
         visualizer.setEnabled(showBones != ShowBones.None);
         int selectedBoneIndex = cgm.getBone().index();
@@ -453,7 +453,7 @@ final public class SceneUpdater {
         visualizer.setLineWidth(lineWidth);
 
         float pointSize = options.getPointSize();
-        AppSettings current = Maud.getApplication().getSettings();
+        AppSettings current = CharEd.getApplication().getSettings();
         int msaaSamples = current.getSamples();
         if (msaaSamples == 16) { // work around JME issue #878
             pointSize *= 2f;
@@ -476,7 +476,7 @@ final public class SceneUpdater {
                 visualizer.setHeadColor(boneIndex, invisibleColor);
             } else if (cgm.getAnimation().isRetargetedPose()) {
                 String name = cgm.getSkeleton().getBoneName(boneIndex);
-                if (Maud.getModel().getMap().isBoneMapped(name)) {
+                if (CharEd.getModel().getMap().isBoneMapped(name)) {
                     visualizer.setHeadColor(boneIndex, forMapped);
                 }
             } else if (cgm.getAnimation().hasTrackForBone(boneIndex)) {
@@ -492,7 +492,7 @@ final public class SceneUpdater {
      * @param cgm which C-G model (not null)
      */
     private static void updateSky(Cgm cgm) {
-        SceneOptions sceneOptions = Maud.getModel().getScene();
+        SceneOptions sceneOptions = CharEd.getModel().getScene();
         RenderOptions renderOptions = sceneOptions.getRender();
         boolean skySimulated = renderOptions.isSkySimulated();
 

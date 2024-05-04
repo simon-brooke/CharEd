@@ -34,7 +34,7 @@ import jme3utilities.math.MyVector3f;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.SelectedSpatial;
 
 /**
@@ -116,7 +116,7 @@ class SpatialScaleTool extends Tool {
 
         float masterScale = readSlider("ssMaster", masterSt);
         scales.multLocal(masterScale);
-        Maud.getModel().getTarget().setSpatialScale(scales);
+        CharEd.getModel().getTarget().setSpatialScale(scales);
     }
 
     /**
@@ -135,7 +135,7 @@ class SpatialScaleTool extends Tool {
      * the selected spatial.
      */
     private void setSlidersToTransform() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         Vector3f vector = spatial.localScale(null);
         float maxScale = MyMath.max(vector.x, vector.y, vector.z);
         assert maxScale > 0f : maxScale;

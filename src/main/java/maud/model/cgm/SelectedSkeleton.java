@@ -50,7 +50,7 @@ import jme3utilities.InfluenceUtil;
 import jme3utilities.MySpatial;
 import jme3utilities.MyString;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.model.EditorModel;
 import maud.model.LoadedMap;
@@ -631,7 +631,7 @@ public class SelectedSkeleton implements JmeCloneable {
 
         if (numBones > 0) {
             Object selected = find();
-            EditorModel model = Maud.getModel();
+            EditorModel model = CharEd.getModel();
             LoadedMap map = model.getMap();
             int ascentBi = selectedBi;
 

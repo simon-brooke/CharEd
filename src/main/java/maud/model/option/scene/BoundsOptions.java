@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.action.ActionPrefix;
 import maud.model.EditState;
@@ -112,7 +112,7 @@ public class BoundsOptions implements Cloneable {
         if (!color.equals(newColor)) {
             color.set(newColor);
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedBoundsColor();
         }
     }
@@ -140,7 +140,7 @@ public class BoundsOptions implements Cloneable {
         if (lineWidth != newWidth) {
             lineWidth = newWidth;
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedBoundsLineWidth();
         }
     }

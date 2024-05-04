@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.EditableCgm;
 import maud.model.cgm.SelectedTexture;
 
@@ -73,7 +73,7 @@ class CgmTool extends Tool {
     @Override
     protected void toolUpdate() {
         // name
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         String name = target.getName();
         String nameText = MyString.quote(name);
         setStatusText("cgmName", " " + nameText);

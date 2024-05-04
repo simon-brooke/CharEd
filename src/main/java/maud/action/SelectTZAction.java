@@ -37,7 +37,7 @@ import jme3utilities.nifty.WindowController;
 import jme3utilities.wes.TweenRotations;
 import jme3utilities.wes.TweenVectors;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.menu.AnimationMenus;
 import maud.menu.EnumMenus;
 import maud.menu.MeshMenus;
@@ -85,7 +85,7 @@ final class SelectTZAction {
      */
     static boolean process(String actionString) {
         boolean handled = true;
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
 
         switch (actionString) {
             case Action.selectTexture:
@@ -159,7 +159,7 @@ final class SelectTZAction {
     private static boolean testForPrefixes(String actionString) {
         boolean handled = true;
 
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         Cgm target = model.getTarget();
         String arg;
 
@@ -245,7 +245,7 @@ final class SelectTZAction {
         } else if (actionString.startsWith(ActionPrefix.selectVertex)) {
             arg = MyString.remainder(actionString, ActionPrefix.selectVertex);
             int index = Integer.parseInt(arg);
-            int indexBase = Maud.getModel().getMisc().indexBase();
+            int indexBase = CharEd.getModel().getMisc().indexBase();
             target.getVertex().select(index - indexBase);
 
         } else if (actionString.startsWith(ActionPrefix.selectVertexBone)) {
@@ -269,7 +269,7 @@ final class SelectTZAction {
         if (!handled && actionString.startsWith(ActionPrefix.selectTool)) {
             String toolName = MyString.remainder(actionString,
                     ActionPrefix.selectTool);
-            WindowController tool = Maud.gui.findTool(toolName);
+            WindowController tool = CharEd.gui.findTool(toolName);
             if (tool != null) {
                 tool.select();
                 handled = true;
@@ -284,7 +284,7 @@ final class SelectTZAction {
                 int x = Integer.parseInt(args[1]);
                 int y = Integer.parseInt(args[2]);
 
-                WindowController tool = Maud.gui.findTool(toolName);
+                WindowController tool = CharEd.gui.findTool(toolName);
                 if (tool != null) {
                     tool.select();
                     Element element = tool.getElement();
@@ -292,7 +292,7 @@ final class SelectTZAction {
                     element.setConstraintX(newX);
                     SizeValue newY = new SizeValue(y, SizeValueType.Pixel);
                     element.setConstraintY(newY);
-                    Screen screen = Maud.gui.getScreen();
+                    Screen screen = CharEd.gui.getScreen();
                     screen.layoutLayers();
                     handled = true;
                 }

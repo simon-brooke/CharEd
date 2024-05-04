@@ -54,7 +54,7 @@ import jme3utilities.math.MyArray;
 import jme3utilities.math.MyMath;
 import jme3utilities.mesh.RectangleMesh;
 import jme3utilities.wes.Pose;
-import maud.Maud;
+import maud.CharEd;
 import maud.mesh.Finial;
 import maud.mesh.Sparkline;
 import maud.mesh.YSwarm;
@@ -374,7 +374,7 @@ public class ScoreView implements EditorView {
 
         Camera camera = getCamera();
         if (!MyCamera.isFullWidth(camera)) {
-            MiscOptions misc = Maud.getModel().getMisc();
+            MiscOptions misc = CharEd.getModel().getMisc();
             int width = camera.getWidth(); // in pixels
             float boundaryX = misc.xBoundary() * width;
             Vector2f inputXY = selection.copyInputXY();
@@ -514,11 +514,11 @@ public class ScoreView implements EditorView {
     @Override
     public ViewPort getViewPort() {
         ViewPort result = null;
-        ViewMode viewMode = Maud.getModel().getMisc().viewMode();
+        ViewMode viewMode = CharEd.getModel().getMisc().viewMode();
         if (viewMode == ViewMode.Hybrid) {
             result = viewPort3;
         } else if (viewMode == ViewMode.Score) {
-            if (Maud.getModel().getSource().isLoaded()) {
+            if (CharEd.getModel().getSource().isLoaded()) {
                 result = viewPort2;
             } else {
                 result = viewPort1;
@@ -552,7 +552,7 @@ public class ScoreView implements EditorView {
             cgm = viewCgm;
             StaffTrack.setCgm(viewCgm);
 
-            EditorModel model = Maud.getModel();
+            EditorModel model = CharEd.getModel();
             ScoreOptions options = model.getScore();
             ColorRGBA backgroundColor;
             if (cgm == model.getSource()) {
@@ -634,7 +634,7 @@ public class ScoreView implements EditorView {
     @Override
     public void warpCursor() {
         Camera camera = getCamera();
-        InputManager inputManager = Maud.getApplication().getInputManager();
+        InputManager inputManager = CharEd.getApplication().getInputManager();
         Ray ray = MyCamera.mouseRay(camera, inputManager);
 
         float newY = ray.origin.y;
@@ -650,7 +650,7 @@ public class ScoreView implements EditorView {
         int targetBoneIndex = cgm.getTrack().targetBoneIndex();
         BitSet selectSet;
 
-        ScoreOptions options = Maud.getModel().getScore();
+        ScoreOptions options = CharEd.getModel().getScore();
         ShowBones showBones = options.bonesShown(cgm);
         switch (showBones) {
             case All:
@@ -835,7 +835,7 @@ public class ScoreView implements EditorView {
         maxWidth = (rightX - leftX) / compression;
         middleY = -height - sparklineHeight / 2 - (float) Finial.hpf;
 
-        ScoreOptions options = Maud.getModel().getScore();
+        ScoreOptions options = CharEd.getModel().getScore();
         boolean translations = options.showsTranslations();
         boolean hasTranslations = StaffTrack.hasTranslations();
         if (translations && hasTranslations) {
@@ -1161,7 +1161,7 @@ public class ScoreView implements EditorView {
         }
 
         this.numPlots = 0;
-        ScoreOptions options = Maud.getModel().getScore();
+        ScoreOptions options = CharEd.getModel().getScore();
 
         boolean hasTranslations = StaffTrack.hasTranslations();
         boolean showTranslations = options.showsTranslations();
@@ -1198,7 +1198,7 @@ public class ScoreView implements EditorView {
         boolean hasRotations = StaffTrack.hasRotations();
         boolean hasScales = StaffTrack.hasScales();
 
-        ScoreOptions options = Maud.getModel().getScore();
+        ScoreOptions options = CharEd.getModel().getScore();
         boolean translations = hasTranslations && options.showsTranslations();
         boolean rotations = hasRotations && options.showsRotations();
         boolean scales = hasScales && options.showsScales();

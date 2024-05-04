@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 import jme3utilities.Heart;
-import maud.Maud;
+import maud.CharEd;
 import maud.action.ActionPrefix;
 import maud.dialog.EditorDialogs;
 import maud.model.EditableMap;
@@ -137,10 +137,10 @@ final public class EditorMenus {
      */
     public static void loadMapAsset() {
         MenuBuilder builder = newLocationMenu();
-        if (Maud.getModel().getSource().getSkeleton().isSelected()) {
+        if (CharEd.getModel().getSource().getSkeleton().isSelected()) {
             builder.add(identityForSource);
         }
-        if (Maud.getModel().getTarget().getSkeleton().isSelected()) {
+        if (CharEd.getModel().getTarget().getSkeleton().isSelected()) {
             builder.add(identityForTarget);
         }
         builder.show(ActionPrefix.loadMapLocator);
@@ -150,7 +150,7 @@ final public class EditorMenus {
      * Handle a "load texture" action without arguments.
      */
     public static void loadTexture() {
-        SelectedTexture texture = Maud.getModel().getTarget().getTexture();
+        SelectedTexture texture = CharEd.getModel().getTarget().getTexture();
         if (texture.hasKey()) {
             MenuBuilder builder = newLocationMenu();
             builder.show(ActionPrefix.loadTextureLocator);
@@ -167,7 +167,7 @@ final public class EditorMenus {
      */
     static MenuBuilder newLocationMenu() {
         MenuBuilder builder = new MenuBuilder();
-        List<String> pathList = Maud.getModel().getLocations().listAll();
+        List<String> pathList = CharEd.getModel().getLocations().listAll();
         for (String path : pathList) {
             if (path.endsWith(".jar")) {
                 builder.addJar(path);
@@ -343,7 +343,7 @@ final public class EditorMenus {
      */
     private static boolean menuMap(String remainder) {
         boolean handled = true;
-        EditableMap map = Maud.getModel().getMap();
+        EditableMap map = CharEd.getModel().getMap();
         String actionPrefix;
         switch (remainder) {
             case "Delete invalid mappings":
@@ -399,7 +399,7 @@ final public class EditorMenus {
                 break;
 
             case "Deselect texture":
-                Maud.getModel().getTarget().getTexture().deselectAll();
+                CharEd.getModel().getTarget().getTexture().deselectAll();
                 break;
 
             case "Texture tool":
@@ -431,7 +431,7 @@ final public class EditorMenus {
                 break;
 
             case "Display settings":
-                Maud.gui.goDisplaySettingsScreen();
+                CharEd.gui.goDisplaySettingsScreen();
                 break;
 
             case "Dump tool":
@@ -439,7 +439,7 @@ final public class EditorMenus {
                 break;
 
             case "Hotkeys":
-                Maud.gui.goBindScreen();
+                CharEd.gui.goBindScreen();
                 break;
 
             case "Remove asset location":
@@ -447,7 +447,7 @@ final public class EditorMenus {
                 break;
 
             case "Revert startup script to default":
-                Maud.revertStartupScript();
+                CharEd.revertStartupScript();
                 break;
 
             case "Scene-view options":
@@ -467,7 +467,7 @@ final public class EditorMenus {
                 break;
 
             case "Update startup script":
-                Maud.getModel().updateStartupScript();
+                CharEd.getModel().updateStartupScript();
                 break;
 
             default:

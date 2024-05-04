@@ -30,7 +30,7 @@ import com.jme3.bullet.collision.shapes.CollisionShape;
 import java.util.logging.Logger;
 import jme3utilities.MyString;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.Background;
 import maud.model.option.scene.SkeletonColors;
 
@@ -107,7 +107,7 @@ public class EditState implements Cloneable {
      * @param eventDescription description of causative event (not null)
      */
     public static void optionSetEdited(String eventDescription) {
-        EditState editState = Maud.getModel().getOptionsEditState();
+        EditState editState = CharEd.getModel().getOptionsEditState();
         editState.setEdited(eventDescription);
     }
 

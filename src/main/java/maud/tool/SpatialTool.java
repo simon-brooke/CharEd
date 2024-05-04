@@ -35,7 +35,7 @@ import jme3utilities.math.MyQuaternion;
 import jme3utilities.math.MyVector3f;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.SelectedSpatial;
 
 /**
@@ -92,7 +92,7 @@ class SpatialTool extends Tool {
     private void updateChildren() {
         String childrenText;
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.isNode()) {
             int numChildren = spatial.countChildren();
             if (numChildren == 0) {
@@ -116,7 +116,7 @@ class SpatialTool extends Tool {
     private void updateMaterial() {
         String materialText;
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.hasMaterial()) {
             String materialName = spatial.getMaterialName();
             if (materialName == null) {
@@ -139,7 +139,7 @@ class SpatialTool extends Tool {
     private void updateMesh() {
         String meshText;
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.hasMesh()) {
             int numElements = spatial.countElements();
             meshText = Integer.toString(numElements);
@@ -172,7 +172,7 @@ class SpatialTool extends Tool {
     private void updateName() {
         String nameText;
 
-        String name = Maud.getModel().getTarget().getSpatial().getName();
+        String name = CharEd.getModel().getTarget().getSpatial().getName();
         if (name == null) {
             nameText = "null";
         } else {
@@ -188,7 +188,7 @@ class SpatialTool extends Tool {
     private void updateParent() {
         String parentText;
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.isCgmRoot()) {
             parentText = "no parent (the model root is selected)";
         } else {
@@ -213,7 +213,7 @@ class SpatialTool extends Tool {
         String next = "";
         String last = "";
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         int numSiblings = spatial.countSiblings(); // count includes self
         if (numSiblings > 1) {
             int siblingIndex = spatial.siblingIndex();
@@ -241,7 +241,7 @@ class SpatialTool extends Tool {
     private void updateTreePosition() {
         String positionText;
 
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         if (spatial.isCgmRoot()) {
             positionText = "model root";
         } else {
@@ -255,7 +255,7 @@ class SpatialTool extends Tool {
      * Update the display of the spatial's Transform.
      */
     private void updateTransform() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
 
         String buttonText;
         if (spatial.containsMeshes()) {
@@ -328,7 +328,7 @@ class SpatialTool extends Tool {
      * Update the display of the spatial's type.
      */
     private void updateType() {
-        SelectedSpatial spatial = Maud.getModel().getTarget().getSpatial();
+        SelectedSpatial spatial = CharEd.getModel().getTarget().getSpatial();
         String typeText = spatial.describeType();
         setStatusText("spatialType", typeText);
     }

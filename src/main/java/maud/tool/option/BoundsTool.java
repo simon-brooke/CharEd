@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.option.scene.BoundsOptions;
 
 /**
@@ -110,7 +110,7 @@ public class BoundsTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        BoundsOptions options = Maud.getModel().getScene().getBounds();
+        BoundsOptions options = CharEd.getModel().getScene().getBounds();
         switch (name) {
             case "boundsDepthTest":
                 options.setDepthTestFlag(isChecked);
@@ -128,7 +128,7 @@ public class BoundsTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        BoundsOptions options = Maud.getModel().getScene().getBounds();
+        BoundsOptions options = CharEd.getModel().getScene().getBounds();
 
         float lineWidth = readSlider("boundsLineWidth", widthSt);
         options.setLineWidth(lineWidth);
@@ -143,7 +143,7 @@ public class BoundsTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        BoundsOptions options = Maud.getModel().getScene().getBounds();
+        BoundsOptions options = CharEd.getModel().getScene().getBounds();
 
         ColorRGBA color = options.copyColor(null);
         setColorBank("bounds", colorSt, color);

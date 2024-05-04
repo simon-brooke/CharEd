@@ -34,7 +34,7 @@ import jme3utilities.MyString;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.SelectedShape;
@@ -92,7 +92,7 @@ class ShapeTool extends Tool {
         String childrenText = "";
         String scButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedShape shape = target.getShape();
         if (shape.isSelected()) {
             String type = shape.type();
@@ -126,7 +126,7 @@ class ShapeTool extends Tool {
         String previousButton = "";
         String selectButton;
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedShape shape = target.getShape();
         boolean isSelected = shape.isSelected();
         int numShapes = target.getPhysics().countShapes();
@@ -165,7 +165,7 @@ class ShapeTool extends Tool {
      */
     private void updateName() {
         String name;
-        SelectedShape shape = Maud.getModel().getTarget().getShape();
+        SelectedShape shape = CharEd.getModel().getTarget().getShape();
         if (shape.isSelected()) {
             name = shape.name();
         } else {
@@ -178,7 +178,7 @@ class ShapeTool extends Tool {
      * Update the parameter buttons.
      */
     private void updateParameter() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         ShapeParameter parameter = model.getMisc().shapeParameter();
         String name = parameter.toString();
         setButtonText("shapeParm", name);
@@ -200,7 +200,7 @@ class ShapeTool extends Tool {
         String axisName = "";
         String vertices = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedShape shape = target.getShape();
         if (shape.isSelected()) {
             type = shape.type();
@@ -225,7 +225,7 @@ class ShapeTool extends Tool {
         String usersText = "";
         String suButton = "";
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         SelectedShape shape = target.getShape();
         if (shape.isSelected()) {
             Set<Long> userSet = shape.userSet();

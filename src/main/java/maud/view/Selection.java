@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyVector3f;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.LoadedMap;
 import maud.model.cgm.Cgm;
@@ -370,7 +370,7 @@ public class Selection {
         assert bestBoneIndex >= 0 : bestBoneIndex;
 
         bestCgm.getBone().select(bestBoneIndex);
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         if (model.getTarget().getAnimation().isRetargetedPose()) {
             // Also select the mapped bone (if any).
             LoadedMap map = model.getMap();

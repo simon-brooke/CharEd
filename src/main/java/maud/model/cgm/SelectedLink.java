@@ -51,7 +51,7 @@ import jme3utilities.MyString;
 import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
 import jme3utilities.minie.MyPco;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.History;
 
 /**
@@ -177,7 +177,7 @@ public class SelectedLink implements JmeCloneable {
      */
     public void createAttachmentLink() {
         String boneName = editableCgm.getBone().name();
-        Spatial cgmRoot = Maud.getModel().getSource().getRootSpatial();
+        Spatial cgmRoot = CharEd.getModel().getSource().getRootSpatial();
         Spatial cloneCgm = Heart.deepCopy(cgmRoot);
         editableCgm.attachBone(boneName, cloneCgm);
         select("Attachment:" + boneName);
@@ -197,7 +197,7 @@ public class SelectedLink implements JmeCloneable {
             } else {
                 String message = String.format("Failed to link bone %s.",
                         MyString.quote(boneName));
-                Maud.getModel().getMisc().setStatusMessage(message);
+                CharEd.getModel().getMisc().setStatusMessage(message);
             }
         }
     }

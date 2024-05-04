@@ -33,7 +33,7 @@ import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.LoadedAnimation;
 import maud.model.cgm.PlayOptions;
@@ -114,7 +114,7 @@ class SourceAnimationTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        Cgm cgm = Maud.getModel().getSource();
+        Cgm cgm = CharEd.getModel().getSource();
         PlayOptions play = cgm.getPlay();
 
         switch (name) {
@@ -142,7 +142,7 @@ class SourceAnimationTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        Cgm cgm = Maud.getModel().getSource();
+        Cgm cgm = CharEd.getModel().getSource();
 
         float duration = cgm.getAnimation().duration();
         if (duration > 0f) {
@@ -184,7 +184,7 @@ class SourceAnimationTool extends Tool {
         String nextButton = "";
         String previousButton = "";
 
-        Cgm cgm = Maud.getModel().getSource();
+        Cgm cgm = CharEd.getModel().getSource();
         int numAnimControls = cgm.countAnimationControls();
         if (numAnimControls > 0) {
             selectButton = "Select animControl";
@@ -228,7 +228,7 @@ class SourceAnimationTool extends Tool {
         String nextButton = "";
         String previousButton = "";
 
-        Cgm cgm = Maud.getModel().getSource();
+        Cgm cgm = CharEd.getModel().getSource();
         SelectedAnimControl animControl = cgm.getAnimControl();
         if (animControl.isSelected()) {
             loadButton = "Load animation";
@@ -265,7 +265,7 @@ class SourceAnimationTool extends Tool {
      * Update the loop/pin/pong check boxes and the pause button label.
      */
     private void updateLooping() {
-        Cgm cgm = Maud.getModel().getSource();
+        Cgm cgm = CharEd.getModel().getSource();
         PlayOptions play = cgm.getPlay();
         boolean pinned = play.isPinned();
         setChecked("pinSource", pinned);
@@ -294,7 +294,7 @@ class SourceAnimationTool extends Tool {
     private void updateName() {
         String nameText;
 
-        Cgm cgm = Maud.getModel().getSource();
+        Cgm cgm = CharEd.getModel().getSource();
         if (cgm.isLoaded()) {
             String name = cgm.getAnimation().name();
             if (cgm.getAnimation().isReal()) {
@@ -313,7 +313,7 @@ class SourceAnimationTool extends Tool {
      * Update the speed slider and its status label.
      */
     private void updateSpeed() {
-        Cgm cgm = Maud.getModel().getSource();
+        Cgm cgm = CharEd.getModel().getSource();
 
         float duration = cgm.getAnimation().duration();
         setSliderEnabled("sSpeed", duration > 0f);
@@ -327,7 +327,7 @@ class SourceAnimationTool extends Tool {
      * Update the track counts.
      */
     private void updateTrackCounts() {
-        LoadedAnimation animation = Maud.getModel().getSource().getAnimation();
+        LoadedAnimation animation = CharEd.getModel().getSource().getAnimation();
         int numBoneTracks = animation.countBoneTracks();
         String boneTracksText = Integer.toString(numBoneTracks);
         setStatusText("sourceBoneTracks", boneTracksText);
@@ -346,7 +346,7 @@ class SourceAnimationTool extends Tool {
      * Update the track-time slider and its status label.
      */
     private void updateTrackTime() {
-        Cgm cgm = Maud.getModel().getSource();
+        Cgm cgm = CharEd.getModel().getSource();
         LoadedAnimation animation = cgm.getAnimation();
         float duration = animation.duration();
         /*

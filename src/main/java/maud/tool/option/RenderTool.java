@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.option.scene.RenderOptions;
 import maud.model.option.scene.SceneOptions;
@@ -107,7 +107,7 @@ public class RenderTool extends Tool {
      */
     @Override
     public void onCheckBoxChanged(String name, boolean isChecked) {
-        SceneOptions options = Maud.getModel().getScene();
+        SceneOptions options = CharEd.getModel().getScene();
         switch (name) {
             case "shadows":
                 options.getRender().setShadowsRendered(isChecked);
@@ -125,7 +125,7 @@ public class RenderTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
 
         float sourceScale = readSlider("sourceScale", scaleSt);
         model.getSource().getSceneView().getTransform().setScale(sourceScale);
@@ -140,7 +140,7 @@ public class RenderTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         SceneOptions sceneOptions = model.getScene();
         RenderOptions options = sceneOptions.getRender();
 

@@ -28,7 +28,7 @@ package maud.menu;
 
 import java.util.logging.Logger;
 import jme3utilities.MyString;
-import maud.Maud;
+import maud.CharEd;
 import maud.dialog.EditorDialogs;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.EditableCgm;
@@ -67,7 +67,7 @@ final class KeyframeMenus {
     static void buildKeyframeMenu(MenuBuilder builder) {
         builder.addTool("Tool");
 
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         if (target.getTrack().isSelected()
                 && !target.getAnimation().isMoving()) {
             builder.addSubmenu("Select");
@@ -105,7 +105,7 @@ final class KeyframeMenus {
             handled = menuKeyframeSelect(arg);
 
         } else {
-            EditableCgm target = Maud.getModel().getTarget();
+            EditableCgm target = CharEd.getModel().getTarget();
             switch (remainder) {
                 case "Adjust timing":
                     EditorDialogs.setFrameTime();
@@ -157,7 +157,7 @@ final class KeyframeMenus {
      */
     private static boolean menuKeyframeSelect(String remainder) {
         boolean handled = true;
-        Cgm target = Maud.getModel().getTarget();
+        Cgm target = CharEd.getModel().getTarget();
         switch (remainder) {
             case "By index":
                 EditorDialogs.selectKeyframe();

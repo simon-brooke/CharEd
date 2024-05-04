@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
-import maud.Maud;
+import maud.CharEd;
 import maud.MaudUtil;
 import maud.action.ActionPrefix;
 import maud.model.EditState;
@@ -189,7 +189,7 @@ public class SkeletonOptions implements Cloneable {
     public void setColor(SkeletonColors use, ColorRGBA newColor) {
         Validate.nonNull(newColor, "new color");
 
-        EditState editState = Maud.getModel().getOptionsEditState();
+        EditState editState = CharEd.getModel().getOptionsEditState();
         switch (use) {
             case IdleBones:
                 if (!defaultColor.equals(newColor)) {
@@ -235,7 +235,7 @@ public class SkeletonOptions implements Cloneable {
         if (lineWidth != width) {
             lineWidth = width;
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedSkeletonLineWidth();
         }
     }
@@ -251,7 +251,7 @@ public class SkeletonOptions implements Cloneable {
         if (pointSize != size) {
             pointSize = size;
 
-            EditState editState = Maud.getModel().getOptionsEditState();
+            EditState editState = CharEd.getModel().getOptionsEditState();
             editState.setEditedSkeletonPointSize();
         }
     }

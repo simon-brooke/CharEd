@@ -30,7 +30,7 @@ import com.jme3.math.Transform;
 import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.EditorModel;
 import maud.model.cgm.Cgm;
 import maud.model.cgm.SelectedSpatial;
@@ -72,7 +72,7 @@ class ExtremeVertexTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        EditorModel model = Maud.getModel();
+        EditorModel model = CharEd.getModel();
         AxesSubject subject = model.getScene().getAxes().getSubject();
         String axesButton = subject.toString();
         setButtonText("axesSubject2", axesButton);

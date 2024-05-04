@@ -38,7 +38,7 @@ import jme3utilities.nifty.BasicScreenController;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.Tool;
 import maud.DescribeUtil;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.Checkpoint;
 import maud.model.History;
 
@@ -142,7 +142,7 @@ public class HistoryTool extends Tool {
 
         setButtonText("historyClear", "Clear");
 
-        int limit = Maud.getModel().getMisc().maxCheckpoints();
+        int limit = CharEd.getModel().getMisc().maxCheckpoints();
         String limitButton = Integer.toString(limit);
         setButtonText("historyLimit", limitButton);
 
@@ -248,7 +248,7 @@ public class HistoryTool extends Tool {
      * @param y vertical offset (in pixels downward from top edge)
      */
     private void scrollTo(int y) {
-        Screen screen = Maud.gui.getScreen();
+        Screen screen = CharEd.gui.getScreen();
         ScrollPanel scpa = screen.findNiftyControl("historyScrollPanel",
                 ScrollPanel.class);
         scpa.setVerticalPos(y);

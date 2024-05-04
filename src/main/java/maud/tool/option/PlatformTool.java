@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.WhichCgm;
 import maud.model.option.scene.PlatformType;
 import maud.model.option.scene.SceneOptions;
@@ -90,7 +90,7 @@ public class PlatformTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        SceneOptions options = Maud.getModel().getScene();
+        SceneOptions options = CharEd.getModel().getScene();
 
         float sourceDiameter = readSlider("sourcePlatformDiameter", diameterSt);
         options.setPlatformDiameter(WhichCgm.Source, sourceDiameter);
@@ -105,7 +105,7 @@ public class PlatformTool extends Tool {
      */
     @Override
     protected void toolUpdate() {
-        SceneOptions options = Maud.getModel().getScene();
+        SceneOptions options = CharEd.getModel().getScene();
 
         PlatformType type = options.getPlatformType();
         String tButton = type.toString();

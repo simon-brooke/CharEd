@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 import jme3utilities.nifty.GuiScreenController;
 import jme3utilities.nifty.SliderTransform;
 import jme3utilities.nifty.Tool;
-import maud.Maud;
+import maud.CharEd;
 import maud.model.cgm.EditableCgm;
 import maud.model.cgm.SelectedBone;
 
@@ -114,7 +114,7 @@ class BoneTranslationTool extends Tool {
      */
     @Override
     public void onSliderChanged(String sliderName) {
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         if (target.getBone().shouldEnableControls()) {
             Vector3f offsets = readVectorBank("Off", axisSt, null);
             float masterScale = readSlider("offMaster", masterSt);
@@ -132,7 +132,7 @@ class BoneTranslationTool extends Tool {
     @Override
     protected void toolUpdate() {
         boolean enableSliders = false;
-        SelectedBone bone = Maud.getModel().getTarget().getBone();
+        SelectedBone bone = CharEd.getModel().getTarget().getBone();
         if (bone.isSelected()) {
             setSlidersToPose();
             if (bone.shouldEnableControls()) {
@@ -168,7 +168,7 @@ class BoneTranslationTool extends Tool {
      * Set all 4 sliders (and their status labels) based on the pose.
      */
     private void setSlidersToPose() {
-        EditableCgm target = Maud.getModel().getTarget();
+        EditableCgm target = CharEd.getModel().getTarget();
         Vector3f vector = target.getBone().userTranslation(null);
         float[] offsets = vector.toArray(null);
 
